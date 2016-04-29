@@ -1,0 +1,36 @@
+---
+layout: page
+description: "Le blog d'un développer Web (PHP, CakePHP, JS...)"
+---
+
+{% for post in paginator.posts %}
+    <div class="post-preview">
+        <a href="{{ post.url | prepend: site.baseurl }}">
+            <h2 class="post-title">            {{ post.title }}
+            </h2>
+            {% if post.subtitle %}
+            <h3 class="post-subtitle">
+                {{ post.subtitle }}
+            </h3>
+            {% endif %}
+        </a>
+        <p class="post-meta">Publié par {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} le {{ post.date | localize: "%-d %B %Y" }}</p>
+    </div>
+    <hr>
+{% endfor %}
+
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+    <ul class="pager">
+        {% if paginator.previous_page %}
+        <li class="previous">
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Articles plus récents</a>
+        </li>
+        {% endif %}
+        {% if paginator.next_page %}
+        <li class="next">
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Articles plus anciens &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
+{% endif %}

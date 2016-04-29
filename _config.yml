@@ -1,0 +1,24 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: Flavien BENINCA (ozee31)
+email: contact@flavienbeninca.fr
+description: Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://flavienbeninca.fr" # the base hostname & protocol for your site
+github_username: ozee31
+email_username: contact@flavienbeninca.fr
+linkedin_username: flavienbeninca
+paginate: 5
+lang: fr-FR
+header-img: /img/home-bg.jpg
+
+# Build settings
+markdown: kramdown
+
+gems: [jekyll-paginate, jekyll-feed]
