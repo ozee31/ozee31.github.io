@@ -9,6 +9,7 @@
 title: Flavien BENINCA (ozee31)
 email: contact@flavienbeninca.fr
 description: Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end
+# baseurl: "" # the subpath of your site, e.g. /blog
 baseurl: "/website-prod" # the subpath of your site, e.g. /blog
 url: "http://ozee31.github.io/website-prod" # the base hostname & protocol for your site
 github_username: ozee31
