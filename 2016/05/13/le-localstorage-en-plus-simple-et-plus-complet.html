@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
+
+    <title>[js] Le LocalStorage, en plus simple et plus complet - Flavien BENINCA (ozee31)</title>
+
+    <link rel="canonical" href="http://ozee31.github.io/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Perso CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://ozee31.github.io/feed.xml" title="Flavien BENINCA (ozee31)" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flavien BENINCA (ozee31)</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Blog</a>
+                </li>
+                
+				
+                <li>
+                    <a href="/about.html">A propos</a>
+                </li>
+				
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/about-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="heading-title">
+                        <h1>[js] Le LocalStorage, en plus simple et plus complet</h1>
+                        
+                        <h2 class="subheading">Cachejs est une librairie qui permet de stocker des données sur le PC du client en utilisant le LocalStorage ou le SessionStorage</h2>
+                        
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 13 mai 2016</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+				<h1 id="le-localstorage-en-plus-simple-et-plus-complet">Le LocalStorage, en plus simple et plus complet</h1>
+<p>Nous allons voir qu’avec la librairie Cachejs, il est relativement simple de stocker des données côté client en utilisant le LocalStorage du navigateur.</p>
+
+<h2 id="qusaco-">Quésaco ?</h2>
+
+<p>On va commencer par une petite définition à base de wikipedia
+&gt; Le stockage web local ou stockage DOM (Document Object Model) est une technique d’enregistrement de données dans un navigateur web. Le stockage web local permet l’enregistrement persistant, comme avec les cookies mais avec une capacité bien plus grande, et sans avoir à rajouter de données dans l’entête de requête HTTP. Il existe deux types de stockage web local : le stockage local et le stockage de session, équivalant respectivement aux cookies persistants et aux cookies de session.</p>
+
+<p>LocalStorage est donc une API qui est compatible avec la plupart des navigateurs (pour peux qu’on soit moderne), à savoir Chrome, Firefox, IE (à partir de la 8), Opera, Safari.</p>
+
+<h2 id="en-avant-guingamp">En avant <del>Guingamp</del></h2>
+
+<p>Pour cette démonstration nous n’avons pas besoin de grand chose, on va créer une page HTML avec un script JS donc pas besoin de serveur Apache ou autre ça va être très simple.</p>
+
+<p>Je vais juste utiliser <code class="highlighter-rouge">npm</code> pour installer la librairie mais libre à vous d’utiliser <code class="highlighter-rouge">bower</code> ou de télécharger les sources directement sur github.</p>
+
+<p>D’ailleur en parlant de source voici le <a href="https://github.com/ozee31/cachejs">repository</a></p>
+
+<h2 id="installation-et-prparation">Installation et préparation</h2>
+
+<p>Pour cette démonstration je vais initialiser un projet npm</p>
+
+<pre><code class="language-SHELL">    npm init
+</code></pre>
+
+<p>Puis j’installer la librairie (à ce jour la version 1.0)</p>
+
+<pre><code class="language-SHELL">    npm install ozee-cachejs
+</code></pre>
+
+<p>Je vais créer ensuite un fichier <code class="highlighter-rouge">index.html</code></p>
+
+<pre><code class="language-HTML">    &lt;!doctype html&gt;
+
+    &lt;html lang="fr"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;title&gt;Cachejs demo&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="output"&gt;
+
+        &lt;/div&gt;
+
+        &lt;script src="node_modules/ozee-cachejs/dist/cache.min.js"&gt;&lt;/script&gt;
+        &lt;script src="demo.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</code></pre>
+
+<p>Puis un fichier <code class="highlighter-rouge">demo.js</code> avec un petit bout de code qui va nous permettre de savoir si la lib est chargé</p>
+
+<pre><code class="language-JS">    (function() {
+        var output = document.getElementById('output');
+
+        if ( typeof Cachejs === 'undefined' ) {
+            output.innerHTML = 'Lib non chargé';
+            return false;
+        }
+
+        output.innerHTML = 'Lib chargé';
+    })();
+</code></pre>
+
+<p>On démarre notre fichier index.html dans notre navigateur favori et si tout se passe bien on devrait voir s’afficher</p>
+
+<blockquote>
+  <p>Lib chargé</p>
+</blockquote>
+
+<p>Si ce n’est pas le cas je vous invite à vérifier le chemin vers la livrairie.</p>
+
+<h2 id="prsentation">Présentation</h2>
+
+<p>Avant de commencer à utiliser la librairie, je pense q’une petite présentation s’impose.</p>
+
+<h3 id="section">1 = 2</h3>
+
+<blockquote>
+  <p>Tu te fous pas un peu de moi là ?</p>
+</blockquote>
+
+<p>Je vous rassure, je suis meilleur que ça en mathématique. Tout ça pour vous dire que cette librairie est composé de 2 classes qui partagent exactement la même API.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Cachejs.Local</code> : utilise <a href="https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage">le localStorage</a></li>
+  <li><code class="highlighter-rouge">Cachejs.Session</code> : utilise <a href="https://developer.mozilla.org/fr/docs/Web/API/Window/sessionStorage">le sessionStorage</a></li>
+</ul>
+
+<blockquote>
+  <p>La propriété localStorage vous permet d’accéder à un objet local Storage. Le localStorage est similaire au sessionStorage. La seul différence : les données stockées dans le localStorage n’ont pas de délai d’expiration, les données stockées dans le sessionStorage sont nettoyées quand la session navigateur prend fin — donc quand on ferme le navigateur.</p>
+</blockquote>
+
+<h3 id="pourquoi-">Pourquoi ?</h3>
+
+<blockquote>
+  <p>Et elle m’apporte quoi cette librairie par rapport à l’API de base ?</p>
+</blockquote>
+
+<p>Concrètement, par rapport à l’api standard vous pourrez :</p>
+
+<ul>
+  <li>stocker des données complexe (array, object)</li>
+  <li>faire expirer vos données au bout d’un certain temps</li>
+  <li>stocker des données en lecture seule</li>
+</ul>
+
+<h3 id="mthodes-man">Méthodes man</h3>
+
+<p>Voici un bref aperçu des méthodes disponible :</p>
+
+<ul>
+  <li><strong>set</strong> : stocker une donnée</li>
+  <li><strong>get</strong> : récupérer une donnée stocké</li>
+  <li><strong>remove</strong> : supprimer une donnée</li>
+  <li><strong>clear</strong> : vider tout le cache</li>
+  <li><strong>isExpired</strong> : indique si la donnée a expiré</li>
+  <li><strong>isReadonly</strong> : indique si la donnée est en lecture seule</li>
+</ul>
+
+<h2 id="alors-on-danse-commence">Alors on <del>danse</del> commence</h2>
+
+<h3 id="set-et-match">Set et match</h3>
+<p>Nous allons stocker divers types de données (string, array, objet…) et les afficher ensuite dans notre balise <code class="highlighter-rouge">output</code>. Je vous invite donc à modifier le fichier <code class="highlighter-rouge">demo.js</code></p>
+
+<pre><code class="language-JS">    // demo.js
+
+    (function() {
+        var output = document.getElementById('output');
+
+        if ( typeof Cachejs === 'undefined' ) {
+            output.innerHTML = 'Lib non chargé';
+            return false;
+        }
+
+        // On réinitialise le cache
+        Cachejs.Local.clear();
+        Cachejs.Session.clear();
+
+        /**
+         * Stockage des données
+         */
+            // stockage d'un string
+            Cachejs.Local.set('monString', 'je suis un string');
+
+            // stockage d'un booléen en Session
+            Cachejs.Session.set('monBool', true);
+
+            // stockage d'un array
+            Cachejs.Local.set('monArray', [1,2,3]);
+
+            // stockage d'un objet
+            Cachejs.Local.set('monObjet', {prenom: 'Lary', nom: 'Gole'});
+
+
+        /**
+         * Récupération des données
+         */
+            output.innerHTML = '';
+
+            // On affiche le cache local de la clé 'monString'
+            output.innerHTML += 'monString = ' + Cachejs.Local.get('monString') + '&lt;br&gt;';
+
+            // Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
+            output.innerHTML += 'monBool (local) = ' + Cachejs.Local.get('monBool') + '&lt;br&gt;';
+
+            // En revanche avec le cache session ça marche
+            output.innerHTML += 'monBool (sessoin) = ' + Cachejs.Session.get('monBool') + '&lt;br&gt;';
+
+            // On affiche notre array
+            output.innerHTML += 'monArray = ' + Cachejs.Local.get('monArray') + '&lt;br&gt;';
+
+            // Et pour finir notre objet
+            output.innerHTML += 'monObjet = ' + JSON.stringify( Cachejs.Local.get('monObjet') ) + '&lt;br&gt;';
+    })();
+</code></pre>
+
+<p>Une fois la page rafraîchie vous devrez voir apparaître :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    monString = je suis un string
+    monBool (local) = null
+    monBool (sessoin) = true
+    monArray = 1,2,3
+    monObjet = {"prenom":"Lary","nom":"Gole"}
+</code></pre>
+</div>
+
+<h3 id="aller-plus-loin">Aller plus loin</h3>
+
+<p>Si vous êtes toujours là (et je l’espère), on va comme le titre l’indique, aller plus loin, en utilisant l’expiration des données et la lecture seule.
+On repart à zéro avec notre <code class="highlighter-rouge">demo.js</code></p>
+
+<pre><code class="language-JS">    // demo.js
+
+    (function() {
+        var output = document.getElementById('output');
+
+        if ( typeof Cachejs === 'undefined' ) {
+            output.innerHTML = 'Lib non chargé';
+            return false;
+        }
+
+        // On réinitialise le cache
+        Cachejs.Local.clear();
+        Cachejs.Session.clear();
+        output.innerHTML = '';
+
+        /**
+         * Lecture seule
+         */
+            Cachejs.Local.set('readOnly', 'Je suis en lecture seule', null, true);
+
+            // Je ne peux donc pas modifié la donnée
+            Cachejs.Local.set('readOnly', 'Je ne peux pas être modifié');
+            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '&lt;br&gt;';
+
+            // Je ne peux pas la supprimer non plus
+            Cachejs.Local.remove('readOnly');
+            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '&lt;br&gt;';
+
+        /**
+         * Expiration
+         */
+            Cachejs.Local.set('expiration', 'Je vais expirer dans 3 secondes', 3);
+
+            // J'existe encore
+            output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '&lt;br&gt;';
+
+            // Dans 4 secondes j'existe plus
+            setTimeout(function(){ output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '&lt;br&gt;' },4000);
+    })();
+</code></pre>
+
+<p>On recharge, on attend 4 secondes et le résultat sera :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    readOnly = Je suis en lecture seule
+    readOnly = Je suis en lecture seule
+    expiration = Je vais expirer dans 3 secondes
+    expiration = null
+</code></pre>
+</div>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html" data-toggle="tooltip" data-placement="top" title="[php] Générer des PDF avec DomPDF et CakePHP">&larr; Article précédent</a>
+                    </li>
+                    
+                    
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/ozee31">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/flavienbeninca">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:contact@flavienbeninca.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
+
+
+</body>
+
+</html>

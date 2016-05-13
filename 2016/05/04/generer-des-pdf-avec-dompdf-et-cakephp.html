@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
+
+    <title>[php] Générer des PDF avec DomPDF et CakePHP - Flavien BENINCA (ozee31)</title>
+
+    <link rel="canonical" href="http://ozee31.github.io/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Perso CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://ozee31.github.io/feed.xml" title="Flavien BENINCA (ozee31)" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flavien BENINCA (ozee31)</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Blog</a>
+                </li>
+                
+				
+                <li>
+                    <a href="/about.html">A propos</a>
+                </li>
+				
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/post-bg-1.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="heading-title">
+                        <h1>[php] Générer des PDF avec DomPDF et CakePHP</h1>
+                        
+                        <h2 class="subheading">Générer des PDF sous CakePHP n'a jamais été aussi simple.</h2>
+                        
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 4 mai 2016</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+				<h1 id="gnrer-des-pdf-avec-dompdf-et-cakephp">Générer des PDF avec DomPDF et CakePHP</h1>
+<p>Grâce à la librairie <a href="https://github.com/dompdf/dompdf">DomPDF</a> couplé au plugin <a href="https://github.com/DaoAndCo/cakephp-dompdf">cakephp-dompdf</a>, il est très facile de générer des PDF en HTML/CSS.</p>
+
+<h2 id="environnement">Environnement</h2>
+<p>Voici ma configuration pour cette démo</p>
+
+<ul>
+  <li>Une VM ubuntu server en version 14</li>
+  <li>Server Apache</li>
+  <li>PHP en version 7 (la version minimale est la 5.4.16)</li>
+  <li>CakePHP en version 3.2 (la version minimale est la 3.0)</li>
+  <li>La librairie DomPDF en version 0.7 beta (la 0.6 n’utilise pas les namespaces)</li>
+  <li>Le plugin cakephp-dompdf en version 1.0</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+<p>Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer</p>
+
+<pre><code class="language-SHELL">    composer require dompdf/dompdf:0.7.x@beta
+    composer require daoandco/cakephp-dompdf
+</code></pre>
+
+<p>Très important, il ne faut pas oublié de générer les liens symboliques du plugin.</p>
+
+<pre><code class="language-SHELL">    bin/cake plugin assets symlink
+</code></pre>
+
+<p>On charge ensuite le plugin</p>
+
+<pre><code class="language-PHP">    // config/bootstrap.php
+
+    Plugin::load('Dompdf');
+</code></pre>
+
+<h2 id="en-route-pour-laventure">En route pour l’aventure</h2>
+<p>Le plus simple pour générer les PDF est d’écouter les urls afin de traiter l’extension <code class="highlighter-rouge">.pdf</code> (<a href="http://book.cakephp.org/3.0/fr/development/routing.html#routing-des-extensions-de-fichier">Documentation</a>)</p>
+
+<p>On va donc, pour l’exemple définir une <del>auto</del> route.</p>
+
+<pre><code class="language-PHP">Router::scope('/', function (RouteBuilder $routes) {
+    $routes-&gt;extensions(['pdf']);
+    $routes-&gt;connect('/demo/view/*', ['controller' =&gt; 'Demo', 'action' =&gt; 'view']);
+}
+</code></pre>
+
+<p>Et pour le controlleur :</p>
+
+<pre><code class="language-PHP">// scr/Controller/DemoController.php
+
+namespace App\Controller;
+
+class DemoController extends AppController {
+
+    public function view($name) {
+
+    }
+}
+</code></pre>
+
+<p>On teste notre route http://localhost/demo/view/test.pdf et <strong>bim!!!</strong></p>
+
+<p><img src="https://lh3.googleusercontent.com/87TellwMnUAMrKZfakHSiIqnmuxd9fGbRzKS4B--_XAqaC7X9wDa00-i5rFXesNMtaWSrGcY8Q=s0" alt="Template is missing" title="capture-1.JPG" /></p>
+
+<p>Ne vous inquiétez pas, c’est normal, pas de panique on a pas encore créé notre template.</p>
+
+<h2 id="jai-view-un-pdf">J’ai view un PDF</h2>
+
+<p>Comme on écoute toujours la maîtresse et que l’on est bien sage, on va créer notre fichier <code class="highlighter-rouge">view.ctp</code> dans <code class="highlighter-rouge">Demo/pdf/view.ctp</code></p>
+
+<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+
+&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+
+&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
+</code></pre>
+
+<blockquote>
+  <p>Hey, t’est bien gentil mais là il me demande de créer un layout.</p>
+</blockquote>
+
+<p>Oui je sais mais comme la vie est bien faite, notre petit plugin inclut justement un Layout qui nous permet entre autre de fixer un header ainsi qu’un footer.</p>
+
+<h2 id="plugue-ton-layout">Plugue ton Layout</h2>
+
+<p>Pour faire les choses bien (il faut toujours faire les choses bien), on va modifier notre Controller</p>
+
+<pre><code class="language-PHP">public function view($name) {
+
+    $this-&gt;viewBuilder()
+        -&gt;className('Dompdf.Pdf')
+        -&gt;layout('Dompdf.default')
+        -&gt;options(['config' =&gt; [
+            'filename' =&gt; $name,
+            'render' =&gt; 'browser',
+    ]]);
+}
+</code></pre>
+
+<p>On recharge la page, et là, sous vos yeux ébahis, un magnifique PDF apparaît dans votre Firefox (comment ça vous n’utilisez pas Firefox ?)</p>
+
+<p><img src="https://lh3.googleusercontent.com/tJcFxm3bITPAfJTdhNHRi6uTtsMGIdxvIFhe9xNq3yJWwIF2TkqI8IcFItt7Upx2MHPvRC7sqA=s0" alt="Le pdf généré" title="capture-2.JPG" /></p>
+
+<blockquote>
+  <p>Tout ça juste pour charger un Layout ?</p>
+</blockquote>
+
+<p>En fait on a surtout dit à CakePHP d’utiliser le plugin pour générer la vue, je vous invite à lire <a href="https://github.com/DaoAndCo/cakephp-dompdf#configuration">la documentation du plugin</a> pour comprendre ce que je viens de faire.</p>
+
+<h2 id="je-veux-du-css-et-des-nanas">Je veux du CSS et des nanas</h2>
+
+<blockquote>
+  <p>Bon les h1 et les p c’est bien gentil mais comment je style ça ? Et les images comment ça marche ?</p>
+</blockquote>
+
+<p>On y viens, et on va même faire un header et un footer comme je suis gentil.</p>
+
+<p>Allez c’est parti on crée notre beau css</p>
+
+<pre><code class="language-CSS">/* webroot/css/demo.css */
+
+h1 {
+    color: red;
+}
+</code></pre>
+
+<p>Et comme tout est prévu, notre beau petit plugin possède un helper, on peut donc modifier notre fichier <code class="highlighter-rouge">view.ctp</code></p>
+
+<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+
+&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;
+
+&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+
+&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
+</code></pre>
+
+<p>Ah oui, j’oubliais les nanas, pour les images c’est aussi avec le helper (et on en profite pour rajouter le header et le footer)</p>
+
+<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+
+&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;
+
+&lt;?php
+$this-&gt;start('header');
+    echo '&lt;p&gt;I\'m a header&lt;/p&gt;';
+$this-&gt;end();
+
+$this-&gt;start('footer');
+    echo '&lt;p&gt;I\'m a footer&lt;/p&gt;';
+$this-&gt;end();
+?&gt;
+
+&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+
+&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
+
+&lt;?= $this-&gt;Dompdf-&gt;image('nanas.jpg'); ?&gt;
+</code></pre>
+
+<p>On actualise la page, et voilà notre PDF stylé comme jamais
+<img src="https://lh3.googleusercontent.com/4zy5TzBYp6cT4PDG_S7-V7yzX9J5BIyze5Uj-fHTpJBN7XY0NymbLGRjkvQedxVNIx9Dm6RYwg=s0" alt="enter image description here" title="capture-3.JPG" /></p>
+
+<h2 id="aller-plus-loin">Aller plus loin</h2>
+<p>Je vous invite à lire la <a href="https://github.com/DaoAndCo/cakephp-dompdf">documentation</a> du plugin qui est très complète.</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html" data-toggle="tooltip" data-placement="top" title="[js] Le LocalStorage, en plus simple et plus complet">Article suivant &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<hr>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/ozee31">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/flavienbeninca">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:contact@flavienbeninca.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
+
+
+</body>
+
+</html>
