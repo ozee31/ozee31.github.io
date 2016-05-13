@@ -8,11 +8,13 @@ layout: default
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1 class="text--shadow">{{ page.title }}</h1>
-                    {% if page.subtitle %}
-                    <h2 class="subheading text--shadow">{{ page.subtitle }}</h2>
-                    {% endif %}
-                    <span class="meta">Posté par {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} le {{ page.date | localize: "%-d %B %Y" }}</span>
+                    <div class="heading-title">
+                        <h1>{{ page.title }}</h1>
+                        {% if page.subtitle %}
+                        <h2 class="subheading">{{ page.subtitle }}</h2>
+                        {% endif %}
+                        <span class="meta">Posté par {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} le {{ page.date | localize: "%-d %B %Y" }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,12 +34,12 @@ layout: default
                 <ul class="pager">
                     {% if page.previous.url %}
                     <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Article précédent</a>
                     </li>
                     {% endif %}
                     {% if page.next.url %}
                     <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Article suivant &rarr;</a>
                     </li>
                     {% endif %}
                 </ul>

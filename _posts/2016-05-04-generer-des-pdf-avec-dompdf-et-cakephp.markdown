@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "Générer des PDF avec DomPDF et CakePHP"
-subtitle:   "Générer des PDF sous CakePHP n'a jamais été aussi symple."
+title:      "[php] Générer des PDF avec DomPDF et CakePHP"
+subtitle:   "Générer des PDF sous CakePHP n'a jamais été aussi simple."
 date:       2016-05-04 12:00:00
 header-img: "img/post-bg-1.jpg"
 ---
