@@ -3,7 +3,8 @@ layout:     post
 title:      "[vuejs] Démarrer avec bootstrap"
 subtitle:   "Dans ce tutoriel, nous allons voir comment démarrer un projet avec Bootstrap (en mode SASS) sur le framework Vuejs"
 date:       2016-06-15 08:00:00
-header-img: "img/about-bg.jpg"
+header-img: "img/vuejs.png"
+hearder-bg-color: "rgba(66, 185, 131, 0.9)"
 ---
 
 # Vuejs - Démarrer avec bootstrap
