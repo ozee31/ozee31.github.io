@@ -5,9 +5,287 @@
     <description>Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end</description>
     <link>http://ozee31.github.io/</link>
     <atom:link href="http://ozee31.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 May 2016 12:59:52 +0000</pubDate>
-    <lastBuildDate>Fri, 13 May 2016 12:59:52 +0000</lastBuildDate>
+    <pubDate>Wed, 15 Jun 2016 13:11:36 +0000</pubDate>
+    <lastBuildDate>Wed, 15 Jun 2016 13:11:36 +0000</lastBuildDate>
     <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>[vuejs] Démarrer avec bootstrap</title>
+        <description>&lt;h1 id=&quot;vuejs---dmarrer-avec-bootstrap&quot;&gt;Vuejs - Démarrer avec bootstrap&lt;/h1&gt;
+
+&lt;p&gt;Dans ce tutoriel, nous allons voir comment démarrer un projet avec &lt;a href=&quot;http://getbootstrap.com/&quot;&gt;Bootstrap&lt;/a&gt; (en mode SASS) sur le framework &lt;a href=&quot;https://vuejs.org/&quot;&gt;Vuejs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prrequis&quot;&gt;Prérequis&lt;/h2&gt;
+&lt;p&gt;Pour suivre ce tuto vous devez connaitre un minimum le framework &lt;a href=&quot;https://vuejs.org/&quot;&gt;Vuejs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;environnement&quot;&gt;Environnement&lt;/h2&gt;
+&lt;p&gt;Voici ma configuration pour cette démo&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Une machine Windows 10 (ne me fouettez pas SVP)&lt;/li&gt;
+  &lt;li&gt;NPM en version 5&lt;/li&gt;
+  &lt;li&gt;Vuejs en version 1.0.21 avec webpack&lt;/li&gt;
+  &lt;li&gt;Bootstrap-sass en version 3.3.6&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cration-du-projet&quot;&gt;Création du projet&lt;/h2&gt;
+&lt;p&gt;Je démarre toujours un projet Vuejs grâce à vue-cli afin d’installer Vuejs grâce à webpack.&lt;/p&gt;
+
+&lt;p&gt;Si ce n’est pas déjà fait vous devez l’installer globalement&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install -g vue-cli
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;On peut ensuite créer le projet&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vue init webpack tuto
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Vous vous déplacez dans le dossier du projet et vous installez les dépendances de vuejs&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd tuto
+npm install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Enfin on installe les dépendances propre à environnement à savoir : bootstrap, jquery et ce qu’il faut pour compiler le sass&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install -S bootstrap-sass
+npm install -S jquery
+npm install sass-loader node-sass webpack --save-dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;prparation-de-la-vue&quot;&gt;Préparation de la vue&lt;/h2&gt;
+
+&lt;p&gt;Nous allons modifier le fichier de base &lt;code class=&quot;highlighter-rouge&quot;&gt;App.vue&lt;/code&gt;afin d’intégrer un petit exemple de page utilisant bootstrap.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// src/App.vue
+
+&amp;lt;template&amp;gt;
+  &amp;lt;div id=&quot;app&quot;&amp;gt;
+    &amp;lt;div class=&quot;container&quot;&amp;gt;
+
+      &amp;lt;!-- Static navbar --&amp;gt;
+      &amp;lt;nav class=&quot;navbar navbar-default&quot;&amp;gt;
+        &amp;lt;div class=&quot;container-fluid&quot;&amp;gt;
+          &amp;lt;div class=&quot;navbar-header&quot;&amp;gt;
+            &amp;lt;button type=&quot;button&quot; class=&quot;navbar-toggle collapsed&quot; data-toggle=&quot;collapse&quot; data-target=&quot;#navbar&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;navbar&quot;&amp;gt;
+              &amp;lt;span class=&quot;sr-only&quot;&amp;gt;Toggle navigation&amp;lt;/span&amp;gt;
+              &amp;lt;span class=&quot;icon-bar&quot;&amp;gt;&amp;lt;/span&amp;gt;
+              &amp;lt;span class=&quot;icon-bar&quot;&amp;gt;&amp;lt;/span&amp;gt;
+              &amp;lt;span class=&quot;icon-bar&quot;&amp;gt;&amp;lt;/span&amp;gt;
+            &amp;lt;/button&amp;gt;
+            &amp;lt;a class=&quot;navbar-brand&quot; href=&quot;#&quot;&amp;gt;Project name&amp;lt;/a&amp;gt;
+          &amp;lt;/div&amp;gt;
+          &amp;lt;div id=&quot;navbar&quot; class=&quot;navbar-collapse collapse&quot;&amp;gt;
+            &amp;lt;ul class=&quot;nav navbar-nav&quot;&amp;gt;
+              &amp;lt;li class=&quot;active&quot;&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Home&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+              &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+              &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Contact&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+              &amp;lt;li class=&quot;dropdown&quot;&amp;gt;
+                &amp;lt;a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot; role=&quot;button&quot; aria-haspopup=&quot;true&quot; aria-expanded=&quot;false&quot;&amp;gt;Dropdown &amp;lt;span class=&quot;caret&quot;&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;
+                &amp;lt;ul class=&quot;dropdown-menu&quot;&amp;gt;
+                  &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Action&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+                  &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Another action&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+                  &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Something else here&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+                  &amp;lt;li role=&quot;separator&quot; class=&quot;divider&quot;&amp;gt;&amp;lt;/li&amp;gt;
+                  &amp;lt;li class=&quot;dropdown-header&quot;&amp;gt;Nav header&amp;lt;/li&amp;gt;
+                  &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;Separated link&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+                  &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#&quot;&amp;gt;One more separated link&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+                &amp;lt;/ul&amp;gt;
+              &amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+            &amp;lt;ul class=&quot;nav navbar-nav navbar-right&quot;&amp;gt;
+              &amp;lt;li class=&quot;active&quot;&amp;gt;&amp;lt;a href=&quot;./&quot;&amp;gt;Default &amp;lt;span class=&quot;sr-only&quot;&amp;gt;(current)&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+              &amp;lt;li&amp;gt;&amp;lt;a href=&quot;../navbar-static-top/&quot;&amp;gt;Static top&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+              &amp;lt;li&amp;gt;&amp;lt;a href=&quot;../navbar-fixed-top/&quot;&amp;gt;Fixed top&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+          &amp;lt;/div&amp;gt;&amp;lt;!--/.nav-collapse --&amp;gt;
+        &amp;lt;/div&amp;gt;&amp;lt;!--/.container-fluid --&amp;gt;
+      &amp;lt;/nav&amp;gt;
+
+      &amp;lt;!-- Main component for a primary marketing message or call to action --&amp;gt;
+      &amp;lt;div class=&quot;jumbotron&quot;&amp;gt;
+        &amp;lt;h1&amp;gt;Navbar example&amp;lt;/h1&amp;gt;
+        &amp;lt;p&amp;gt;This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.&amp;lt;/p&amp;gt;
+        &amp;lt;p&amp;gt;
+          &amp;lt;a class=&quot;btn btn-lg btn-primary&quot; href=&quot;../../components/#navbar&quot; role=&quot;button&quot;&amp;gt;View navbar docs »&amp;lt;/a&amp;gt;
+        &amp;lt;/p&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/template&amp;gt;
+
+&amp;lt;script&amp;gt;
+import Hello from &#39;./components/Hello&#39;
+
+export default {
+  components: {
+    Hello
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Maintenant si vous lancez le serveur de dev avec la commande &lt;code class=&quot;highlighter-rouge&quot;&gt;npm run dev&lt;/code&gt; pour pouvez voir une belle page non stylé.&lt;/p&gt;
+
+&lt;h2 id=&quot;je-veux-du-style&quot;&gt;Je veux du style&lt;/h2&gt;
+
+&lt;h3 id=&quot;architecture&quot;&gt;Architecture&lt;/h3&gt;
+
+&lt;p&gt;Dans le dossier &lt;code class=&quot;highlighter-rouge&quot;&gt;assets&lt;/code&gt; je vous invite à créer des dossiers et fichiers vide comme ci-dessous&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;src/
+---assets/
+------scss/
+---------design.scss
+---------bootstrap/
+------------bootstrap-custom.scss
+------------variables.scss
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;designscss&quot;&gt;design.scss&lt;/h3&gt;
+
+&lt;p&gt;C’est le fichier principal, c’est lui qui sera appelé par votre page &lt;code class=&quot;highlighter-rouge&quot;&gt;App.vue&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// On importe bootstrap
+@import &quot;./bootstrap/bootstrap-custom&quot;;
+
+// On fait ce qu&#39;on veut après
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;variablesscss&quot;&gt;variables.scss&lt;/h3&gt;
+
+&lt;p&gt;Ce fichier permet de personnaliser bootstrap à votre guise, voici un exemple de surcharge du fichier par défaut&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * Toute cette partie permet de surcharger les variables de bootstrap
+ */
+
+// La je modifie la couleur principale
+$brand-primary: #5a3966;
+
+
+/**
+ * J&#39;importe enfin le fichier de variables par défaut de bootstrap qui va permettre de définir les variables que je n&#39;ai pas surchargées
+ */
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;bootstrap-customscss&quot;&gt;bootstrap-custom.scss&lt;/h3&gt;
+
+&lt;p&gt;Ce fichier va charger tous les modules de bootstrap&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Core variables and mixins
+@import &quot;./variables&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins&quot;;
+
+// Reset and dependencies
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons&quot;;
+
+// Core CSS
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons&quot;;
+
+// Components
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/component-animations&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/input-groups&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navs&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navbar&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pagination&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pager&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/labels&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/badges&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/media&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/list-group&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/panels&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/wells&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close&quot;;
+
+// Components JavaScript
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel&quot;;
+
+// Utility classes
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities&quot;;
+@import &quot;node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Libre à vous de surcharger ou de ne pas charger des modules en particulier. On voit qu’on a bien surcharger notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;variable.scss&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;allez-cest-parti&quot;&gt;Allez c’est parti&lt;/h3&gt;
+
+&lt;p&gt;Il nous reste plus qu’à charger notre fichier principal dans la vue&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Code à rajouter dans le ficier &quot;App.vue&quot;
+
+&amp;lt;style lang=&quot;scss&quot;&amp;gt;
+  @import &#39;src/assets/scss/design.scss&#39;;
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Et quand regarde le résultat……… &lt;strong&gt;BOOM !!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Module not found: Error: Cannot resolve &#39;file&#39; or &#39;directory&#39; ../fonts/bootstrap/glyphicons-halflings-regular.eot
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;En fait bootstrap ne parviens plus à charger ses fontes, il va juste falloir surcharger une petite variable&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Dans &quot;variables.scss&quot; surchargez cette variable (insérer la ligne avant le @import final, pas après)
+
+$icon-font-path: &quot;/node_modules/bootstrap-sass/assets/fonts/bootstrap/&quot;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Maintenant on a une “belle” page mais si vous essayez de déplier le Dropdown cela ne fonctionne pas. C’est tout à fait normal car le javascript n’est pas chargé.&lt;/p&gt;
+
+&lt;h2 id=&quot;javascript&quot;&gt;Javascript&lt;/h2&gt;
+
+&lt;p&gt;Pour charger la librairie js de bootstrap rien de plus simple&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Code à rajouter dans votre fichier &quot;src/main.js&quot;
+
+import jQuery from &#39;jQuery&#39;
+window.jQuery = window.$ = jQuery
+require(&#39;bootstrap-sass&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Et voilà vous avez maintenant un Bootstrap entièrement personnalisable pour votre application Vuejs&lt;/p&gt;
+</description>
+        <pubDate>Wed, 15 Jun 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/06/15/vuejs-demarrer-avec-bootstrap.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/06/15/vuejs-demarrer-avec-bootstrap.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>[js] Le LocalStorage, en plus simple et plus complet</title>
