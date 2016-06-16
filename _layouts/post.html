@@ -29,30 +29,56 @@ layout: default
 
 <!-- Post Content -->
 <article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 				{{ content }}
 
-                <hr>
+        <hr>
 
-                <ul class="pager">
-                    {% if page.previous.url %}
-                    <li class="previous">
-                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Article précédent</a>
-                    </li>
-                    {% endif %}
-                    {% if page.next.url %}
-                    <li class="next">
-                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Article suivant &rarr;</a>
-                    </li>
-                    {% endif %}
-                </ul>
+        <ul class="pager">
+          {% if page.previous.url %}
+          <li class="previous">
+              <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Article précédent</a>
+          </li>
+          {% endif %}
+          {% if page.next.url %}
+          <li class="next">
+              <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Article suivant &rarr;</a>
+          </li>
+          {% endif %}
+        </ul>
 
-            </div>
-        </div>
+        {% if page.comments %}
+          <hr>
+
+          <div id="disqus_thread"></div>
+
+          <script>
+            var disqus_config = function() {
+              this.page.url = "{{ site.url }}{{ page.url }}"; // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "{{ page.id }}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document,
+                s = d.createElement('script');
+
+              s.src = '//{{ site.disqus_shortname }}.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', + new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+          </noscript>
+
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        {% endif %}
+
+      </div>
     </div>
+  </div>
 </article>
 
 <hr>

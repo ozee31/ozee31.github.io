@@ -3,6 +3,7 @@ layout:     post
 title:      "[js] Le LocalStorage, en plus simple et plus complet"
 subtitle:   "Cachejs est une librairie qui permet de stocker des données sur le PC du client en utilisant le LocalStorage ou le SessionStorage"
 date:       2016-05-13 08:00:00
+comments: true
 header-img: "img/js.png"
 hearder-bg-color: "#323330"
 ---
