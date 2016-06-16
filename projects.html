@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
 
-    <title>Flavien BENINCA (ozee31)</title>
+    <title>Projets - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/">
+    <link rel="canonical" href="http://ozee31.github.io/projects.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,7 +88,7 @@
 <header class="intro-header intro-header--page" style="
   
   
-    background-color: #0085a1;
+    background-color: #07ABA0;
   
 ">
     <div class="container">
@@ -96,9 +96,9 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading ">
                     <div class="heading-title">
-                        <h1>Flavien BENINCA (ozee31)</h1>
+                        <h1>Projets</h1>
                         <hr class="small">
-                        <span class="subheading">Le blog d'un développer Web (PHP, CakePHP, JS...)</span>
+                        <span class="subheading"></span>
                     </div>
                 </div>
             </div>
@@ -110,52 +110,196 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			
-    <div class="post-preview">
-        <a href="/2016/06/15/vuejs-demarrer-avec-bootstrap.html">
-            <h2 class="post-title">            [vuejs] Démarrer avec bootstrap
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Dans ce tutoriel, nous allons voir comment démarrer un projet avec Bootstrap (en mode SASS) sur le framework Vuejs
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 15 juin 2016</p>
-    </div>
-    <hr>
+			<section class="project-section">
+  <h1 class="h2">Javascript</h1>
 
-    <div class="post-preview">
-        <a href="/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html">
-            <h2 class="post-title">            [js] Le LocalStorage, en plus simple et plus complet
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Cachejs est une librairie qui permet de stocker des données sur le PC du client en utilisant le LocalStorage ou le SessionStorage
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 13 mai 2016</p>
-    </div>
-    <hr>
+  <article>
+    <h2 class="h3">OhMyCache</h2>
 
-    <div class="post-preview">
-        <a href="/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html">
-            <h2 class="post-title">            [php] Générer des PDF avec DomPDF et CakePHP
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Générer des PDF sous CakePHP n'a jamais été aussi simple.
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 4 mai 2016</p>
-    </div>
-    <hr>
+    <table>
+      <tbody>
+        <tr>
+          <th>Type</th>
+          <td>Librairie</td>
+        </tr>
+        <tr>
+          <th>Etat</th>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>
+            Basé sur les API LocalStorage et SessionStorage, cette librairie permet de stocker n'importe quel type de données (string, json, array...) et ajoute la possibilité de les enregistrer de manière temporaire et/ou en lecture seule.
+          </td>
+        </tr>
+        <tr>
+          <th>Développement</th>
+          <td>
+            Grâce à <a href="https://webpack.github.io/">Webpack</a>, la librairie est côdée en ECMAScript 2015 (puis compilé grâce à Babel). De plus elle utilise le pattern <a href="https://github.com/umdjs/umd">UMD</a>, ce qui la rend compatible AMD, CommonJS...
+          </td>
+        </tr>
+        <tr>
+          <th>Dépendences</th>
+          <td>
+            Aucune
+          </td>
+        </tr>
+        <tr>
+          <th>Licence</th>
+          <td><a href="https://opensource.org/licenses/mit-license.php">MIT</a></td>
+        </tr>
+        <tr>
+          <th>Lien</th>
+          <td>
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/ozee31/ohmycache">Documentation</a></li>
+              <li><a href="https://github.com/ozee31/ohmycache">Dépôt Github</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>
 
 
-<!-- Pager -->
+<section class="project-section">
+  <h1 class="h2">CakePHP</h1>
 
+  <article>
+    <h2 class="h3">DomPDF</h2>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Type</th>
+          <td>Plugin</td>
+        </tr>
+        <tr>
+          <th>Etat</th>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <th>Compatibilité</th>
+          <td>CakePHP 3.x</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>
+            Ce plugin pour CakePHP 3.x permet de générer des PDF grâce à <a href="http://dompdf.github.io/">DomPDF</a> de manière plus simple et plus propre. En effet il utilise directement votre système de template, inclut des helpers, gère la pagination...
+          </td>
+        </tr>
+        <tr>
+          <th>Dépendences</th>
+          <td>
+            <a href="http://dompdf.github.io/">DomPDF</a>
+          </td>
+        </tr>
+        <tr>
+          <th>Licence</th>
+          <td><a href="https://opensource.org/licenses/mit-license.php">MIT</a></td>
+        </tr>
+        <tr>
+          <th>Lien</th>
+          <td>
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/DaoAndCo/cakephp-dompdf">Documentation</a></li>
+              <li><a href="https://github.com/DaoAndCo/cakephp-dompdf">Dépôt Github</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <h2 class="h3">CacheCleaner</h2>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Type</th>
+          <td>Plugin (shell)</td>
+        </tr>
+        <tr>
+          <th>Etat</th>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <th>Compatibilité</th>
+          <td>CakePHP 3.x</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>
+            Ce plugin pour CakePHP 3.x permet de néttoyer le cache de votre application en production (très utile après une mise en production). Il gère le système de cache de fichiers (dossier tmp), le cache ORM, le cache applicatif (cakephp), ainsi que l'Opcache.
+          </td>
+        </tr>
+        <tr>
+          <th>Dépendences</th>
+          <td>
+            Aucune
+          </td>
+        </tr>
+        <tr>
+          <th>Licence</th>
+          <td><a href="https://opensource.org/licenses/mit-license.php">MIT</a></td>
+        </tr>
+        <tr>
+          <th>Lien</th>
+          <td>
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/DaoAndCo/cakephp-cachecleaner">Documentation</a></li>
+              <li><a href="https://github.com/DaoAndCo/cakephp-cachecleaner">Dépôt Github</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+  <article>
+    <h2 class="h3">Logging</h2>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Type</th>
+          <td>Plugin</td>
+        </tr>
+        <tr>
+          <th>Etat</th>
+          <td>Stable</td>
+        </tr>
+        <tr>
+          <th>Compatibilité</th>
+          <td>CakePHP 3.x</td>
+        </tr>
+        <tr>
+          <th>Description</th>
+          <td>
+            Initialement conçu pour permettre la journalisation des actions des utilisateurs, ce plugin vous permet de stocker n'importe quels évenements dans votre base de données. Il est également accompagné d'un component qui permet de stocker à la demande (ou de manière automatique) des données comme l'objet Session ou l'objet Request
+          </td>
+        </tr>
+        <tr>
+          <th>Dépendences</th>
+          <td>Aucune</td>
+        </tr>
+        <tr>
+          <th>Licence</th>
+          <td><a href="https://opensource.org/licenses/mit-license.php">MIT</a></td>
+        </tr>
+        <tr>
+          <th>Lien</th>
+          <td>
+            <ul class="list-unstyled">
+              <li><a href="https://github.com/DaoAndCo/cakephp-logging">Documentation</a></li>
+              <li><a href="https://github.com/DaoAndCo/cakephp-logging">Dépôt Github</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </article>
+</section>
 
 		</div>
 	</div>
