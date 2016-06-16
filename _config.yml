@@ -18,6 +18,7 @@ linkedin_username: flavienbeninca
 paginate: 5
 lang: fr-FR
 header-img: /img/home-bg.jpg
+google_analytics: UA-53339494-2
 
 # Build settings
 markdown: kramdown
