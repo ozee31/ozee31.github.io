@@ -1,6 +1,22 @@
 ---
 ---
 
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 800;
+}
+
+a {
+  color: #0085a1;
+}
+.a--nocolor {
+  color: #404040;
+}
 
 .tabulation {
     margin-left: 25px;
@@ -29,3 +45,10 @@
         font-weight: normal;
         font-size: 20px;
     }
+
+/**
+ * PROJECTS
+ */
+  .project-section article {
+    margin-left: 25px;
+  }
