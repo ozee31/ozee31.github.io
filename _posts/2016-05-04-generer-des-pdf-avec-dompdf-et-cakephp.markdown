@@ -18,14 +18,13 @@ Voici ma configuration pour cette démo
 - Server Apache
 - PHP en version 7 (la version minimale est la 5.4.16)
 - CakePHP en version 3.2 (la version minimale est la 3.0)
-- La librairie DomPDF en version 0.7 beta (la 0.6 n'utilise pas les namespaces)
+- La librairie DomPDF en version 0.7
 - Le plugin cakephp-dompdf en version 1.0
 
 ## Installation
 Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer
 
 ```SHELL
-    composer require dompdf/dompdf:0.7.x@beta
     composer require daoandco/cakephp-dompdf
 ```
 
