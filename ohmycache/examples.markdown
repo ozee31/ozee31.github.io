@@ -15,18 +15,18 @@ hearder-bg-color: "#323330"
       <h1>Exemples</h1>
 
       <h2>Store data in local storage</h2>
-      <pre>OhMyCache.Local.set('key', 'local')</pre>
+      {% highlight js %}OhMyCache.Local.set('key', 'local'){% endhighlight %}
 
       <h2>Store data in session storage</h2>
-      <pre>OhMyCache.Session.set('key', 'session')</pre>
+      {% highlight js %}OhMyCache.Session.set('key', 'session'){% endhighlight %}
 
       <h2>Get data in local storage</h2>
-      <pre>OhMyCache.Local.get('key') // return 'local'</pre>
+      {% highlight js %}OhMyCache.Local.get('key') // return 'local'{% endhighlight %}
 
       <h2>Get data in session storage</h2>
-      <pre>OhMyCache.Session.get('key') // return 'session'</pre>
+      {% highlight js %}OhMyCache.Session.get('key') // return 'session'{% endhighlight %}
 
       <h2>Store an object</h2>
-      <pre>OhMyCache.Local.set('myObj', {attr1: 'val1', attr2: 'val2'})</pre>
+      {% highlight js %}OhMyCache.Local.set('myObj', {attr1: 'val1', attr2: 'val2'}){% endhighlight %}
   </section>
 </div>

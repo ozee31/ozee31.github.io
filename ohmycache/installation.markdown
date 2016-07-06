@@ -17,51 +17,51 @@ hearder-bg-color: "#323330"
     <h2>Download</h2>
 
     <h3>NPM</h3>
-    <pre>npm install OhMyCache</pre>
+    {% highlight shell %}npm install OhMyCache{% endhighlight %}
 
     <h3>Bower</h3>
-    <pre>bower install OhMyCache</pre>
+    {% highlight shell %}bower install OhMyCache{% endhighlight %}
 
 
     <h2>Load the library</h2>
 
     <h3>ES2015 (babel)</h3>
-    <pre>
+{% highlight js %}
 import {Local, Session} from 'OhMyCache'
 
 // quick use
 Local.set('key', 'val')
 Session.set('key', 'val')
-    </pre>
+{% endhighlight %}
 
     <h3>require function of node</h3>
-    <pre>
+{% highlight js %}
 var OhMyCache = require('OhMyCache')
 
 // quick use
 OhMyCache.Local.set('key', 'val')
 OhMyCache.Session.set('key', 'val')
-    </pre>
+{% endhighlight %}
 
     <h3>Html script</h3>
-    <pre>
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;!-- npm --&gt;
-        &lt;script src="node_modules/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+{% highlight html %}
+<html>
+  <head>
+    <!-- npm -->
+    <script src="node_modules/ohmycache/dist/bundle.js"></script>
 
-        &lt;!-- bower --&gt;
-        &lt;script src="bower_components//ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+    <!-- bower -->
+    <script src="bower_components//ohmycache/dist/bundle.js"></script>
 
-        &lt;!-- other method --&gt;
-        &lt;script src="lib-path/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-          // quick use
-          OhMyCache.Local.set('key', 'val')
-          OhMyCache.Session.set('key', 'val')
-        &lt;/script&gt;
-    &lt;/head&gt;
-&lt;/html&gt;
-    </pre>
+    <!-- other method -->
+    <script src="lib-path/ohmycache/dist/bundle.js"></script>
+    <script>
+      // quick use
+      OhMyCache.Local.set('key', 'val')
+      OhMyCache.Session.set('key', 'val')
+    </script>
+  </head>
+</html>
+{% endhighlight %}
   </section>
 </div>

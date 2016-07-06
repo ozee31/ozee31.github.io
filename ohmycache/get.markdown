@@ -14,7 +14,7 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>get</h1>
     <p>Get the value, remove the date if expired</p>
-    <pre>get(key)</pre>
+    {% highlight js %}get(key){% endhighlight %}
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -26,7 +26,7 @@ hearder-bg-color: "#323330"
     <p>This method return the value of a data (string, int, float, array, object...)</p>
 
     <h2>Exemples</h2>
-    <pre>
+{% highlight js %}
 OhMyCache.Local.set('key', 'value')
 
 OhMyCache.Local.get('key') // 'value'
@@ -35,6 +35,6 @@ OhMyCache.Session.get('key') // null
 OhMyCache.Local.set('key', 'value', {expire: 1})
 // sleep 2 secondes or more
 OhMyCache.Local.get('key') // null
-    </pre>
+{% endhighlight %}
   </section>
 </div>

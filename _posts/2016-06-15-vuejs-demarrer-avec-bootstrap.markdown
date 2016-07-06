@@ -28,36 +28,36 @@ Je démarre toujours un projet Vuejs grâce à vue-cli afin d'installer Vuejs gr
 
 Si ce n'est pas déjà fait vous devez l'installer globalement
 
-```
+{% highlight shell %}
 npm install -g vue-cli
-```
+{% endhighlight %}
 
 On peut ensuite créer le projet
 
-```
+{% highlight shell %}
 vue init webpack tuto
-```
+{% endhighlight %}
 
 Vous vous déplacez dans le dossier du projet et vous installez les dépendances de vuejs
 
-```
+{% highlight shell %}
 cd tuto
 npm install
-```
+{% endhighlight %}
 
 Enfin on installe les dépendances propre à environnement à savoir : bootstrap, jquery et ce qu'il faut pour compiler le sass
 
-```
+{% highlight shell %}
 npm install -S bootstrap-sass
 npm install -S jquery
 npm install sass-loader node-sass webpack --save-dev
-```
+{% endhighlight %}
 
 ## Préparation de la vue
 
 Nous allons modifier le fichier de base `App.vue`afin d'intégrer un petit exemple de page utilisant bootstrap.
 
-```
+{% highlight html %}
 // src/App.vue
 
 <template>
@@ -124,7 +124,7 @@ export default {
   }
 }
 </script>
-```
+{% endhighlight %}
 
 Maintenant si vous lancez le serveur de dev avec la commande `npm run dev` pour pouvez voir une belle page non stylé.
 
@@ -148,23 +148,23 @@ src/
 
 C'est le fichier principal, c'est lui qui sera appelé par votre page `App.vue`
 
-```
-// On importe bootstrap
+{% highlight scss %}
+/* On importe bootstrap */
 @import "./bootstrap/bootstrap-custom";
 
-// On fait ce qu'on veut après
-```
+/* On fait ce qu'on veut après */
+{% endhighlight %}
 
 ### variables.scss
 
 Ce fichier permet de personnaliser bootstrap à votre guise, voici un exemple de surcharge du fichier par défaut
 
-```
+{% highlight scss %}
 /**
  * Toute cette partie permet de surcharger les variables de bootstrap
  */
 
-// La je modifie la couleur principale
+/* La je modifie la couleur principale */
 $brand-primary: #5a3966;
 
 
@@ -172,23 +172,23 @@ $brand-primary: #5a3966;
  * J'importe enfin le fichier de variables par défaut de bootstrap qui va permettre de définir les variables que je n'ai pas surchargées
  */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
-```
+{% endhighlight %}
 
 ### bootstrap-custom.scss
 
 Ce fichier va charger tous les modules de bootstrap
 
-```
-// Core variables and mixins
+{% highlight scss %}
+/* Core variables and mixins */
 @import "./variables";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 
-// Reset and dependencies
+/* Reset and dependencies */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
-// Core CSS
+/* Core CSS */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code";
@@ -197,7 +197,7 @@ Ce fichier va charger tous les modules de bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 
-// Components
+/* Components */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
@@ -220,16 +220,16 @@ Ce fichier va charger tous les modules de bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/wells";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close";
 
-// Components JavaScript
+/* Components JavaScript */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
 
-// Utility classes
+/* Utility classes */
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
-```
+{% endhighlight %}
 
 Libre à vous de surcharger ou de ne pas charger des modules en particulier. On voit qu'on a bien surcharger notre fichier `variable.scss`
 
@@ -237,13 +237,13 @@ Libre à vous de surcharger ou de ne pas charger des modules en particulier. On 
 
 Il nous reste plus qu'à charger notre fichier principal dans la vue
 
-```
+{% highlight html %}
 // Code à rajouter dans le ficier "App.vue"
 
 <style lang="scss">
   @import 'src/assets/scss/design.scss';
 </style>
-```
+{% endhighlight %}
 
 Et quand regarde le résultat......... **BOOM !!!**
 
@@ -251,11 +251,11 @@ Et quand regarde le résultat......... **BOOM !!!**
 
 En fait bootstrap ne parviens plus à charger ses fontes, il va juste falloir surcharger une petite variable
 
-```
+{% highlight sass %}
 // Dans "variables.scss" surchargez cette variable (insérer la ligne avant le @import final, pas après)
 
 $icon-font-path: "/node_modules/bootstrap-sass/assets/fonts/bootstrap/";
-```
+{% endhighlight %}
 
 Maintenant on a une "belle" page mais si vous essayez de déplier le Dropdown cela ne fonctionne pas. C'est tout à fait normal car le javascript n'est pas chargé.
 
@@ -263,12 +263,12 @@ Maintenant on a une "belle" page mais si vous essayez de déplier le Dropdown ce
 
 Pour charger la librairie js de bootstrap rien de plus simple
 
-```
+{% highlight js %}
 // Code à rajouter dans votre fichier "src/main.js"
 
 import jQuery from 'jQuery'
 window.jQuery = window.$ = jQuery
 require('bootstrap-sass')
-```
+{% endhighlight %}
 
 Et voilà vous avez maintenant un Bootstrap entièrement personnalisable pour votre application Vuejs

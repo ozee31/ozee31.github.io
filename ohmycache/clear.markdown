@@ -14,13 +14,13 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>clear</h1>
     <p>Remove all items. Also removes read-only datas</p>
-    <pre>clear()</pre>
+    {% highlight js %}clear(){% endhighlight %}
 
     <h2>Return</h2>
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
+{% highlight js %}
 OhMyCache.Local.set('key', 'value')
 OhMyCache.Local.set('key2', 'value', {readonly: true})
 
@@ -28,6 +28,6 @@ OhMyCache.Local.clear() // true
 
 OhMyCache.Local.get('key') // null
 OhMyCache.Local.get('key2') // null
-    </pre>
+{% endhighlight %}
   </section>
 </div>

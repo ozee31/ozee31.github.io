@@ -31,51 +31,51 @@ D'ailleur en parlant de source voici le [repository](https://github.com/ozee31/c
 
 Pour cette démonstration je vais initialiser un projet npm
 
-```SHELL
-    npm init
-```
+{% highlight shell %}
+npm init
+{% endhighlight %}
 
 Puis j'installer la librairie (à ce jour la version 1.0)
 
-```SHELL
-    npm install ozee-cachejs
-```
+{% highlight shell %}
+npm install ozee-cachejs
+{% endhighlight %}
 
 Je vais créer ensuite un fichier `index.html`
 
-```HTML
-    <!doctype html>
+{% highlight html %}
+<!doctype html>
 
-    <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Cachejs demo</title>
-    </head>
-    <body>
-        <div id="output">
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Cachejs demo</title>
+</head>
+<body>
+  <div id="output">
 
-        </div>
+  </div>
 
-        <script src="node_modules/ozee-cachejs/dist/cache.min.js"></script>
-        <script src="demo.js"></script>
-    </body>
-    </html>
-```
+  <script src="node_modules/ozee-cachejs/dist/cache.min.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>
+{% endhighlight %}
 
 Puis un fichier `demo.js` avec un petit bout de code qui va nous permettre de savoir si la lib est chargé
 
-```JS
-    (function() {
-        var output = document.getElementById('output');
+{% highlight js %}
+(function() {
+  var output = document.getElementById('output');
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+  if ( typeof Cachejs === 'undefined' ) {
+      output.innerHTML = 'Lib non chargé';
+      return false;
+  }
 
-        output.innerHTML = 'Lib chargé';
-    })();
-```
+  output.innerHTML = 'Lib chargé';
+})();
+{% endhighlight %}
 
 On démarre notre fichier index.html dans notre navigateur favori et si tout se passe bien on devrait voir s'afficher
 
@@ -124,67 +124,67 @@ Voici un bref aperçu des méthodes disponible :
 ### Set et match
 Nous allons stocker divers types de données (string, array, objet...) et les afficher ensuite dans notre balise `output`. Je vous invite donc à modifier le fichier `demo.js`
 
-```JS
-    // demo.js
+{% highlight js %}
+// demo.js
 
-    (function() {
-        var output = document.getElementById('output');
+(function() {
+    var output = document.getElementById('output');
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+    if ( typeof Cachejs === 'undefined' ) {
+        output.innerHTML = 'Lib non chargé';
+        return false;
+    }
 
-        // On réinitialise le cache
-        Cachejs.Local.clear();
-        Cachejs.Session.clear();
+    // On réinitialise le cache
+    Cachejs.Local.clear();
+    Cachejs.Session.clear();
 
-        /**
-         * Stockage des données
-         */
-            // stockage d'un string
-            Cachejs.Local.set('monString', 'je suis un string');
+    /**
+     * Stockage des données
+     */
+        // stockage d'un string
+        Cachejs.Local.set('monString', 'je suis un string');
 
-            // stockage d'un booléen en Session
-            Cachejs.Session.set('monBool', true);
+        // stockage d'un booléen en Session
+        Cachejs.Session.set('monBool', true);
 
-            // stockage d'un array
-            Cachejs.Local.set('monArray', [1,2,3]);
+        // stockage d'un array
+        Cachejs.Local.set('monArray', [1,2,3]);
 
-            // stockage d'un objet
-            Cachejs.Local.set('monObjet', {prenom: 'Lary', nom: 'Gole'});
+        // stockage d'un objet
+        Cachejs.Local.set('monObjet', {prenom: 'Lary', nom: 'Gole'});
 
 
-        /**
-         * Récupération des données
-         */
-            output.innerHTML = '';
+    /**
+     * Récupération des données
+     */
+        output.innerHTML = '';
 
-            // On affiche le cache local de la clé 'monString'
-            output.innerHTML += 'monString = ' + Cachejs.Local.get('monString') + '<br>';
+        // On affiche le cache local de la clé 'monString'
+        output.innerHTML += 'monString = ' + Cachejs.Local.get('monString') + '<br>';
 
-            // Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
-            output.innerHTML += 'monBool (local) = ' + Cachejs.Local.get('monBool') + '<br>';
+        // Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
+        output.innerHTML += 'monBool (local) = ' + Cachejs.Local.get('monBool') + '<br>';
 
-            // En revanche avec le cache session ça marche
-            output.innerHTML += 'monBool (sessoin) = ' + Cachejs.Session.get('monBool') + '<br>';
+        // En revanche avec le cache session ça marche
+        output.innerHTML += 'monBool (sessoin) = ' + Cachejs.Session.get('monBool') + '<br>';
 
-            // On affiche notre array
-            output.innerHTML += 'monArray = ' + Cachejs.Local.get('monArray') + '<br>';
+        // On affiche notre array
+        output.innerHTML += 'monArray = ' + Cachejs.Local.get('monArray') + '<br>';
 
-            // Et pour finir notre objet
-            output.innerHTML += 'monObjet = ' + JSON.stringify( Cachejs.Local.get('monObjet') ) + '<br>';
-    })();
-```
+        // Et pour finir notre objet
+        output.innerHTML += 'monObjet = ' + JSON.stringify( Cachejs.Local.get('monObjet') ) + '<br>';
+})();
+{% endhighlight %}
 
 Une fois la page rafraîchie vous devrez voir apparaître :
 
 ```
-    monString = je suis un string
-    monBool (local) = null
-    monBool (sessoin) = true
-    monArray = 1,2,3
-    monObjet = {"prenom":"Lary","nom":"Gole"}
+monString = je suis un string
+monBool (local) = null
+monBool (sessoin) = true
+monArray = 1,2,3
+monObjet = {"prenom":"Lary","nom":"Gole"}
 ```
 
 ### Aller plus loin
@@ -192,47 +192,47 @@ Une fois la page rafraîchie vous devrez voir apparaître :
 Si vous êtes toujours là (et je l'espère), on va comme le titre l'indique, aller plus loin, en utilisant l'expiration des données et la lecture seule.
 On repart à zéro avec notre `demo.js`
 
-```JS
-    // demo.js
+{% highlight js %}
+// demo.js
 
-    (function() {
-        var output = document.getElementById('output');
+(function() {
+    var output = document.getElementById('output');
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+    if ( typeof Cachejs === 'undefined' ) {
+        output.innerHTML = 'Lib non chargé';
+        return false;
+    }
 
-        // On réinitialise le cache
-        Cachejs.Local.clear();
-        Cachejs.Session.clear();
-        output.innerHTML = '';
+    // On réinitialise le cache
+    Cachejs.Local.clear();
+    Cachejs.Session.clear();
+    output.innerHTML = '';
 
-        /**
-         * Lecture seule
-         */
-            Cachejs.Local.set('readOnly', 'Je suis en lecture seule', null, true);
+    /**
+     * Lecture seule
+     */
+        Cachejs.Local.set('readOnly', 'Je suis en lecture seule', null, true);
 
-            // Je ne peux donc pas modifié la donnée
-            Cachejs.Local.set('readOnly', 'Je ne peux pas être modifié');
-            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '<br>';
+        // Je ne peux donc pas modifié la donnée
+        Cachejs.Local.set('readOnly', 'Je ne peux pas être modifié');
+        output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '<br>';
 
-            // Je ne peux pas la supprimer non plus
-            Cachejs.Local.remove('readOnly');
-            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '<br>';
+        // Je ne peux pas la supprimer non plus
+        Cachejs.Local.remove('readOnly');
+        output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '<br>';
 
-        /**
-         * Expiration
-         */
-            Cachejs.Local.set('expiration', 'Je vais expirer dans 3 secondes', 3);
+    /**
+     * Expiration
+     */
+        Cachejs.Local.set('expiration', 'Je vais expirer dans 3 secondes', 3);
 
-            // J'existe encore
-            output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '<br>';
+        // J'existe encore
+        output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '<br>';
 
-            // Dans 4 secondes j'existe plus
-            setTimeout(function(){ output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '<br>' },4000);
-    })();
-```
+        // Dans 4 secondes j'existe plus
+        setTimeout(function(){ output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '<br>' },4000);
+})();
+{% endhighlight %}
 
 On recharge, on attend 4 secondes et le résultat sera :
 

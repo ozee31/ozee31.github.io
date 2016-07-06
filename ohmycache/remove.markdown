@@ -14,7 +14,7 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>remove</h1>
     <p>Remove item if don't readonly</p>
-    <pre>remove(key)</pre>
+    {% highlight js %}remove(key){% endhighlight %}
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -26,7 +26,7 @@ hearder-bg-color: "#323330"
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
+{% highlight js %}
 OhMyCache.Local.set('key', 'value')
 OhMyCache.Local.get('key') // 'value'
 OhMyCache.Local.remove('key') // true
@@ -37,6 +37,6 @@ OhMyCache.Local.set('key', 'value', {readonly: true})
 OhMyCache.Local.get('key') // 'value'
 OhMyCache.Local.remove('key') // false
 OhMyCache.Local.get('key') // 'value'
-    </pre>
+{% endhighlight %}
   </section>
 </div>

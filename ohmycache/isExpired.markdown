@@ -14,7 +14,7 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>isExpired</h1>
     <p>Indicates whether the item expired</p>
-    <pre>isExpired(key)</pre>
+    {% highlight js %}isExpired(key){% endhighlight %}
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -26,7 +26,7 @@ hearder-bg-color: "#323330"
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
+{% highlight js %}
 // No expiration
 OhMyCache.Local.set('key', 'value')
 OhMyCache.Local.isExpired('key') // false
@@ -39,6 +39,6 @@ OhMyCache.Local.isExpired('key') // false
 OhMyCache.Local.set('key', 'value', {expire: 1})
 // sleep 1 second or more
 OhMyCache.Local.isExpired('key') // true
-    </pre>
+{% endhighlight %}
   </section>
 </div>

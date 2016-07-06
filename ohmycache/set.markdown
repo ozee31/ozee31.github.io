@@ -14,7 +14,7 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>set</h1>
     <p>Add the key to the storage, or update that key's value if it already exist</p>
-    <pre>set(key, value, options)</pre>
+    {% highlight js %}set(key, value, options){% endhighlight %}
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -47,7 +47,7 @@ hearder-bg-color: "#323330"
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
+{% highlight js %}
 // String with LocalStorage
 OhMyCache.Local.set('key', 'value')
 
@@ -67,6 +67,6 @@ OhMyCache.Local.set('key', 'value', {expire: 3600}) // data expires in 1 hour
 OhMyCache.Local.set('key', 'value', {readonly: true}) // return true
 OhMyCache.Local.set('key', 'change') // return false
 OhMyCache.Local.get('key') // return 'value'
-    </pre>
+{% endhighlight %}
   </section>
 </div>

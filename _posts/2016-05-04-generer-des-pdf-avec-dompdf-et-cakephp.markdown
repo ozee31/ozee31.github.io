@@ -24,50 +24,53 @@ Voici ma configuration pour cette démo
 ## Installation
 Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer
 
-```SHELL
-    composer require daoandco/cakephp-dompdf
-```
+{% highlight shell %}
+composer require daoandco/cakephp-dompdf
+{% endhighlight %}
 
 Très important, il ne faut pas oublié de générer les liens symboliques du plugin.
 
-```SHELL
-    bin/cake plugin assets symlink
-```
+{% highlight shell %}
+bin/cake plugin assets symlink
+{% endhighlight %}
 
 On charge ensuite le plugin
 
-```PHP
-    // config/bootstrap.php
+{% highlight php %}
+<?php
+// config/bootstrap.php
 
-    Plugin::load('Dompdf');
-```
+Plugin::load('Dompdf');
+{% endhighlight %}
 
 ## En route pour l'aventure
 Le plus simple pour générer les PDF est d'écouter les urls afin de traiter l'extension `.pdf` ([Documentation](http://book.cakephp.org/3.0/fr/development/routing.html#routing-des-extensions-de-fichier))
 
 On va donc, pour l'exemple définir une ~~auto~~ route.
 
-```PHP
+{% highlight php %}
+<?php
 Router::scope('/', function (RouteBuilder $routes) {
-    $routes->extensions(['pdf']);
-    $routes->connect('/demo/view/*', ['controller' => 'Demo', 'action' => 'view']);
+  $routes->extensions(['pdf']);
+  $routes->connect('/demo/view/*', ['controller' => 'Demo', 'action' => 'view']);
 }
-```
+{% endhighlight %}
 
 Et pour le controlleur :
 
-```PHP
+{% highlight php %}
+<?php
 // scr/Controller/DemoController.php
 
 namespace App\Controller;
 
 class DemoController extends AppController {
 
-    public function view($name) {
+  public function view($name) {
 
-    }
+  }
 }
-```
+{% endhighlight %}
 
 On teste notre route http://localhost/demo/view/test.pdf et **bim!!!**
 
@@ -79,13 +82,13 @@ Ne vous inquiétez pas, c'est normal, pas de panique on a pas encore créé notr
 
 Comme on écoute toujours la maîtresse et que l'on est bien sage, on va créer notre fichier `view.ctp` dans `Demo/pdf/view.ctp`
 
-```HTML
+{% highlight html %}
 <!-- src/Template/Demo/pdf/view.ctp -->
 
 <h1>Ceci est un pédéhèffe</h1>
 
 <p>Il est généré avec Dôme Pédéhèffe</p>
-```
+{% endhighlight %}
 
 > Hey, t'est bien gentil mais là il me demande de créer un layout.
 
@@ -95,18 +98,19 @@ Oui je sais mais comme la vie est bien faite, notre petit plugin inclut justemen
 
 Pour faire les choses bien (il faut toujours faire les choses bien), on va modifier notre Controller
 
-```PHP
+{% highlight php %}
+<?php
 public function view($name) {
 
-    $this->viewBuilder()
-        ->className('Dompdf.Pdf')
-        ->layout('Dompdf.default')
-        ->options(['config' => [
-            'filename' => $name,
-            'render' => 'browser',
-    ]]);
+  $this->viewBuilder()
+    ->className('Dompdf.Pdf')
+    ->layout('Dompdf.default')
+    ->options(['config' => [
+      'filename' => $name,
+      'render' => 'browser',
+  ]]);
 }
-```
+{% endhighlight %}
 
 On recharge la page, et là, sous vos yeux ébahis, un magnifique PDF apparaît dans votre Firefox (comment ça vous n'utilisez pas Firefox ?)
 
@@ -124,17 +128,17 @@ On y viens, et on va même faire un header et un footer comme je suis gentil.
 
 Allez c'est parti on crée notre beau css
 
-```CSS
+{% highlight css %}
 /* webroot/css/demo.css */
 
 h1 {
-    color: red;
+  color: red;
 }
-```
+{% endhighlight %}
 
 Et comme tout est prévu, notre beau petit plugin possède un helper, on peut donc modifier notre fichier `view.ctp`
 
-```HTML
+{% highlight html %}
 <!-- src/Template/Demo/pdf/view.ctp -->
 
 <?= $this->Dompdf->css('demo'); ?>
@@ -142,22 +146,22 @@ Et comme tout est prévu, notre beau petit plugin possède un helper, on peut do
 <h1>Ceci est un pédéhèffe</h1>
 
 <p>Il est généré avec Dôme Pédéhèffe</p>
-```
+{% endhighlight %}
 
 Ah oui, j'oubliais les nanas, pour les images c'est aussi avec le helper (et on en profite pour rajouter le header et le footer)
 
-```HTML
+{% highlight html %}
 <!-- src/Template/Demo/pdf/view.ctp -->
 
 <?= $this->Dompdf->css('demo'); ?>
 
 <?php
 $this->start('header');
-    echo '<p>I\'m a header</p>';
+  echo '<p>I\'m a header</p>';
 $this->end();
 
 $this->start('footer');
-    echo '<p>I\'m a footer</p>';
+  echo '<p>I\'m a footer</p>';
 $this->end();
 ?>
 
@@ -166,7 +170,7 @@ $this->end();
 <p>Il est généré avec Dôme Pédéhèffe</p>
 
 <?= $this->Dompdf->image('nanas.jpg'); ?>
-```
+{% endhighlight %}
 
 On actualise la page, et voilà notre PDF stylé comme jamais
 ![enter image description here](https://lh3.googleusercontent.com/4zy5TzBYp6cT4PDG_S7-V7yzX9J5BIyze5Uj-fHTpJBN7XY0NymbLGRjkvQedxVNIx9Dm6RYwg=s0 "capture-3.JPG")
