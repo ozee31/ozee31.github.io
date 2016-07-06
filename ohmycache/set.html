@@ -1,0 +1,72 @@
+---
+layout: documentation
+title: "OhMyCache - set"
+id: 'ohmycache'
+section: "set"
+hearder-bg-color: "#323330"
+---
+
+<div class="row">
+  <div class="col-md-2">
+    {% include ohmycache/nav.html %}
+  </div>
+
+  <section class="col-md-10">
+    <h1>set</h1>
+    <p>Add the key to the storage, or update that key's value if it already exist</p>
+    <pre>set(key, value, options)</pre>
+
+    <h2>Parameters</h2>
+    <dl class="dl-horizontal">
+      <dt>key</dt>
+      <dd>{string} name of the key you want to create or update</dd>
+
+      <dt>value</dt>
+      <dd>{mixed} name of the key you want to create or update. Must be a string, int, float, array, object...</dd>
+
+      <dt>options</dt>
+      <dd>{object} add options for storage if necessary</dd>
+    </dl>
+
+    <h2>Options</h2>
+    <h3>expire</h3>
+    <p>
+      If you want your data expires, add <code>expire</code> in option parameter. <br>
+      The value of <code>expire</code> must be expressed in second. <br>
+      By default the value is <code>false</code>
+    </p>
+
+    <h3>readonly</h3>
+    <p>
+      If you want your data is neither modified nor deleteable., add <code>readonly</code> in option parameter. <br>
+      The value of <code>readonly</code> must be a boolean. <br>
+      By default the value is <code>false</code>
+    </p>
+
+    <h2>Return</h2>
+    <p>This method return a boolean</p>
+
+    <h2>Exemples</h2>
+    <pre>
+// String with LocalStorage
+OhMyCache.Local.set('key', 'value')
+
+// String with SessionStorage
+OhMyCache.Session.set('key', 'value')
+
+// Array
+OhMyCache.Local.set('key', [1,2,3])
+
+// Object
+OhMyCache.Local.set('user', {fistname: 'James', lastname: 'Bond'})
+
+// With expiration
+OhMyCache.Local.set('key', 'value', {expire: 3600}) // data expires in 1 hour
+
+// ReadOnly
+OhMyCache.Local.set('key', 'value', {readonly: true}) // return true
+OhMyCache.Local.set('key', 'change') // return false
+OhMyCache.Local.get('key') // return 'value'
+    </pre>
+  </section>
+</div>

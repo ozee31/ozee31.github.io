@@ -1,0 +1,33 @@
+---
+layout: documentation
+title: "OhMyCache - clear"
+id: 'ohmycache'
+section: "clear"
+hearder-bg-color: "#323330"
+---
+
+<div class="row">
+  <div class="col-md-2">
+    {% include ohmycache/nav.html %}
+  </div>
+
+  <section class="col-md-10">
+    <h1>clear</h1>
+    <p>Remove all items. Also removes read-only datas</p>
+    <pre>clear()</pre>
+
+    <h2>Return</h2>
+    <p>This method return a boolean</p>
+
+    <h2>Exemples</h2>
+    <pre>
+OhMyCache.Local.set('key', 'value')
+OhMyCache.Local.set('key2', 'value', {readonly: true})
+
+OhMyCache.Local.clear() // true
+
+OhMyCache.Local.get('key') // null
+OhMyCache.Local.get('key2') // null
+    </pre>
+  </section>
+</div>

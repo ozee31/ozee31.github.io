@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+<header class="intro-header intro-header--documentation intro-header--{{ page.id }}" style="
+  {% if page.header-img %}
+    background-image: url('{{ site.baseurl }}/{{ page.header-img }}');
+  {% endif %}
+">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if page.header %}
+                  <div class="site-heading ">
+                    <div class="heading-title">
+                      <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                      <hr class="small">
+                      <span class="subheading">{{ page.description }}</span>
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="site-heading site-heading--documentation"></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container-fluid container--doc container--{{ page.id }}">
+  {{ content }}
+</div>
+
+<hr>

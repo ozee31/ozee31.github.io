@@ -32,9 +32,12 @@ a {
     .intro-header .site-heading, .intro-header .post-heading, .intro-header .page-heading {
       padding: 100px 0;
     }
-    .intro-header--post {
-      background: no-repeat bottom right 30px #808080;;
+    .intro-header--post, .intro-header--documentation {
+      background: no-repeat bottom right 30px #808080;
       background-size: auto;
+    }
+    .intro-header--documentation {
+      margin-bottom: 0;
     }
     .heading-title {
         padding: 20px;
@@ -51,4 +54,70 @@ a {
  */
   .project-section article {
     margin-left: 25px;
+  }
+
+  /**
+   * DOCUMENTATION
+   */
+  $color-primary-ohmycache: #3b3939;
+  $color-primary-ohmycache-light: lighten($color-primary-ohmycache, 15%);
+  $color-primary-ohmycache-light25: lighten($color-primary-ohmycache, 25%);
+  $color-primary-ohmycache-light50: lighten($color-primary-ohmycache, 50%);
+
+  .intro-header {
+    &.intro-header--ohmycache {
+      background-color: $color-primary-ohmycache;
+    }
+
+    .site-heading.site-heading--documentation {
+      padding: 30px 0;
+    }
+  }
+  .container--doc {
+    .nav-section {
+      h1 {
+        font-weight: normal;
+        font-size: 15px;
+      }
+      .nav > li > a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: 18px;
+      }
+    }
+    h2 {
+      font-size: 28px;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: normal;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+
+
+    &.container--ohmycache {
+      .documentation-nav {
+        background-color: #f7f7f7;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+
+      .nav-section {
+        h1 {
+          color: $color-primary-ohmycache-light50;
+        }
+        li > a {
+          color: $color-primary-ohmycache-light;
+        }
+        li.active > a {
+          background-color: $color-primary-ohmycache-light;
+          color: white;
+        }
+      }
+    }
   }

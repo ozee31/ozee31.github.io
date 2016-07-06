@@ -1,0 +1,67 @@
+---
+layout: documentation
+title: "OhMyCache - Installation"
+id: 'ohmycache'
+section: "installation"
+hearder-bg-color: "#323330"
+---
+
+<div class="row">
+  <div class="col-md-2">
+    {% include ohmycache/nav.html %}
+  </div>
+
+  <section class="col-md-10">
+    <h1>Installation</h1>
+
+    <h2>Download</h2>
+
+    <h3>NPM</h3>
+    <pre>npm install OhMyCache</pre>
+
+    <h3>Bower</h3>
+    <pre>bower install OhMyCache</pre>
+
+
+    <h2>Load the library</h2>
+
+    <h3>ES2015 (babel)</h3>
+    <pre>
+import {Local, Session} from 'OhMyCache'
+
+// quick use
+Local.set('key', 'val')
+Session.set('key', 'val')
+    </pre>
+
+    <h3>require function of node</h3>
+    <pre>
+var OhMyCache = require('OhMyCache')
+
+// quick use
+OhMyCache.Local.set('key', 'val')
+OhMyCache.Session.set('key', 'val')
+    </pre>
+
+    <h3>Html script</h3>
+    <pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- npm --&gt;
+        &lt;script src="node_modules/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+
+        &lt;!-- bower --&gt;
+        &lt;script src="bower_components//ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+
+        &lt;!-- other method --&gt;
+        &lt;script src="lib-path/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+          // quick use
+          OhMyCache.Local.set('key', 'val')
+          OhMyCache.Session.set('key', 'val')
+        &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/html&gt;
+    </pre>
+  </section>
+</div>
