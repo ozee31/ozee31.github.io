@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
 
-    <title>Flavien BENINCA (ozee31)</title>
+    <title>OhMyCache - Installation - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/">
+    <link rel="canonical" href="http://ozee31.github.io/ohmycache/installation.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -107,80 +107,113 @@
 
 
     <!-- Page Header -->
-<header class="intro-header intro-header--page" style="
-  
-  
-    background-color: #0085a1;
+<header class="intro-header intro-header--documentation intro-header--ohmycache" style="
   
 ">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading ">
-                    <div class="heading-title">
-                        <h1>Flavien BENINCA (ozee31)</h1>
-                        <hr class="small">
-                        <span class="subheading">Le blog d'un développer Web (PHP, CakePHP, JS...)</span>
-                    </div>
-                </div>
+                
+                  <div class="site-heading site-heading--documentation"></div>
+                
             </div>
         </div>
     </div>
 </header>
 
 <!-- Main Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			
-    <div class="post-preview">
-        <a href="/2016/06/15/vuejs-demarrer-avec-bootstrap.html">
-            <h2 class="post-title">            [vuejs] Démarrer avec bootstrap
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Dans ce tutoriel, nous allons voir comment démarrer un projet avec Bootstrap (en mode SASS) sur le framework Vuejs
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 15 juin 2016</p>
-    </div>
-    <hr>
+<div class="container-fluid container--doc container--ohmycache">
+  <div class="row">
+  <div class="col-md-2">
+    <div class="documentation-nav">
+  <section class="nav-section">
+    <h1>Getting started</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/">Introduction</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/examples">Examples</a></li>
+      <li role="presentation" class="active"><a href="/ohmycache/installation">Installation</a></li>
+    </ul>
+  </section>
 
-    <div class="post-preview">
-        <a href="/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html">
-            <h2 class="post-title">            [js] Le LocalStorage, en plus simple et plus complet
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Cachejs est une librairie qui permet de stocker des données sur le PC du client en utilisant le LocalStorage ou le SessionStorage
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 13 mai 2016</p>
-    </div>
-    <hr>
+  <section class="nav-section">
+    <h1>API</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/classes">Classes</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/set">set</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/get">get</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/remove">remove</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/clear">clear</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/isExpired">isExpired</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/isReadonly">isReadonly</a></li>
+    </ul>
+  </section>
 
-    <div class="post-preview">
-        <a href="/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html">
-            <h2 class="post-title">            [php] Générer des PDF avec DomPDF et CakePHP
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Générer des PDF sous CakePHP n'a jamais été aussi simple.
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 4 mai 2016</p>
-    </div>
-    <hr>
+  <section class="nav-section">
+    <h1>More</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/changelog">Changelog</a></li>
+      <li role="presentation"><a href="https://github.com/ozee31/ohmycache">Repository</a></li>
+      <li role="presentation"><a href="https://github.com/ozee31/ohmycache/issues">Issues</a></li>
+    </ul>
+  </section>
+</div>
+  </div>
+
+  <section class="col-md-10">
+    <h1>Installation</h1>
+
+    <h2>Download</h2>
+
+    <h3>NPM</h3>
+    <pre>npm install OhMyCache</pre>
+
+    <h3>Bower</h3>
+    <pre>bower install OhMyCache</pre>
 
 
-<!-- Pager -->
+    <h2>Load the library</h2>
 
+    <h3>ES2015 (babel)</h3>
+    <pre>
+import {Local, Session} from 'OhMyCache'
 
-		</div>
-	</div>
+// quick use
+Local.set('key', 'val')
+Session.set('key', 'val')
+    </pre>
+
+    <h3>require function of node</h3>
+    <pre>
+var OhMyCache = require('OhMyCache')
+
+// quick use
+OhMyCache.Local.set('key', 'val')
+OhMyCache.Session.set('key', 'val')
+    </pre>
+
+    <h3>Html script</h3>
+    <pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- npm --&gt;
+        &lt;script src="node_modules/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+
+        &lt;!-- bower --&gt;
+        &lt;script src="bower_components//ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+
+        &lt;!-- other method --&gt;
+        &lt;script src="lib-path/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+        &lt;script&gt;
+          // quick use
+          OhMyCache.Local.set('key', 'val')
+          OhMyCache.Session.set('key', 'val')
+        &lt;/script&gt;
+    &lt;/head&gt;
+&lt;/html&gt;
+    </pre>
+  </section>
+</div>
+
 </div>
 
 <hr>

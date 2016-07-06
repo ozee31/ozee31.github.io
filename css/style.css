@@ -25,9 +25,12 @@ a {
 .intro-header .site-heading, .intro-header .post-heading, .intro-header .page-heading {
   padding: 100px 0; }
 
-.intro-header--post {
+.intro-header--post, .intro-header--documentation {
   background: no-repeat bottom right 30px #808080;
   background-size: auto; }
+
+.intro-header--documentation {
+  margin-bottom: 0; }
 
 .heading-title {
   padding: 20px;
@@ -43,3 +46,39 @@ a {
  */
 .project-section article {
   margin-left: 25px; }
+
+/**
+ * DOCUMENTATION
+ */
+.intro-header.intro-header--ohmycache {
+  background-color: #3b3939; }
+.intro-header .site-heading.site-heading--documentation {
+  padding: 30px 0; }
+
+.container--doc .nav-section h1 {
+  font-weight: normal;
+  font-size: 15px; }
+.container--doc .nav-section .nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  font-size: 18px; }
+.container--doc h2 {
+  font-size: 28px; }
+.container--doc h3 {
+  font-size: 20px;
+  font-weight: normal; }
+.container--doc p {
+  margin-top: 0;
+  margin-bottom: 15px; }
+.container--doc.container--ohmycache .documentation-nav {
+  background-color: #f7f7f7;
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 5px; }
+.container--doc.container--ohmycache .nav-section h1 {
+  color: #bbb8b8; }
+.container--doc.container--ohmycache .nav-section li > a {
+  color: #625f5f; }
+.container--doc.container--ohmycache .nav-section li.active > a {
+  background-color: #625f5f;
+  color: white; }

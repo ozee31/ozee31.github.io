@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
 
-    <title>Flavien BENINCA (ozee31)</title>
+    <title>OhMyCache - set - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/">
+    <link rel="canonical" href="http://ozee31.github.io/ohmycache/set.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -107,80 +107,117 @@
 
 
     <!-- Page Header -->
-<header class="intro-header intro-header--page" style="
-  
-  
-    background-color: #0085a1;
+<header class="intro-header intro-header--documentation intro-header--ohmycache" style="
   
 ">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading ">
-                    <div class="heading-title">
-                        <h1>Flavien BENINCA (ozee31)</h1>
-                        <hr class="small">
-                        <span class="subheading">Le blog d'un développer Web (PHP, CakePHP, JS...)</span>
-                    </div>
-                </div>
+                
+                  <div class="site-heading site-heading--documentation"></div>
+                
             </div>
         </div>
     </div>
 </header>
 
 <!-- Main Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			
-    <div class="post-preview">
-        <a href="/2016/06/15/vuejs-demarrer-avec-bootstrap.html">
-            <h2 class="post-title">            [vuejs] Démarrer avec bootstrap
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Dans ce tutoriel, nous allons voir comment démarrer un projet avec Bootstrap (en mode SASS) sur le framework Vuejs
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 15 juin 2016</p>
-    </div>
-    <hr>
+<div class="container-fluid container--doc container--ohmycache">
+  <div class="row">
+  <div class="col-md-2">
+    <div class="documentation-nav">
+  <section class="nav-section">
+    <h1>Getting started</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/">Introduction</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/examples">Examples</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/installation">Installation</a></li>
+    </ul>
+  </section>
 
-    <div class="post-preview">
-        <a href="/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html">
-            <h2 class="post-title">            [js] Le LocalStorage, en plus simple et plus complet
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Cachejs est une librairie qui permet de stocker des données sur le PC du client en utilisant le LocalStorage ou le SessionStorage
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 13 mai 2016</p>
-    </div>
-    <hr>
+  <section class="nav-section">
+    <h1>API</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/classes">Classes</a></li>
+      <li role="presentation" class="active"><a href="/ohmycache/set">set</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/get">get</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/remove">remove</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/clear">clear</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/isExpired">isExpired</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/isReadonly">isReadonly</a></li>
+    </ul>
+  </section>
 
-    <div class="post-preview">
-        <a href="/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html">
-            <h2 class="post-title">            [php] Générer des PDF avec DomPDF et CakePHP
-            </h2>
-            
-            <h3 class="post-subtitle">
-                Générer des PDF sous CakePHP n'a jamais été aussi simple.
-            </h3>
-            
-        </a>
-        <p class="post-meta">Publié par Flavien BENINCA (ozee31) le 4 mai 2016</p>
-    </div>
-    <hr>
+  <section class="nav-section">
+    <h1>More</h1>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class=""><a href="/ohmycache/changelog">Changelog</a></li>
+      <li role="presentation"><a href="https://github.com/ozee31/ohmycache">Repository</a></li>
+      <li role="presentation"><a href="https://github.com/ozee31/ohmycache/issues">Issues</a></li>
+    </ul>
+  </section>
+</div>
+  </div>
 
+  <section class="col-md-10">
+    <h1>set</h1>
+    <p>Add the key to the storage, or update that key's value if it already exist</p>
+    <pre>set(key, value, options)</pre>
 
-<!-- Pager -->
+    <h2>Parameters</h2>
+    <dl class="dl-horizontal">
+      <dt>key</dt>
+      <dd>{string} name of the key you want to create or update</dd>
 
+      <dt>value</dt>
+      <dd>{mixed} name of the key you want to create or update. Must be a string, int, float, array, object...</dd>
 
-		</div>
-	</div>
+      <dt>options</dt>
+      <dd>{object} add options for storage if necessary</dd>
+    </dl>
+
+    <h2>Options</h2>
+    <h3>expire</h3>
+    <p>
+      If you want your data expires, add <code>expire</code> in option parameter. <br>
+      The value of <code>expire</code> must be expressed in second. <br>
+      By default the value is <code>false</code>
+    </p>
+
+    <h3>readonly</h3>
+    <p>
+      If you want your data is neither modified nor deleteable., add <code>readonly</code> in option parameter. <br>
+      The value of <code>readonly</code> must be a boolean. <br>
+      By default the value is <code>false</code>
+    </p>
+
+    <h2>Return</h2>
+    <p>This method return a boolean</p>
+
+    <h2>Exemples</h2>
+    <pre>
+// String with LocalStorage
+OhMyCache.Local.set('key', 'value')
+
+// String with SessionStorage
+OhMyCache.Session.set('key', 'value')
+
+// Array
+OhMyCache.Local.set('key', [1,2,3])
+
+// Object
+OhMyCache.Local.set('user', {fistname: 'James', lastname: 'Bond'})
+
+// With expiration
+OhMyCache.Local.set('key', 'value', {expire: 3600}) // data expires in 1 hour
+
+// ReadOnly
+OhMyCache.Local.set('key', 'value', {readonly: true}) // return true
+OhMyCache.Local.set('key', 'change') // return false
+OhMyCache.Local.get('key') // return 'value'
+    </pre>
+  </section>
+</div>
 </div>
 
 <hr>
