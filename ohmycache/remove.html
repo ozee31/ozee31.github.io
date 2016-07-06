@@ -162,7 +162,9 @@
   <section class="col-md-10">
     <h1>remove</h1>
     <p>Remove item if don't readonly</p>
-    <pre>remove(key)</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
+
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -174,20 +176,27 @@
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
-OhMyCache.Local.set('key', 'value')
-OhMyCache.Local.get('key') // 'value'
-OhMyCache.Local.remove('key') // true
-OhMyCache.Local.get('key') // null
 
-// ReadOnly
-OhMyCache.Local.set('key', 'value', {readonly: true})
-OhMyCache.Local.get('key') // 'value'
-OhMyCache.Local.remove('key') // false
-OhMyCache.Local.get('key') // 'value'
-    </pre>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// 'value'
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// true
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// null
+</span>
+
+<span class="c1">// ReadOnly
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// 'value'
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// 'value'</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>

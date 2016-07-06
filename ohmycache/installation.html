@@ -165,52 +165,59 @@
     <h2>Download</h2>
 
     <h3>NPM</h3>
-    <pre>npm install OhMyCache</pre>
+    
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install OhMyCache</code></pre></figure>
+
 
     <h3>Bower</h3>
-    <pre>bower install OhMyCache</pre>
+    
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">bower install OhMyCache</code></pre></figure>
+
 
 
     <h2>Load the library</h2>
 
     <h3>ES2015 (babel)</h3>
-    <pre>
-import {Local, Session} from 'OhMyCache'
 
-// quick use
-Local.set('key', 'val')
-Session.set('key', 'val')
-    </pre>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="p">{</span><span class="nx">Local</span><span class="p">,</span> <span class="nx">Session</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">'OhMyCache'</span>
+
+<span class="c1">// quick use
+</span>
+<span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span>
+<span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span></code></pre></figure>
+
 
     <h3>require function of node</h3>
-    <pre>
-var OhMyCache = require('OhMyCache')
 
-// quick use
-OhMyCache.Local.set('key', 'val')
-OhMyCache.Session.set('key', 'val')
-    </pre>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">OhMyCache</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'OhMyCache'</span><span class="p">)</span>
+
+<span class="c1">// quick use
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span></code></pre></figure>
+
 
     <h3>Html script</h3>
-    <pre>
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;!-- npm --&gt;
-        &lt;script src="node_modules/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
 
-        &lt;!-- bower --&gt;
-        &lt;script src="bower_components//ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="c">&lt;!-- npm --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/ohmycache/dist/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-        &lt;!-- other method --&gt;
-        &lt;script src="lib-path/ohmycache/dist/bundle.js"&gt;&lt;/script&gt;
-        &lt;script&gt;
-          // quick use
-          OhMyCache.Local.set('key', 'val')
-          OhMyCache.Session.set('key', 'val')
-        &lt;/script&gt;
-    &lt;/head&gt;
-&lt;/html&gt;
-    </pre>
+    <span class="c">&lt;!-- bower --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bower_components//ohmycache/dist/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+    <span class="c">&lt;!-- other method --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"lib-path/ohmycache/dist/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="c1">// quick use
+</span>
+      <span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span>
+      <span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">)</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
   </section>
 </div>
 

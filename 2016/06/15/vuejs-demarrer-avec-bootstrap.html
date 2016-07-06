@@ -159,103 +159,93 @@
 
 <p>Si ce n’est pas déjà fait vous devez l’installer globalement</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>npm install -g vue-cli
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install -g vue-cli</code></pre></figure>
 
 <p>On peut ensuite créer le projet</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>vue init webpack tuto
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">vue init webpack tuto</code></pre></figure>
 
 <p>Vous vous déplacez dans le dossier du projet et vous installez les dépendances de vuejs</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd tuto
-npm install
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cd </span>tuto
+npm install</code></pre></figure>
 
 <p>Enfin on installe les dépendances propre à environnement à savoir : bootstrap, jquery et ce qu’il faut pour compiler le sass</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>npm install -S bootstrap-sass
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install -S bootstrap-sass
 npm install -S jquery
-npm install sass-loader node-sass webpack --save-dev
-</code></pre>
-</div>
+npm install sass-loader node-sass webpack --save-dev</code></pre></figure>
 
 <h2 id="prparation-de-la-vue">Préparation de la vue</h2>
 
 <p>Nous allons modifier le fichier de base <code class="highlighter-rouge">App.vue</code>afin d’intégrer un petit exemple de page utilisant bootstrap.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// src/App.vue
+<figure class="highlight"><pre><code class="language-html" data-lang="html">// src/App.vue
 
-&lt;template&gt;
-  &lt;div id="app"&gt;
-    &lt;div class="container"&gt;
+<span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
 
-      &lt;!-- Static navbar --&gt;
-      &lt;nav class="navbar navbar-default"&gt;
-        &lt;div class="container-fluid"&gt;
-          &lt;div class="navbar-header"&gt;
-            &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"&gt;
-              &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
-              &lt;span class="icon-bar"&gt;&lt;/span&gt;
-              &lt;span class="icon-bar"&gt;&lt;/span&gt;
-              &lt;span class="icon-bar"&gt;&lt;/span&gt;
-            &lt;/button&gt;
-            &lt;a class="navbar-brand" href="#"&gt;Project name&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div id="navbar" class="navbar-collapse collapse"&gt;
-            &lt;ul class="nav navbar-nav"&gt;
-              &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
-              &lt;li class="dropdown"&gt;
-                &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/a&gt;
-                &lt;ul class="dropdown-menu"&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
-                  &lt;li role="separator" class="divider"&gt;&lt;/li&gt;
-                  &lt;li class="dropdown-header"&gt;Nav header&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;Separated link&lt;/a&gt;&lt;/li&gt;
-                  &lt;li&gt;&lt;a href="#"&gt;One more separated link&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-              &lt;/li&gt;
-            &lt;/ul&gt;
-            &lt;ul class="nav navbar-nav navbar-right"&gt;
-              &lt;li class="active"&gt;&lt;a href="./"&gt;Default &lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="../navbar-static-top/"&gt;Static top&lt;/a&gt;&lt;/li&gt;
-              &lt;li&gt;&lt;a href="../navbar-fixed-top/"&gt;Fixed top&lt;/a&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/div&gt;&lt;!--/.nav-collapse --&gt;
-        &lt;/div&gt;&lt;!--/.container-fluid --&gt;
-      &lt;/nav&gt;
+      <span class="c">&lt;!-- Static navbar --&gt;</span>
+      <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-default"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"navbar-header"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"navbar-toggle collapsed"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbar"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-controls=</span><span class="s">"navbar"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>Toggle navigation<span class="nt">&lt;/span&gt;</span>
+              <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon-bar"</span><span class="nt">&gt;&lt;/span&gt;</span>
+              <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon-bar"</span><span class="nt">&gt;&lt;/span&gt;</span>
+              <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"icon-bar"</span><span class="nt">&gt;&lt;/span&gt;</span>
+            <span class="nt">&lt;/button&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Project name<span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;/div&gt;</span>
+          <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"navbar"</span> <span class="na">class=</span><span class="s">"navbar-collapse collapse"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav navbar-nav"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"active"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"dropdown"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">class=</span><span class="s">"dropdown-toggle"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span> <span class="na">role=</span><span class="s">"button"</span> <span class="na">aria-haspopup=</span><span class="s">"true"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span><span class="nt">&gt;</span>Dropdown <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"caret"</span><span class="nt">&gt;&lt;/span&gt;&lt;/a&gt;</span>
+                <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span><span class="nt">&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Another action<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Something else here<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li</span> <span class="na">role=</span><span class="s">"separator"</span> <span class="na">class=</span><span class="s">"divider"</span><span class="nt">&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"dropdown-header"</span><span class="nt">&gt;</span>Nav header<span class="nt">&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Separated link<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>One more separated link<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                <span class="nt">&lt;/ul&gt;</span>
+              <span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;/ul&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"nav navbar-nav navbar-right"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"active"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"./"</span><span class="nt">&gt;</span>Default <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"../navbar-static-top/"</span><span class="nt">&gt;</span>Static top<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+              <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"../navbar-fixed-top/"</span><span class="nt">&gt;</span>Fixed top<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;/ul&gt;</span>
+          <span class="nt">&lt;/div&gt;</span><span class="c">&lt;!--/.nav-collapse --&gt;</span>
+        <span class="nt">&lt;/div&gt;</span><span class="c">&lt;!--/.container-fluid --&gt;</span>
+      <span class="nt">&lt;/nav&gt;</span>
 
-      &lt;!-- Main component for a primary marketing message or call to action --&gt;
-      &lt;div class="jumbotron"&gt;
-        &lt;h1&gt;Navbar example&lt;/h1&gt;
-        &lt;p&gt;This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.&lt;/p&gt;
-        &lt;p&gt;
-          &lt;a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button"&gt;View navbar docs »&lt;/a&gt;
-        &lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
+      <span class="c">&lt;!-- Main component for a primary marketing message or call to action --&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"jumbotron"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Navbar example<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"btn btn-lg btn-primary"</span> <span class="na">href=</span><span class="s">"../../components/#navbar"</span> <span class="na">role=</span><span class="s">"button"</span><span class="nt">&gt;</span>View navbar docs »<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
 
-&lt;script&gt;
-import Hello from './components/Hello'
+<span class="nt">&lt;script&gt;</span>
+<span class="kr">import</span> <span class="nx">Hello</span> <span class="nx">from</span> <span class="s1">'./components/Hello'</span>
 
-export default {
-  components: {
-    Hello
-  }
-}
-&lt;/script&gt;
-</code></pre>
-</div>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">Hello</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
 <p>Maintenant si vous lancez le serveur de dev avec la commande <code class="highlighter-rouge">npm run dev</code> pour pouvez voir une belle page non stylé.</p>
 
@@ -279,88 +269,82 @@ export default {
 
 <p>C’est le fichier principal, c’est lui qui sera appelé par votre page <code class="highlighter-rouge">App.vue</code></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// On importe bootstrap
-@import "./bootstrap/bootstrap-custom";
+<figure class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/* On importe bootstrap */</span>
+<span class="k">@import</span> <span class="s2">"./bootstrap/bootstrap-custom"</span><span class="p">;</span>
 
-// On fait ce qu'on veut après
-</code></pre>
-</div>
+<span class="cm">/* On fait ce qu'on veut après */</span></code></pre></figure>
 
 <h3 id="variablesscss">variables.scss</h3>
 
 <p>Ce fichier permet de personnaliser bootstrap à votre guise, voici un exemple de surcharge du fichier par défaut</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<figure class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/**
  * Toute cette partie permet de surcharger les variables de bootstrap
- */
+ */</span>
 
-// La je modifie la couleur principale
-$brand-primary: #5a3966;
+<span class="cm">/* La je modifie la couleur principale */</span>
+<span class="nv">$brand-primary</span><span class="p">:</span> <span class="mh">#5a3966</span><span class="p">;</span>
 
 
-/**
+<span class="cm">/**
  * J'importe enfin le fichier de variables par défaut de bootstrap qui va permettre de définir les variables que je n'ai pas surchargées
- */
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
-</code></pre>
-</div>
+ */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables"</span><span class="p">;</span></code></pre></figure>
 
 <h3 id="bootstrap-customscss">bootstrap-custom.scss</h3>
 
 <p>Ce fichier va charger tous les modules de bootstrap</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Core variables and mixins
-@import "./variables";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+<figure class="highlight"><pre><code class="language-scss" data-lang="scss"><span class="cm">/* Core variables and mixins */</span>
+<span class="k">@import</span> <span class="s2">"./variables"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins"</span><span class="p">;</span>
 
-// Reset and dependencies
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+<span class="cm">/* Reset and dependencies */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons"</span><span class="p">;</span>
 
-// Core CSS
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons";
+<span class="cm">/* Core CSS */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/code"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tables"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/forms"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/buttons"</span><span class="p">;</span>
 
-// Components
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navs";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pagination";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pager";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/labels";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/badges";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/media";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/list-group";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/panels";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/wells";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close";
+<span class="cm">/* Components */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/component-animations"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/dropdowns"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/button-groups"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/input-groups"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navs"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navbar"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/breadcrumbs"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pagination"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/pager"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/labels"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/badges"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/jumbotron"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/thumbnails"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/alerts"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/media"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/list-group"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/panels"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-embed"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/wells"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close"</span><span class="p">;</span>
 
-// Components JavaScript
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+<span class="cm">/* Components JavaScript */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel"</span><span class="p">;</span>
 
-// Utility classes
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
-</code></pre>
-</div>
+<span class="cm">/* Utility classes */</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities"</span><span class="p">;</span>
+<span class="k">@import</span> <span class="s2">"node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities"</span><span class="p">;</span></code></pre></figure>
 
 <p>Libre à vous de surcharger ou de ne pas charger des modules en particulier. On voit qu’on a bien surcharger notre fichier <code class="highlighter-rouge">variable.scss</code></p>
 
@@ -368,13 +352,11 @@ $brand-primary: #5a3966;
 
 <p>Il nous reste plus qu’à charger notre fichier principal dans la vue</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Code à rajouter dans le ficier "App.vue"
+<figure class="highlight"><pre><code class="language-html" data-lang="html">// Code à rajouter dans le ficier "App.vue"
 
-&lt;style lang="scss"&gt;
-  @import 'src/assets/scss/design.scss';
-&lt;/style&gt;
-</code></pre>
-</div>
+<span class="nt">&lt;style </span><span class="na">lang=</span><span class="s">"scss"</span><span class="nt">&gt;</span>
+  <span class="k">@import</span> <span class="s2">'src/assets/scss/design.scss'</span><span class="p">;</span>
+<span class="nt">&lt;/style&gt;</span></code></pre></figure>
 
 <p>Et quand regarde le résultat……… <strong>BOOM !!!</strong></p>
 
@@ -384,11 +366,10 @@ $brand-primary: #5a3966;
 
 <p>En fait bootstrap ne parviens plus à charger ses fontes, il va juste falloir surcharger une petite variable</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Dans "variables.scss" surchargez cette variable (insérer la ligne avant le @import final, pas après)
-
-$icon-font-path: "/node_modules/bootstrap-sass/assets/fonts/bootstrap/";
-</code></pre>
-</div>
+<figure class="highlight"><pre><code class="language-sass" data-lang="sass"><span class="c1">// Dans "variables.scss" surchargez cette variable (insérer la ligne avant le @import final, pas après)
+</span><span class="err">
+</span>
+<span class="nv">$icon-font-path</span><span class="p">:</span> <span class="s2">"/node_modules/bootstrap-sass/assets/fonts/bootstrap/"</span><span class="err">;</span></code></pre></figure>
 
 <p>Maintenant on a une “belle” page mais si vous essayez de déplier le Dropdown cela ne fonctionne pas. C’est tout à fait normal car le javascript n’est pas chargé.</p>
 
@@ -396,13 +377,12 @@ $icon-font-path: "/node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 
 <p>Pour charger la librairie js de bootstrap rien de plus simple</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// Code à rajouter dans votre fichier "src/main.js"
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Code à rajouter dans votre fichier "src/main.js"
+</span>
 
-import jQuery from 'jQuery'
-window.jQuery = window.$ = jQuery
-require('bootstrap-sass')
-</code></pre>
-</div>
+<span class="kr">import</span> <span class="nx">jQuery</span> <span class="nx">from</span> <span class="s1">'jQuery'</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
+<span class="nx">require</span><span class="p">(</span><span class="s1">'bootstrap-sass'</span><span class="p">)</span></code></pre></figure>
 
 <p>Et voilà vous avez maintenant un Bootstrap entièrement personnalisable pour votre application Vuejs</p>
 

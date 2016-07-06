@@ -159,47 +159,43 @@
 
 <p>Pour cette démonstration je vais initialiser un projet npm</p>
 
-<pre><code class="language-SHELL">    npm init
-</code></pre>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm init</code></pre></figure>
 
 <p>Puis j’installer la librairie (à ce jour la version 1.0)</p>
 
-<pre><code class="language-SHELL">    npm install ozee-cachejs
-</code></pre>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install ozee-cachejs</code></pre></figure>
 
 <p>Je vais créer ensuite un fichier <code class="highlighter-rouge">index.html</code></p>
 
-<pre><code class="language-HTML">    &lt;!doctype html&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
 
-    &lt;html lang="fr"&gt;
-    &lt;head&gt;
-        &lt;meta charset="utf-8"&gt;
-        &lt;title&gt;Cachejs demo&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div id="output"&gt;
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"fr"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Cachejs demo<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"output"</span><span class="nt">&gt;</span>
 
-        &lt;/div&gt;
+  <span class="nt">&lt;/div&gt;</span>
 
-        &lt;script src="node_modules/ozee-cachejs/dist/cache.min.js"&gt;&lt;/script&gt;
-        &lt;script src="demo.js"&gt;&lt;/script&gt;
-    &lt;/body&gt;
-    &lt;/html&gt;
-</code></pre>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/ozee-cachejs/dist/cache.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"demo.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
 
 <p>Puis un fichier <code class="highlighter-rouge">demo.js</code> avec un petit bout de code qui va nous permettre de savoir si la lib est chargé</p>
 
-<pre><code class="language-JS">    (function() {
-        var output = document.getElementById('output');
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'output'</span><span class="p">);</span>
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+  <span class="k">if</span> <span class="p">(</span> <span class="k">typeof</span> <span class="nx">Cachejs</span> <span class="o">===</span> <span class="s1">'undefined'</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Lib non chargé'</span><span class="p">;</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
 
-        output.innerHTML = 'Lib chargé';
-    })();
-</code></pre>
+  <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Lib chargé'</span><span class="p">;</span>
+<span class="p">})();</span></code></pre></figure>
 
 <p>On démarre notre fichier index.html dans notre navigateur favori et si tout se passe bien on devrait voir s’afficher</p>
 
@@ -262,65 +258,75 @@
 <h3 id="set-et-match">Set et match</h3>
 <p>Nous allons stocker divers types de données (string, array, objet…) et les afficher ensuite dans notre balise <code class="highlighter-rouge">output</code>. Je vous invite donc à modifier le fichier <code class="highlighter-rouge">demo.js</code></p>
 
-<pre><code class="language-JS">    // demo.js
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// demo.js
+</span>
 
-    (function() {
-        var output = document.getElementById('output');
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'output'</span><span class="p">);</span>
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+    <span class="k">if</span> <span class="p">(</span> <span class="k">typeof</span> <span class="nx">Cachejs</span> <span class="o">===</span> <span class="s1">'undefined'</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Lib non chargé'</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        // On réinitialise le cache
-        Cachejs.Local.clear();
-        Cachejs.Session.clear();
+    <span class="c1">// On réinitialise le cache
+</span>
+    <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 
-        /**
-         * Stockage des données
-         */
-            // stockage d'un string
-            Cachejs.Local.set('monString', 'je suis un string');
+    <span class="cm">/**
+     * Stockage des données
+     */</span>
+        <span class="c1">// stockage d'un string
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'monString'</span><span class="p">,</span> <span class="s1">'je suis un string'</span><span class="p">);</span>
 
-            // stockage d'un booléen en Session
-            Cachejs.Session.set('monBool', true);
+        <span class="c1">// stockage d'un booléen en Session
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'monBool'</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-            // stockage d'un array
-            Cachejs.Local.set('monArray', [1,2,3]);
+        <span class="c1">// stockage d'un array
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'monArray'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
 
-            // stockage d'un objet
-            Cachejs.Local.set('monObjet', {prenom: 'Lary', nom: 'Gole'});
+        <span class="c1">// stockage d'un objet
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'monObjet'</span><span class="p">,</span> <span class="p">{</span><span class="na">prenom</span><span class="p">:</span> <span class="s1">'Lary'</span><span class="p">,</span> <span class="na">nom</span><span class="p">:</span> <span class="s1">'Gole'</span><span class="p">});</span>
 
 
-        /**
-         * Récupération des données
-         */
-            output.innerHTML = '';
+    <span class="cm">/**
+     * Récupération des données
+     */</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
 
-            // On affiche le cache local de la clé 'monString'
-            output.innerHTML += 'monString = ' + Cachejs.Local.get('monString') + '&lt;br&gt;';
+        <span class="c1">// On affiche le cache local de la clé 'monString'
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'monString = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'monString'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
-            output.innerHTML += 'monBool (local) = ' + Cachejs.Local.get('monBool') + '&lt;br&gt;';
+        <span class="c1">// Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'monBool (local) = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'monBool'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // En revanche avec le cache session ça marche
-            output.innerHTML += 'monBool (sessoin) = ' + Cachejs.Session.get('monBool') + '&lt;br&gt;';
+        <span class="c1">// En revanche avec le cache session ça marche
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'monBool (sessoin) = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'monBool'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // On affiche notre array
-            output.innerHTML += 'monArray = ' + Cachejs.Local.get('monArray') + '&lt;br&gt;';
+        <span class="c1">// On affiche notre array
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'monArray = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'monArray'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // Et pour finir notre objet
-            output.innerHTML += 'monObjet = ' + JSON.stringify( Cachejs.Local.get('monObjet') ) + '&lt;br&gt;';
-    })();
-</code></pre>
+        <span class="c1">// Et pour finir notre objet
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'monObjet = '</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'monObjet'</span><span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
+<span class="p">})();</span></code></pre></figure>
 
 <p>Une fois la page rafraîchie vous devrez voir apparaître :</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    monString = je suis un string
-    monBool (local) = null
-    monBool (sessoin) = true
-    monArray = 1,2,3
-    monObjet = {"prenom":"Lary","nom":"Gole"}
+<div class="highlighter-rouge"><pre class="highlight"><code>monString = je suis un string
+monBool (local) = null
+monBool (sessoin) = true
+monArray = 1,2,3
+monObjet = {"prenom":"Lary","nom":"Gole"}
 </code></pre>
 </div>
 
@@ -329,46 +335,51 @@
 <p>Si vous êtes toujours là (et je l’espère), on va comme le titre l’indique, aller plus loin, en utilisant l’expiration des données et la lecture seule.
 On repart à zéro avec notre <code class="highlighter-rouge">demo.js</code></p>
 
-<pre><code class="language-JS">    // demo.js
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// demo.js
+</span>
 
-    (function() {
-        var output = document.getElementById('output');
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'output'</span><span class="p">);</span>
 
-        if ( typeof Cachejs === 'undefined' ) {
-            output.innerHTML = 'Lib non chargé';
-            return false;
-        }
+    <span class="k">if</span> <span class="p">(</span> <span class="k">typeof</span> <span class="nx">Cachejs</span> <span class="o">===</span> <span class="s1">'undefined'</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'Lib non chargé'</span><span class="p">;</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        // On réinitialise le cache
-        Cachejs.Local.clear();
-        Cachejs.Session.clear();
-        output.innerHTML = '';
+    <span class="c1">// On réinitialise le cache
+</span>
+    <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
 
-        /**
-         * Lecture seule
-         */
-            Cachejs.Local.set('readOnly', 'Je suis en lecture seule', null, true);
+    <span class="cm">/**
+     * Lecture seule
+     */</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'readOnly'</span><span class="p">,</span> <span class="s1">'Je suis en lecture seule'</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 
-            // Je ne peux donc pas modifié la donnée
-            Cachejs.Local.set('readOnly', 'Je ne peux pas être modifié');
-            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '&lt;br&gt;';
+        <span class="c1">// Je ne peux donc pas modifié la donnée
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'readOnly'</span><span class="p">,</span> <span class="s1">'Je ne peux pas être modifié'</span><span class="p">);</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'readOnly = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'readOnly'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // Je ne peux pas la supprimer non plus
-            Cachejs.Local.remove('readOnly');
-            output.innerHTML += 'readOnly = ' + Cachejs.Local.get('readOnly') + '&lt;br&gt;';
+        <span class="c1">// Je ne peux pas la supprimer non plus
+</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">'readOnly'</span><span class="p">);</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'readOnly = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'readOnly'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-        /**
-         * Expiration
-         */
-            Cachejs.Local.set('expiration', 'Je vais expirer dans 3 secondes', 3);
+    <span class="cm">/**
+     * Expiration
+     */</span>
+        <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'expiration'</span><span class="p">,</span> <span class="s1">'Je vais expirer dans 3 secondes'</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 
-            // J'existe encore
-            output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '&lt;br&gt;';
+        <span class="c1">// J'existe encore
+</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'expiration = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'expiration'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span><span class="p">;</span>
 
-            // Dans 4 secondes j'existe plus
-            setTimeout(function(){ output.innerHTML += 'expiration = ' + Cachejs.Local.get('expiration') + '&lt;br&gt;' },4000);
-    })();
-</code></pre>
+        <span class="c1">// Dans 4 secondes j'existe plus
+</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="nx">output</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="s1">'expiration = '</span> <span class="o">+</span> <span class="nx">Cachejs</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'expiration'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;br&gt;'</span> <span class="p">},</span><span class="mi">4000</span><span class="p">);</span>
+<span class="p">})();</span></code></pre></figure>
 
 <p>On recharge, on attend 4 secondes et le résultat sera :</p>
 

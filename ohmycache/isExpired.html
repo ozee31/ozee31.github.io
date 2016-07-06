@@ -162,7 +162,9 @@
   <section class="col-md-10">
     <h1>isExpired</h1>
     <p>Indicates whether the item expired</p>
-    <pre>isExpired(key)</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">isExpired</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
+
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -174,22 +176,29 @@
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
-// No expiration
-OhMyCache.Local.set('key', 'value')
-OhMyCache.Local.isExpired('key') // false
 
-// No expired
-OhMyCache.Local.set('key', 'value', {expire: 999999})
-OhMyCache.Local.isExpired('key') // false
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// No expiration
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isExpired</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
+</span>
 
-// Expired
-OhMyCache.Local.set('key', 'value', {expire: 1})
-// sleep 1 second or more
-OhMyCache.Local.isExpired('key') // true
-    </pre>
+<span class="c1">// No expired
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">expire</span><span class="p">:</span> <span class="mi">999999</span><span class="p">})</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isExpired</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
+</span>
+
+<span class="c1">// Expired
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">expire</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="c1">// sleep 1 second or more
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isExpired</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// true</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>

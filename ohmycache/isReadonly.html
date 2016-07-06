@@ -162,7 +162,9 @@
   <section class="col-md-10">
     <h1>isReadonly</h1>
     <p>Indicates whether the value is readonly</p>
-    <pre>isReadonly(key)</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">isReadonly</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
+
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -174,17 +176,21 @@
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
-// No readonly
-OhMyCache.Local.set('key', 'value')
-OhMyCache.Local.isReadonly('key') // false
 
-// is readonly
-OhMyCache.Local.set('key', 'value', {readonly: true})
-OhMyCache.Local.isReadonly('key') // true
-    </pre>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// No readonly
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
+</span>
+
+<span class="c1">// is readonly
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// true</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>

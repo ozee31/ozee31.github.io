@@ -162,23 +162,28 @@
   <section class="col-md-10">
     <h1>clear</h1>
     <p>Remove all items. Also removes read-only datas</p>
-    <pre>clear()</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">clear</span><span class="p">()</span></code></pre></figure>
+
 
     <h2>Return</h2>
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
-OhMyCache.Local.set('key', 'value')
-OhMyCache.Local.set('key2', 'value', {readonly: true})
 
-OhMyCache.Local.clear() // true
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key2'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
 
-OhMyCache.Local.get('key') // null
-OhMyCache.Local.get('key2') // null
-    </pre>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span> <span class="c1">// true
+</span>
+
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// null
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key2'</span><span class="p">)</span> <span class="c1">// null</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>

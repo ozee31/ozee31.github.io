@@ -155,45 +155,43 @@
 <h2 id="installation">Installation</h2>
 <p>Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer</p>
 
-<pre><code class="language-SHELL">    composer require daoandco/cakephp-dompdf
-</code></pre>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">composer require daoandco/cakephp-dompdf</code></pre></figure>
 
 <p>Très important, il ne faut pas oublié de générer les liens symboliques du plugin.</p>
 
-<pre><code class="language-SHELL">    bin/cake plugin assets symlink
-</code></pre>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">bin/cake plugin assets symlink</code></pre></figure>
 
 <p>On charge ensuite le plugin</p>
 
-<pre><code class="language-PHP">    // config/bootstrap.php
-
-    Plugin::load('Dompdf');
-</code></pre>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// config/bootstrap.php
+</span>
+<span class="nx">Plugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'Dompdf'</span><span class="p">);</span></code></pre></figure>
 
 <h2 id="en-route-pour-laventure">En route pour l’aventure</h2>
 <p>Le plus simple pour générer les PDF est d’écouter les urls afin de traiter l’extension <code class="highlighter-rouge">.pdf</code> (<a href="http://book.cakephp.org/3.0/fr/development/routing.html#routing-des-extensions-de-fichier">Documentation</a>)</p>
 
 <p>On va donc, pour l’exemple définir une <del>auto</del> route.</p>
 
-<pre><code class="language-PHP">Router::scope('/', function (RouteBuilder $routes) {
-    $routes-&gt;extensions(['pdf']);
-    $routes-&gt;connect('/demo/view/*', ['controller' =&gt; 'Demo', 'action' =&gt; 'view']);
-}
-</code></pre>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">Router</span><span class="o">::</span><span class="na">scope</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">RouteBuilder</span> <span class="nv">$routes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">extensions</span><span class="p">([</span><span class="s1">'pdf'</span><span class="p">]);</span>
+  <span class="nv">$routes</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="s1">'/demo/view/*'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'controller'</span> <span class="o">=&gt;</span> <span class="s1">'Demo'</span><span class="p">,</span> <span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'view'</span><span class="p">]);</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Et pour le controlleur :</p>
 
-<pre><code class="language-PHP">// scr/Controller/DemoController.php
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// scr/Controller/DemoController.php
+</span>
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
 
-namespace App\Controller;
+<span class="k">class</span> <span class="nc">DemoController</span> <span class="k">extends</span> <span class="nx">AppController</span> <span class="p">{</span>
 
-class DemoController extends AppController {
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
 
-    public function view($name) {
-
-    }
-}
-</code></pre>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>On teste notre route http://localhost/demo/view/test.pdf et <strong>bim!!!</strong></p>
 
@@ -205,12 +203,11 @@ class DemoController extends AppController {
 
 <p>Comme on écoute toujours la maîtresse et que l’on est bien sage, on va créer notre fichier <code class="highlighter-rouge">view.ctp</code> dans <code class="highlighter-rouge">Demo/pdf/view.ctp</code></p>
 
-<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;</span>
 
-&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+<span class="nt">&lt;h1&gt;</span>Ceci est un pédéhèffe<span class="nt">&lt;/h1&gt;</span>
 
-&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
-</code></pre>
+<span class="nt">&lt;p&gt;</span>Il est généré avec Dôme Pédéhèffe<span class="nt">&lt;/p&gt;</span></code></pre></figure>
 
 <blockquote>
   <p>Hey, t’est bien gentil mais là il me demande de créer un layout.</p>
@@ -222,17 +219,17 @@ class DemoController extends AppController {
 
 <p>Pour faire les choses bien (il faut toujours faire les choses bien), on va modifier notre Controller</p>
 
-<pre><code class="language-PHP">public function view($name) {
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">view</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
 
-    $this-&gt;viewBuilder()
-        -&gt;className('Dompdf.Pdf')
-        -&gt;layout('Dompdf.default')
-        -&gt;options(['config' =&gt; [
-            'filename' =&gt; $name,
-            'render' =&gt; 'browser',
-    ]]);
-}
-</code></pre>
+  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">viewBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">className</span><span class="p">(</span><span class="s1">'Dompdf.Pdf'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">layout</span><span class="p">(</span><span class="s1">'Dompdf.default'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">options</span><span class="p">([</span><span class="s1">'config'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="s1">'filename'</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+      <span class="s1">'render'</span> <span class="o">=&gt;</span> <span class="s1">'browser'</span><span class="p">,</span>
+  <span class="p">]]);</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>On recharge la page, et là, sous vos yeux ébahis, un magnifique PDF apparaît dans votre Firefox (comment ça vous n’utilisez pas Firefox ?)</p>
 
@@ -254,46 +251,43 @@ class DemoController extends AppController {
 
 <p>Allez c’est parti on crée notre beau css</p>
 
-<pre><code class="language-CSS">/* webroot/css/demo.css */
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* webroot/css/demo.css */</span>
 
-h1 {
-    color: red;
-}
-</code></pre>
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
 
 <p>Et comme tout est prévu, notre beau petit plugin possède un helper, on peut donc modifier notre fichier <code class="highlighter-rouge">view.ctp</code></p>
 
-<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;</span>
 
-&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;
+<span class="cp">&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;</span>
 
-&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+<span class="nt">&lt;h1&gt;</span>Ceci est un pédéhèffe<span class="nt">&lt;/h1&gt;</span>
 
-&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
-</code></pre>
+<span class="nt">&lt;p&gt;</span>Il est généré avec Dôme Pédéhèffe<span class="nt">&lt;/p&gt;</span></code></pre></figure>
 
 <p>Ah oui, j’oubliais les nanas, pour les images c’est aussi avec le helper (et on en profite pour rajouter le header et le footer)</p>
 
-<pre><code class="language-HTML">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- src/Template/Demo/pdf/view.ctp --&gt;</span>
 
-&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;
+<span class="cp">&lt;?= $this-&gt;Dompdf-&gt;css('demo'); ?&gt;</span>
 
-&lt;?php
+<span class="cp">&lt;?php
 $this-&gt;start('header');
-    echo '&lt;p&gt;I\'m a header&lt;/p&gt;';
+  echo '&lt;p&gt;I\'m a header&lt;/p&gt;';
 $this-&gt;end();
 
 $this-&gt;start('footer');
-    echo '&lt;p&gt;I\'m a footer&lt;/p&gt;';
+  echo '&lt;p&gt;I\'m a footer&lt;/p&gt;';
 $this-&gt;end();
-?&gt;
+?&gt;</span>
 
-&lt;h1&gt;Ceci est un pédéhèffe&lt;/h1&gt;
+<span class="nt">&lt;h1&gt;</span>Ceci est un pédéhèffe<span class="nt">&lt;/h1&gt;</span>
 
-&lt;p&gt;Il est généré avec Dôme Pédéhèffe&lt;/p&gt;
+<span class="nt">&lt;p&gt;</span>Il est généré avec Dôme Pédéhèffe<span class="nt">&lt;/p&gt;</span>
 
-&lt;?= $this-&gt;Dompdf-&gt;image('nanas.jpg'); ?&gt;
-</code></pre>
+<span class="cp">&lt;?= $this-&gt;Dompdf-&gt;image('nanas.jpg'); ?&gt;</span></code></pre></figure>
 
 <p>On actualise la page, et voilà notre PDF stylé comme jamais
 <img src="https://lh3.googleusercontent.com/4zy5TzBYp6cT4PDG_S7-V7yzX9J5BIyze5Uj-fHTpJBN7XY0NymbLGRjkvQedxVNIx9Dm6RYwg=s0" alt="enter image description here" title="capture-3.JPG" /></p>

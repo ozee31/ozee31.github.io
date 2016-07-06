@@ -162,7 +162,9 @@
   <section class="col-md-10">
     <h1>set</h1>
     <p>Add the key to the storage, or update that key's value if it already exist</p>
-    <pre>set(key, value, options)</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span></code></pre></figure>
+
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -179,15 +181,15 @@
     <h2>Options</h2>
     <h3>expire</h3>
     <p>
-      If you want your data expires, add <code>expire</code> in option parameter. <br>
-      The value of <code>expire</code> must be expressed in second. <br>
+      If you want your data expires, add <code>expire</code> in option parameter. <br />
+      The value of <code>expire</code> must be expressed in second. <br />
       By default the value is <code>false</code>
     </p>
 
     <h3>readonly</h3>
     <p>
-      If you want your data is neither modified nor deleteable., add <code>readonly</code> in option parameter. <br>
-      The value of <code>readonly</code> must be a boolean. <br>
+      If you want your data is neither modified nor deleteable., add <code>readonly</code> in option parameter. <br />
+      The value of <code>readonly</code> must be a boolean. <br />
       By default the value is <code>false</code>
     </p>
 
@@ -195,29 +197,39 @@
     <p>This method return a boolean</p>
 
     <h2>Exemples</h2>
-    <pre>
-// String with LocalStorage
-OhMyCache.Local.set('key', 'value')
 
-// String with SessionStorage
-OhMyCache.Session.set('key', 'value')
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// String with LocalStorage
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
 
-// Array
-OhMyCache.Local.set('key', [1,2,3])
+<span class="c1">// String with SessionStorage
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
 
-// Object
-OhMyCache.Local.set('user', {fistname: 'James', lastname: 'Bond'})
+<span class="c1">// Array
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 
-// With expiration
-OhMyCache.Local.set('key', 'value', {expire: 3600}) // data expires in 1 hour
+<span class="c1">// Object
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="p">{</span><span class="na">fistname</span><span class="p">:</span> <span class="s1">'James'</span><span class="p">,</span> <span class="na">lastname</span><span class="p">:</span> <span class="s1">'Bond'</span><span class="p">})</span>
 
-// ReadOnly
-OhMyCache.Local.set('key', 'value', {readonly: true}) // return true
-OhMyCache.Local.set('key', 'change') // return false
-OhMyCache.Local.get('key') // return 'value'
-    </pre>
+<span class="c1">// With expiration
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">expire</span><span class="p">:</span> <span class="mi">3600</span><span class="p">})</span> <span class="c1">// data expires in 1 hour
+</span>
+
+<span class="c1">// ReadOnly
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">// return true
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'change'</span><span class="p">)</span> <span class="c1">// return false
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// return 'value'</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>

@@ -162,7 +162,9 @@
   <section class="col-md-10">
     <h1>get</h1>
     <p>Get the value, remove the date if expired</p>
-    <pre>get(key)</pre>
+    
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
+
 
     <h2>Parameters</h2>
     <dl class="dl-horizontal">
@@ -174,18 +176,22 @@
     <p>This method return the value of a data (string, int, float, array, object...)</p>
 
     <h2>Exemples</h2>
-    <pre>
-OhMyCache.Local.set('key', 'value')
 
-OhMyCache.Local.get('key') // 'value'
-OhMyCache.Session.get('key') // null
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
 
-OhMyCache.Local.set('key', 'value', {expire: 1})
-// sleep 2 secondes or more
-OhMyCache.Local.get('key') // null
-    </pre>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// 'value'
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Session</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// null
+</span>
+
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">expire</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="c1">// sleep 2 secondes or more
+</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// null</span></code></pre></figure>
+
   </section>
 </div>
+
 </div>
 
 <hr>
