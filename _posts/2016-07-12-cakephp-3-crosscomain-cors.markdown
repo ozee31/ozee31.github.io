@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "[php] CakePHP 3 : Activer le CrossDomain (CORS)"
-subtitle:   "Si vous créé une API publique sous CakePHP 3 vous aurez besoin d'accepter les requêtes CrossDomain. Voilà comment faire."
+subtitle:   "Si vous créez une API publique sous CakePHP 3 vous aurez besoin d'accepter les requêtes CrossDomain. Voilà comment faire."
 date:       2016-07-12 08:00:00
 comments: true
 header-img: "img/php.png"
