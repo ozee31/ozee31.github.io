@@ -49,7 +49,7 @@ Enfin on installe les dépendances propre à environnement à savoir : bootstrap
 
 {% highlight shell %}
 npm install -S bootstrap-sass
-npm install -S jquery
+npm install -S jquery@2
 npm install sass-loader node-sass webpack --save-dev
 {% endhighlight %}
 
@@ -266,7 +266,7 @@ Pour charger la librairie js de bootstrap rien de plus simple
 {% highlight js %}
 // Code à rajouter dans votre fichier "src/main.js"
 
-import jQuery from 'jQuery'
+import jQuery from 'jquery'
 window.jQuery = window.$ = jQuery
 require('bootstrap-sass')
 {% endhighlight %}
