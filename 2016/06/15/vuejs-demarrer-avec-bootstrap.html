@@ -173,7 +173,7 @@ npm install</code></pre></figure>
 <p>Enfin on installe les dépendances propre à environnement à savoir : bootstrap, jquery et ce qu’il faut pour compiler le sass</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install -S bootstrap-sass
-npm install -S jquery
+npm install -S jquery@2
 npm install sass-loader node-sass webpack --save-dev</code></pre></figure>
 
 <h2 id="prparation-de-la-vue">Préparation de la vue</h2>
@@ -380,7 +380,7 @@ npm install sass-loader node-sass webpack --save-dev</code></pre></figure>
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Code à rajouter dans votre fichier "src/main.js"
 </span>
 
-<span class="kr">import</span> <span class="nx">jQuery</span> <span class="nx">from</span> <span class="s1">'jQuery'</span>
+<span class="kr">import</span> <span class="nx">jQuery</span> <span class="nx">from</span> <span class="s1">'jquery'</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span>
 <span class="nx">require</span><span class="p">(</span><span class="s1">'bootstrap-sass'</span><span class="p">)</span></code></pre></figure>
 
