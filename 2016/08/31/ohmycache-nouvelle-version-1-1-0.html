@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
+    <meta name="description" content="Une nouvelle version de la librairie OhMyCache viens d'être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions keys() et getAll() ainsi que l'ajout d'un nouveau paramètres facultatif à la fonction clear()">
 
-    <title>OhMyCache - isReadonly - Flavien BENINCA (ozee31)</title>
+    <title>[js] OhMyCache - Nouvelle version 1.1.0 - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/ohmycache/isReadonly.html">
+    <link rel="canonical" href="http://ozee31.github.io/2016/08/31/ohmycache-nouvelle-version-1-1-0.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -110,94 +110,103 @@
 </nav>
 
 
-    <!-- Page Header -->
-<header class="intro-header intro-header--documentation intro-header--ohmycache" style="
+    <!-- Post Header -->
+<header class="intro-header intro-header--post" style="
+  
+    background-image: url('/img/js.png');
+  
+  
+    background-color: #323330;
   
 ">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-                  <div class="site-heading site-heading--documentation"></div>
-                
+                <div class="post-heading">
+                    <div class="heading-title">
+                        <h1>[js] OhMyCache - Nouvelle version 1.1.0</h1>
+                        
+                        <h2 class="subheading">Une nouvelle version de la librairie OhMyCache viens d'être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions keys() et getAll() ainsi que l'ajout d'un nouveau paramètres facultatif à la fonction clear()</h2>
+                        
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 31 août 2016</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container-fluid container--doc container--ohmycache">
-  <div class="row">
-  <div class="col-md-2">
-    <div class="documentation-nav">
-  <section class="nav-section">
-    <h1>Getting started</h1>
-    <ul class="nav nav-pills nav-stacked">
-      <li role="presentation" class=""><a href="/ohmycache/">Introduction</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/examples">Examples</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/installation">Installation</a></li>
-    </ul>
-  </section>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<h1 id="ohmycache---nouvelle-version-110">OhMyCache - Nouvelle version 1.1.0</h1>
 
-  <section class="nav-section">
-    <h1>API</h1>
-    <ul class="nav nav-pills nav-stacked">
-      <li role="presentation" class=""><a href="/ohmycache/classes">Classes</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/set">set</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/get">get</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/getAll">getAll</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/keys">keys</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/remove">remove</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/clear">clear</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/isExpired">isExpired</a></li>
-      <li role="presentation" class="active"><a href="/ohmycache/isReadonly">isReadonly</a></li>
-    </ul>
-  </section>
+<p>Une nouvelle version de la librairie OhMyCache viens d’être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions <code class="highlighter-rouge">keys()</code> et <code class="highlighter-rouge">getAll()</code> ainsi que l’ajout d’un nouveau paramètres facultatif à la fonction <code class="highlighter-rouge">clear()</code></p>
 
-  <section class="nav-section">
-    <h1>More</h1>
-    <ul class="nav nav-pills nav-stacked">
-      <li role="presentation" class=""><a href="/ohmycache/changelog">Changelog</a></li>
-      <li role="presentation"><a href="https://github.com/ozee31/ohmycache">Repository</a></li>
-      <li role="presentation"><a href="https://github.com/ozee31/ohmycache/issues">Issues</a></li>
-    </ul>
-  </section>
-</div>
+<h2 id="keys">keys()</h2>
+
+<p>Cette fonction retourne l’ensemble des clés stockées en cache. Petite particularité, elle ne nettoiera pas les éléments expirés.</p>
+
+<p><a href="http://flavienbeninca.fr/ohmycache/keys">Voir la documentation</a></p>
+
+<h2 id="getall">getAll()</h2>
+
+<p>Cette fonction retournera l’ensemble des données stockées en cache sour forme d’objet “clé valeur”. Contrairement à la fonction <code class="highlighter-rouge">keys()</code> les données expirées ne seront pas retournées.</p>
+
+<p><a href="http://flavienbeninca.fr/ohmycache/getAll">Voir la documentation</a></p>
+
+<h2 id="clear">Clear()</h2>
+
+<p>Le paramètre <code class="highlighter-rouge">onlyExpired</code> a été ajouté, s’il est passé à <code class="highlighter-rouge">true</code> seul les données expirées seront supprimées (cela permet de libérer de l’espace de stockage).
+Par défaut il est égal à <code class="highlighter-rouge">false</code> et toutes les données seront supprimées (y compris celles en lecture seule)</p>
+
+<p><a href="http://flavienbeninca.fr/ohmycache/clear">Voir la documentation</a></p>
+
+
+        <hr>
+
+        <ul class="pager">
+          
+          <li class="previous">
+              <a href="/2016/08/03/vuejs-une-configuration-defferente-pour-chaque-environnement.html" data-toggle="tooltip" data-placement="top" title="[vuejs] Une configuration différente pour chaque environnement">&larr; Article précédent</a>
+          </li>
+          
+          
+        </ul>
+
+        
+          <hr>
+
+          <div id="disqus_thread"></div>
+
+          <script>
+            var disqus_config = function() {
+              this.page.url = "http://ozee31.github.io/2016/08/31/ohmycache-nouvelle-version-1-1-0.html"; // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "/2016/08/31/ohmycache-nouvelle-version-1-1-0"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document,
+                s = d.createElement('script');
+
+              s.src = '//flavienbeninca.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', + new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+          </noscript>
+
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+
+      </div>
+    </div>
   </div>
-
-  <section class="col-md-10">
-    <h1>isReadonly</h1>
-    <p>Indicates whether the value is readonly</p>
-    
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">isReadonly</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
-
-
-    <h2>Parameters</h2>
-    <dl class="dl-horizontal">
-      <dt>key</dt>
-      <dd>{string} name of the key you want to check</dd>
-    </dl>
-
-    <h2>Return</h2>
-    <p>This method return a boolean</p>
-
-    <h2>Exemples</h2>
-
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// No readonly
-</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
-</span>
-
-<span class="c1">// is readonly
-</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// true</span></code></pre></figure>
-
-  </section>
-</div>
-
-</div>
+</article>
 
 <hr>
 

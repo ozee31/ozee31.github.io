@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end">
 
-    <title>OhMyCache - isReadonly - Flavien BENINCA (ozee31)</title>
+    <title>OhMyCache - keys - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/ohmycache/isReadonly.html">
+    <link rel="canonical" href="http://ozee31.github.io/ohmycache/keys.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -146,11 +146,11 @@
       <li role="presentation" class=""><a href="/ohmycache/set">set</a></li>
       <li role="presentation" class=""><a href="/ohmycache/get">get</a></li>
       <li role="presentation" class=""><a href="/ohmycache/getAll">getAll</a></li>
-      <li role="presentation" class=""><a href="/ohmycache/keys">keys</a></li>
+      <li role="presentation" class="active"><a href="/ohmycache/keys">keys</a></li>
       <li role="presentation" class=""><a href="/ohmycache/remove">remove</a></li>
       <li role="presentation" class=""><a href="/ohmycache/clear">clear</a></li>
       <li role="presentation" class=""><a href="/ohmycache/isExpired">isExpired</a></li>
-      <li role="presentation" class="active"><a href="/ohmycache/isReadonly">isReadonly</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/isReadonly">isReadonly</a></li>
     </ul>
   </section>
 
@@ -166,33 +166,24 @@
   </div>
 
   <section class="col-md-10">
-    <h1>isReadonly</h1>
-    <p>Indicates whether the value is readonly</p>
+    <h1>keys</h1>
+    <p>Return all item's keys, doen't remove expired items</p>
     
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">isReadonly</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">keys</span><span class="p">()</span></code></pre></figure>
 
-
-    <h2>Parameters</h2>
-    <dl class="dl-horizontal">
-      <dt>key</dt>
-      <dd>{string} name of the key you want to check</dd>
-    </dl>
 
     <h2>Return</h2>
-    <p>This method return a boolean</p>
+    <p>All item's keys (array)</p>
 
     <h2>Exemples</h2>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// No readonly
-</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">)</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// false
-</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'k1'</span><span class="p">,</span> <span class="s1">'v1'</span><span class="p">)</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'k2'</span><span class="p">,</span> <span class="s1">'v2'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'k3'</span><span class="p">,</span> <span class="s1">'v3'</span><span class="p">,</span> <span class="p">{</span><span class="na">expire</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 
-<span class="c1">// is readonly
+<span class="c1">// sleep 2 secondes or more
 </span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">,</span> <span class="p">{</span><span class="na">readonly</span><span class="p">:</span> <span class="kc">true</span><span class="p">})</span>
-<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">isReadonly</span><span class="p">(</span><span class="s1">'key'</span><span class="p">)</span> <span class="c1">// true</span></code></pre></figure>
+<span class="nx">OhMyCache</span><span class="p">.</span><span class="nx">Local</span><span class="p">.</span><span class="nx">keys</span><span class="p">()</span> <span class="c1">// ['k1', 'k2', 'k3']</span></code></pre></figure>
 
   </section>
 </div>

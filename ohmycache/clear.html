@@ -89,6 +89,10 @@
           				
                 
           				
+                
+          				
+                
+          				
                     <li>
                       <a href="/projects.html">Projets</a>
                     </li>
@@ -141,6 +145,8 @@
       <li role="presentation" class=""><a href="/ohmycache/classes">Classes</a></li>
       <li role="presentation" class=""><a href="/ohmycache/set">set</a></li>
       <li role="presentation" class=""><a href="/ohmycache/get">get</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/getAll">getAll</a></li>
+      <li role="presentation" class=""><a href="/ohmycache/keys">keys</a></li>
       <li role="presentation" class=""><a href="/ohmycache/remove">remove</a></li>
       <li role="presentation" class="active"><a href="/ohmycache/clear">clear</a></li>
       <li role="presentation" class=""><a href="/ohmycache/isExpired">isExpired</a></li>
@@ -163,8 +169,14 @@
     <h1>clear</h1>
     <p>Remove all items. Also removes read-only datas</p>
     
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">clear</span><span class="p">()</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">clear</span><span class="p">(</span><span class="nx">onlyExpired</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span></code></pre></figure>
 
+
+    <h2>Parameters</h2>
+    <dl class="dl-horizontal">
+      <dt>onlyExpired</dt>
+      <dd>{boolean} if true remove only expired items else remove all items, default false</dd>
+    </dl>
 
     <h2>Return</h2>
     <p>This method return a boolean</p>
