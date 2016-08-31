@@ -14,7 +14,13 @@ hearder-bg-color: "#323330"
   <section class="col-md-10">
     <h1>clear</h1>
     <p>Remove all items. Also removes read-only datas</p>
-    {% highlight js %}clear(){% endhighlight %}
+    {% highlight js %}clear(onlyExpired = false){% endhighlight %}
+
+    <h2>Parameters</h2>
+    <dl class="dl-horizontal">
+      <dt>onlyExpired</dt>
+      <dd>{boolean} if true remove only expired items else remove all items, default false</dd>
+    </dl>
 
     <h2>Return</h2>
     <p>This method return a boolean</p>
