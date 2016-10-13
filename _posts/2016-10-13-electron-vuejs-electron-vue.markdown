@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "[Electron] - Electron + VueJS = electron-vue"
+title:      "[Electron] Electron + VueJS = electron-vue"
 subtitle:   "Dans mon précédent article, je vous ai parlé d'Electron pour créer une application native en HTML/JS. Aujourd'hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS."
 date:       2016-10-13 08:00:00
 comments: true

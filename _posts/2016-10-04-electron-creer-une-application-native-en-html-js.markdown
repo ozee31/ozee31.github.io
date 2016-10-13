@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "[Electron] - Créer une application native en HTML/JS"
+title:      "[Electron] Créer une application native en HTML/JS"
 subtitle:   "Créer une application native multi OS est devenu très simple grâce à Electron. En effet plus besoin d'apprendre le C, C++, Java... il est désormais possible de développer votre application avec les technologies du Web."
 date:       2016-10-04 08:00:00
 comments: true
