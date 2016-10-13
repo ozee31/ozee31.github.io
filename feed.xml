@@ -5,9 +5,95 @@
     <description>Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end</description>
     <link>http://ozee31.github.io/</link>
     <atom:link href="http://ozee31.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 04 Oct 2016 13:19:32 +0000</pubDate>
-    <lastBuildDate>Tue, 04 Oct 2016 13:19:32 +0000</lastBuildDate>
+    <pubDate>Thu, 13 Oct 2016 12:08:15 +0000</pubDate>
+    <lastBuildDate>Thu, 13 Oct 2016 12:08:15 +0000</lastBuildDate>
     <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>[Electron] - Electron + VueJS = electron-vue</title>
+        <description>&lt;h1 id=&quot;electron--vuejs--electron-vue&quot;&gt;Electron + VueJS = electron-vue&lt;/h1&gt;
+
+&lt;p&gt;Dans mon précédent article, je vous ai parlé d’Electron pour créer une application native en HTML/JS. Aujourd’hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS.&lt;/p&gt;
+
+&lt;h2 id=&quot;la-librairie&quot;&gt;La librairie&lt;/h2&gt;
+
+&lt;p&gt;Nul besoin d’installer Vuejs et Electron séparément, une librairie se charge de tout : &lt;a href=&quot;https://www.gitbook.com/book/simulatedgreg/electron-vue/details&quot;&gt;electron-vue&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Elle est bien sûr installable via &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; mais avant ça il y a des prérequis (et je me suis bien pris la tête).&lt;/p&gt;
+
+&lt;h2 id=&quot;prrequis&quot;&gt;Prérequis&lt;/h2&gt;
+
+&lt;p&gt;Comme je l’ai dis précédemment, je me suis bien pris la tête pour réussir l’installation de cette librairie (et la documentation n’est pas très bavarde à ce sujet) mais comme je suis gentil je vais vous montrer comment faire pas à pas.&lt;/p&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;p&gt;Donc la première chose à avoir sur son PC est &lt;a href=&quot;https://www.python.org/downloads/&quot;&gt;Python&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Attention la version à télécharger, à l’heure où je parle (ou plutôt à l’heure où j’écris ces lignes), est la branche &lt;strong&gt;2.x&lt;/strong&gt; (la branche 3.x n’étant pas compatible). Rassurez-vous les version 2.x et 3.x peuvent fonctionner parallèlement.&lt;/p&gt;
+
+&lt;h3 id=&quot;windows-build-tools&quot;&gt;Windows-Build-Tools&lt;/h3&gt;
+
+&lt;p&gt;C’est sur cette partie que j’ai eu le plus de mal, en effet, ne connaissant pas cette librairie j’ai d’abord essayer d’installer &lt;del&gt;l’usine à gaz&lt;/del&gt; Visual Studio afin de posséder le compilateur C++ nécessaire à l’installation de la librairie.&lt;/p&gt;
+
+&lt;p&gt;Mais grâce à cette simple librairie, tout parait (est) beaucoup plus simple. J’ai tout de même dû upgrader npm manuellement.&lt;/p&gt;
+
+&lt;h4 id=&quot;npm-windows-upgrade&quot;&gt;npm-windows-upgrade&lt;/h4&gt;
+
+&lt;p&gt;Si vous êtes sur Linux ou Mac passez votre chemin ^^.&lt;/p&gt;
+
+&lt;p&gt;La première chose à faire est d’ouvrir &lt;strong&gt;PowerShell&lt;/strong&gt; en mode &lt;strong&gt;administrateur&lt;/strong&gt; et de lancer la commande :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ensuite toujours en mode &lt;strong&gt;administrateur&lt;/strong&gt; (mais pas forcément sur PowerShell) vous faites ceci&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install --global --production npm-windows-upgrade
+npm-windows-upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;et installez la dernière version de &lt;code class=&quot;highlighter-rouge&quot;&gt;NPM&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;windows-builds-tools&quot;&gt;Windows Builds Tools&lt;/h4&gt;
+
+&lt;p&gt;Vous pouvez installer &lt;code class=&quot;highlighter-rouge&quot;&gt;windows-build-tools&lt;/code&gt; globalement&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install --global windows-build-tools&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Maintenant on peut démarrer un projet electron-vue grâce à &lt;code class=&quot;highlighter-rouge&quot;&gt;vue-cli&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si vue-cli n’est pas installé, installez le globalement :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install -g vue-cli&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ensuite on initialise et on installe les dépendances :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;vue init simulatedgreg/electron-vue my-project
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;my-project
+npm install
+npm run dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;dveloppement&quot;&gt;Développement&lt;/h2&gt;
+
+&lt;p&gt;Le gros point fort de cette librairie, est que, comme sur un projet VueJS classique, le Hot reload fonctionne.&lt;/p&gt;
+
+&lt;p&gt;Alors lancez au plus vite votre serveur de dev :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm run dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour la suite, si vous connaissez VueJS, vous ne serez pas perdu.&lt;/p&gt;
+
+&lt;h2 id=&quot;vous-navez-pas-russi--installer-electron-vue-&quot;&gt;Vous n’avez pas réussi à installer electron-vue ?&lt;/h2&gt;
+
+&lt;p&gt;Si ce tuto n’a pas fonctionné chez-vous, laissez moi un commentaire avec le plus d’informations possible (SE, version de NPM…) car vu toutes les manipulations que j’ai dû effectuer avant d’arriver au résultat, il est possible que j’ai oublié 2 ou 3 détails.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 13 Oct 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>[Electron] - Créer une application native en HTML/JS</title>
