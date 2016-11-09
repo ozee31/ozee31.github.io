@@ -8,6 +8,12 @@ header-img: "img/php.png"
 hearder-bg-color: "#6082BB"
 ---
 
+> **!!!**
+>
+> **Attention cette méthode est dépréciée depuis la version 3.3 de CakePHP, je vous invite [à lire cet article](http://flavienbeninca.fr/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html) pour activer le CrossDomain grâce au Middleware.**
+>
+> **!!!**
+
 # CakePhp 3 : Activer le CrossDomain (CORS)
 
 Suite à la création d'une API sous CakePHP 3.2, j'ai du à un moment autoriser le CrossDomain afin que mon API soit consultable depuis n'importe quel domaine.
