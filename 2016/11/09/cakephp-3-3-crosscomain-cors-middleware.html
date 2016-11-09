@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Dans mon précédent article, je vous ai parlé d'Electron pour créer une application native en HTML/JS. Aujourd'hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS.">
+    <meta name="description" content="Dans un précédent article, je vous avais montré comment activer le CrossDomain sur votre application en utilisant les filtres du Dispatcher. Cependant depuis le version 3.3 de CakePHP cette technique est obsolète et doit être remplacée par le Middleware. Voici comment faire.">
 
-    <title>[Electron] Electron + VueJS = electron-vue - Flavien BENINCA (ozee31)</title>
+    <title>[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html">
+    <link rel="canonical" href="http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -113,10 +113,10 @@
     <!-- Post Header -->
 <header class="intro-header intro-header--post" style="
   
-    background-image: url('/img/electron.png');
+    background-image: url('/img/php.png');
   
   
-    background-color: rgba(43, 46, 59, 0.9);
+    background-color: #6082BB;
   
 ">
     <div class="container">
@@ -124,11 +124,11 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <div class="heading-title">
-                        <h1>[Electron] Electron + VueJS = electron-vue</h1>
+                        <h1>[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware</h1>
                         
-                        <h2 class="subheading">Dans mon précédent article, je vous ai parlé d'Electron pour créer une application native en HTML/JS. Aujourd'hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS.</h2>
+                        <h2 class="subheading">Dans un précédent article, je vous avais montré comment activer le CrossDomain sur votre application en utilisant les filtres du Dispatcher. Cependant depuis le version 3.3 de CakePHP cette technique est obsolète et doit être remplacée par le Middleware. Voici comment faire.</h2>
                         
-                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 13 octobre 2016</span>
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 9 novembre 2016</span>
                     </div>
                 </div>
             </div>
@@ -141,82 +141,87 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<h1 id="electron--vuejs--electron-vue">Electron + VueJS = electron-vue</h1>
+				<h1 id="cakephp-33--activer-le-crossdomain-cors-en-utilisant-le-middleware">CakePhp 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware</h1>
 
-<p>Dans mon précédent article, je vous ai parlé d’Electron pour créer une application native en HTML/JS. Aujourd’hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS.</p>
+<p>Dans un <a href="http://www.flavienbeninca.fr/2016/07/12/cakephp-3-crosscomain-cors.html">précédent article</a>, je vous avais montré comment activer le CrossDomain sur votre application en utilisant les filtres du Dispatcher.</p>
 
-<h2 id="la-librairie">La librairie</h2>
+<p>Cependant depuis le version 3.3 de CakePHP cette technique est obsolète et doit être remplacée par le Middleware.</p>
 
-<p>Nul besoin d’installer Vuejs et Electron séparément, une librairie se charge de tout : <a href="https://www.gitbook.com/book/simulatedgreg/electron-vue/details">electron-vue</a>.</p>
-
-<p>Elle est bien sûr installable via <code class="highlighter-rouge">npm</code> mais avant ça il y a des prérequis (et je me suis bien pris la tête).</p>
-
-<h2 id="prrequis">Prérequis</h2>
-
-<p>Comme je l’ai dis précédemment, je me suis bien pris la tête pour réussir l’installation de cette librairie (et la documentation n’est pas très bavarde à ce sujet) mais comme je suis gentil je vais vous montrer comment faire pas à pas.</p>
-
-<h3 id="python">Python</h3>
-
-<p>Donc la première chose à avoir sur son PC est <a href="https://www.python.org/downloads/">Python</a>.</p>
-
-<p>Attention la version à télécharger, à l’heure où je parle (ou plutôt à l’heure où j’écris ces lignes), est la branche <strong>2.x</strong> (la branche 3.x n’étant pas compatible). Rassurez-vous les version 2.x et 3.x peuvent fonctionner parallèlement.</p>
-
-<h3 id="windows-build-tools">Windows-Build-Tools</h3>
-
-<p>C’est sur cette partie que j’ai eu le plus de mal, en effet, ne connaissant pas cette librairie j’ai d’abord essayer d’installer <del>l’usine à gaz</del> Visual Studio afin de posséder le compilateur C++ nécessaire à l’installation de la librairie.</p>
-
-<p>Mais grâce à cette simple librairie, tout parait (est) beaucoup plus simple. J’ai tout de même dû upgrader npm manuellement.</p>
-
-<h4 id="npm-windows-upgrade">npm-windows-upgrade</h4>
-
-<p>Si vous êtes sur Linux ou Mac passez votre chemin ^^.</p>
-
-<p>La première chose à faire est d’ouvrir <strong>PowerShell</strong> en mode <strong>administrateur</strong> et de lancer la commande :</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force</code></pre></figure>
-
-<p>Ensuite toujours en mode <strong>administrateur</strong> (mais pas forcément sur PowerShell) vous faites ceci</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install --global --production npm-windows-upgrade
-npm-windows-upgrade</code></pre></figure>
-
-<p>et installez la dernière version de <code class="highlighter-rouge">NPM</code></p>
-
-<h4 id="windows-builds-tools">Windows Builds Tools</h4>
-
-<p>Vous pouvez installer <code class="highlighter-rouge">windows-build-tools</code> globalement</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install --global windows-build-tools</code></pre></figure>
+<p>Mais comme je suis généreux je vous ai concocté un petit plugin qui fera tout le boulot à votre place <del>ou preques</del>.</p>
 
 <h2 id="installation">Installation</h2>
 
-<p>Maintenant on peut démarrer un projet electron-vue grâce à <code class="highlighter-rouge">vue-cli</code></p>
+<p>Rien de bien compliqué, un petit coup de composer et le tour est joué.</p>
 
-<p>Si vue-cli n’est pas installé, installez le globalement :</p>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">composer require ozee31/cakephp-cors</code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm install -g vue-cli</code></pre></figure>
+<p>La seule condition est d’avoir CakePHP dans sa version <code class="highlighter-rouge">&gt; 3.3.0</code></p>
 
-<p>Ensuite on initialise et on installe les dépendances :</p>
+<h2 id="activation">Activation</h2>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">vue init simulatedgreg/electron-vue my-project
+<p>Là aussi, attention c’est très très difficile, il suffit de l’activer dans le fichier <code class="highlighter-rouge">bootstrap.php</code></p>
 
-<span class="nb">cd </span>my-project
-npm install
-npm run dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">Plugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'Cors'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'bootstrap'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span> <span class="s1">'routes'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">]);</span></code></pre></figure>
 
-<h2 id="dveloppement">Développement</h2>
+<h2 id="magie-magie-et-vos-ide">Magie, magie <del>et vos idée…</del></h2>
 
-<p>Le gros point fort de cette librairie, est que, comme sur un projet VueJS classique, le Hot reload fonctionne.</p>
+<p>Et voilà les requêtes ajax CrossDomain fonctionnent, elle est pas belle la vie?</p>
 
-<p>Alors lancez au plus vite votre serveur de dev :</p>
+<blockquote>
+  <p>Quoi c’est tout? C’est paramétrable? Ça fonctionne comment?</p>
+</blockquote>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">npm run dev</code></pre></figure>
+<p>Où là doucement, je v’ai tout vous expliquer.</p>
 
-<p>Pour la suite, si vous connaissez VueJS, vous ne serez pas perdu.</p>
+<h2 id="secret-de-fabrication">Secret de fabrication</h2>
 
-<h2 id="vous-navez-pas-russi--installer-electron-vue-">Vous n’avez pas réussi à installer electron-vue ?</h2>
+<p>Comme vous vous en doutez, le plugin utilise le <a href="http://book.cakephp.org/3.0/fr/controllers/middleware.html">Middleware</a> afin d’analyser la requête et donner la réponse adéquate au navigateur.</p>
 
-<p>Si ce tuto n’a pas fonctionné chez-vous, laissez moi un commentaire avec le plus d’informations possible (SE, version de NPM…) car vu toutes les manipulations que j’ai dû effectuer avant d’arriver au résultat, il est possible que j’ai oublié 2 ou 3 détails.</p>
+<h3 id="etapes">Etapes</h3>
+
+<ul>
+  <li>Le navigateur envoi une requête <code class="highlighter-rouge">OPTIONS</code> au serveur</li>
+  <li>Le plugin analyse les informations et renvoi les bons entêtes au navigateur si l’origine est autorisée (on verra ça dans le chapitre configuration)</li>
+  <li>Si la réponse est correcte la navigateur peut envoyer la bonne requête au serveur (GET, POST…) qui sera traitée normalement</li>
+</ul>
+
+<p>Pour des informations plus détaillées sur le CrossDomain je vous invite à <a href="https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS">lire cet article</a>.</p>
+
+<h3 id="comment-le-middleware-traite-til-la-requte-options-">Comment le Middleware traite t’il la requête OPTIONS ?</h3>
+
+<h4 id="origin">Origin</h4>
+
+<p>Dans un premier temps, le middleware va valider que l’appelant est autorisé à effectuer l’appel (par défaut le plugin autorise tout le monde).</p>
+
+<h4 id="headers">Headers</h4>
+
+<p>Ensuite le plugin analyse les entêtes, si un seul n’est pas autorisé la requête est refusée. (Par défaut le plugin autorise tous les entêtes).</p>
+
+<h4 id="mthodes">Méthodes</h4>
+
+<p>Là encore le plugin autorise toutes les méthodes HTTP possible (GET, POST, PUT, DELETE)</p>
+
+<h4 id="cache">Cache</h4>
+
+<p>Par défaut le plugin met en cache la réponse pendant un jour (le navigateur n’aura pas besoin de relancer une requête OPTION qui a déjà été envoyée)</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>Bien sûr il est possible de surcharger la configuration par défaut, tout se passe dans votre fichier <code class="highlighter-rouge">app.php</code>, il suffit d’ajouter la clé <code class="highlighter-rouge">Cors</code> qui contiendra toutes les options désirées.</p>
+
+<p>Dans l’exemple ci-dessous nous souhaiterons autoriser les requêtes crossDomain de google, leboncoin et mozilla, nous n’autoriserons que le header authorization, les methodes POST et GET et désactiverons le cache.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="s1">'Cors'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+  <span class="s1">'AllowOrigin'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'http://google.fr'</span><span class="p">,</span> <span class="s1">'http://leboncoin.fr'</span><span class="p">,</span> <span class="s1">'http://mozilla.com'</span><span class="p">],</span>
+  <span class="s1">'AllowMethods'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">],</span>
+  <span class="s1">'AllowHeaders'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'authorization'</span><span class="p">],</span>
+  <span class="s1">'MaxAge'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">]</span></code></pre></figure>
+
+<p>Pour plus de détails sur la configuration <a href="https://github.com/ozee31/cakephp-cors">c’est ici</a></p>
+
 
 
         <hr>
@@ -224,13 +229,9 @@ npm run dev</code></pre></figure>
         <ul class="pager">
           
           <li class="previous">
-              <a href="/2016/10/04/electron-creer-une-application-native-en-html-js.html" data-toggle="tooltip" data-placement="top" title="[Electron] Créer une application native en HTML/JS">&larr; Article précédent</a>
+              <a href="/2016/10/13/electron-vuejs-electron-vue.html" data-toggle="tooltip" data-placement="top" title="[Electron] Electron + VueJS = electron-vue">&larr; Article précédent</a>
           </li>
           
-          
-          <li class="next">
-              <a href="/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html" data-toggle="tooltip" data-placement="top" title="[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware">Article suivant &rarr;</a>
-          </li>
           
         </ul>
 
@@ -241,8 +242,8 @@ npm run dev</code></pre></figure>
 
           <script>
             var disqus_config = function() {
-              this.page.url = "http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html"; // Replace PAGE_URL with your page's canonical URL variable
-              this.page.identifier = "/2016/10/13/electron-vuejs-electron-vue"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              this.page.url = "http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html"; // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "/2016/11/09/cakephp-3-3-crosscomain-cors-middleware"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
             (function() { // DON'T EDIT BELOW THIS LINE
               var d = document,

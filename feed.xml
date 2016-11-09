@@ -5,9 +5,100 @@
     <description>Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end</description>
     <link>http://ozee31.github.io/</link>
     <atom:link href="http://ozee31.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 13 Oct 2016 12:09:53 +0000</pubDate>
-    <lastBuildDate>Thu, 13 Oct 2016 12:09:53 +0000</lastBuildDate>
+    <pubDate>Wed, 09 Nov 2016 15:13:27 +0000</pubDate>
+    <lastBuildDate>Wed, 09 Nov 2016 15:13:27 +0000</lastBuildDate>
     <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware</title>
+        <description>&lt;h1 id=&quot;cakephp-33--activer-le-crossdomain-cors-en-utilisant-le-middleware&quot;&gt;CakePhp 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware&lt;/h1&gt;
+
+&lt;p&gt;Dans un &lt;a href=&quot;http://www.flavienbeninca.fr/2016/07/12/cakephp-3-crosscomain-cors.html&quot;&gt;précédent article&lt;/a&gt;, je vous avais montré comment activer le CrossDomain sur votre application en utilisant les filtres du Dispatcher.&lt;/p&gt;
+
+&lt;p&gt;Cependant depuis le version 3.3 de CakePHP cette technique est obsolète et doit être remplacée par le Middleware.&lt;/p&gt;
+
+&lt;p&gt;Mais comme je suis généreux je vous ai concocté un petit plugin qui fera tout le boulot à votre place &lt;del&gt;ou preques&lt;/del&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Rien de bien compliqué, un petit coup de composer et le tour est joué.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;composer require ozee31/cakephp-cors&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;La seule condition est d’avoir CakePHP dans sa version &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt; 3.3.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;activation&quot;&gt;Activation&lt;/h2&gt;
+
+&lt;p&gt;Là aussi, attention c’est très très difficile, il suffit de l’activer dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;bootstrap.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Cors&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bootstrap&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;routes&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;magie-magie-et-vos-ide&quot;&gt;Magie, magie &lt;del&gt;et vos idée…&lt;/del&gt;&lt;/h2&gt;
+
+&lt;p&gt;Et voilà les requêtes ajax CrossDomain fonctionnent, elle est pas belle la vie?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Quoi c’est tout? C’est paramétrable? Ça fonctionne comment?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Où là doucement, je v’ai tout vous expliquer.&lt;/p&gt;
+
+&lt;h2 id=&quot;secret-de-fabrication&quot;&gt;Secret de fabrication&lt;/h2&gt;
+
+&lt;p&gt;Comme vous vous en doutez, le plugin utilise le &lt;a href=&quot;http://book.cakephp.org/3.0/fr/controllers/middleware.html&quot;&gt;Middleware&lt;/a&gt; afin d’analyser la requête et donner la réponse adéquate au navigateur.&lt;/p&gt;
+
+&lt;h3 id=&quot;etapes&quot;&gt;Etapes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Le navigateur envoi une requête &lt;code class=&quot;highlighter-rouge&quot;&gt;OPTIONS&lt;/code&gt; au serveur&lt;/li&gt;
+  &lt;li&gt;Le plugin analyse les informations et renvoi les bons entêtes au navigateur si l’origine est autorisée (on verra ça dans le chapitre configuration)&lt;/li&gt;
+  &lt;li&gt;Si la réponse est correcte la navigateur peut envoyer la bonne requête au serveur (GET, POST…) qui sera traitée normalement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour des informations plus détaillées sur le CrossDomain je vous invite à &lt;a href=&quot;https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS&quot;&gt;lire cet article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;comment-le-middleware-traite-til-la-requte-options-&quot;&gt;Comment le Middleware traite t’il la requête OPTIONS ?&lt;/h3&gt;
+
+&lt;h4 id=&quot;origin&quot;&gt;Origin&lt;/h4&gt;
+
+&lt;p&gt;Dans un premier temps, le middleware va valider que l’appelant est autorisé à effectuer l’appel (par défaut le plugin autorise tout le monde).&lt;/p&gt;
+
+&lt;h4 id=&quot;headers&quot;&gt;Headers&lt;/h4&gt;
+
+&lt;p&gt;Ensuite le plugin analyse les entêtes, si un seul n’est pas autorisé la requête est refusée. (Par défaut le plugin autorise tous les entêtes).&lt;/p&gt;
+
+&lt;h4 id=&quot;mthodes&quot;&gt;Méthodes&lt;/h4&gt;
+
+&lt;p&gt;Là encore le plugin autorise toutes les méthodes HTTP possible (GET, POST, PUT, DELETE)&lt;/p&gt;
+
+&lt;h4 id=&quot;cache&quot;&gt;Cache&lt;/h4&gt;
+
+&lt;p&gt;Par défaut le plugin met en cache la réponse pendant un jour (le navigateur n’aura pas besoin de relancer une requête OPTION qui a déjà été envoyée)&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Bien sûr il est possible de surcharger la configuration par défaut, tout se passe dans votre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;app.php&lt;/code&gt;, il suffit d’ajouter la clé &lt;code class=&quot;highlighter-rouge&quot;&gt;Cors&lt;/code&gt; qui contiendra toutes les options désirées.&lt;/p&gt;
+
+&lt;p&gt;Dans l’exemple ci-dessous nous souhaiterons autoriser les requêtes crossDomain de google, leboncoin et mozilla, nous n’autoriserons que le header authorization, les methodes POST et GET et désactiverons le cache.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&#39;Cors&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&#39;AllowOrigin&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;http://google.fr&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;http://leboncoin.fr&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;http://mozilla.com&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&#39;AllowMethods&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GET&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;POST&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&#39;AllowHeaders&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;authorization&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&#39;MaxAge&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour plus de détails sur la configuration &lt;a href=&quot;https://github.com/ozee31/cakephp-cors&quot;&gt;c’est ici&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 09 Nov 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>[Electron] Electron + VueJS = electron-vue</title>
@@ -633,7 +724,15 @@ De plus on ne va pas simplement effectuer la copie de nos fichiers de config mai
     
       <item>
         <title>[php] CakePHP 3 : Activer le CrossDomain (CORS)</title>
-        <description>&lt;h1 id=&quot;cakephp-3--activer-le-crossdomain-cors&quot;&gt;CakePhp 3 : Activer le CrossDomain (CORS)&lt;/h1&gt;
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;!!!&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Attention cette méthode est dépréciée depuis la version 3.3 de CakePHP, je vous invite &lt;a href=&quot;http://flavienbeninca.fr/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html&quot;&gt;à lire cet article&lt;/a&gt; pour activer le CrossDomain grâce au Middleware.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;!!!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;cakephp-3--activer-le-crossdomain-cors&quot;&gt;CakePhp 3 : Activer le CrossDomain (CORS)&lt;/h1&gt;
 
 &lt;p&gt;Suite à la création d’une API sous CakePHP 3.2, j’ai du à un moment autoriser le CrossDomain afin que mon API soit consultable depuis n’importe quel domaine.&lt;/p&gt;
 
