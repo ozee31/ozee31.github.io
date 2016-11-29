@@ -5,9 +5,111 @@
     <description>Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end</description>
     <link>http://ozee31.github.io/</link>
     <atom:link href="http://ozee31.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Nov 2016 15:13:27 +0000</pubDate>
-    <lastBuildDate>Wed, 09 Nov 2016 15:13:27 +0000</lastBuildDate>
+    <pubDate>Tue, 29 Nov 2016 09:18:40 +0000</pubDate>
+    <lastBuildDate>Tue, 29 Nov 2016 09:18:40 +0000</lastBuildDate>
     <generator>Jekyll v3.1.3</generator>
+    
+      <item>
+        <title>[vuejs] Méthodes publiques</title>
+        <description>&lt;h1 id=&quot;vuejs---mthodes-publiques&quot;&gt;Vuejs - Méthodes publiques&lt;/h1&gt;
+
+&lt;p&gt;Durant le processus de développement d’une application Vuejs, vous pouvez avoir besoin de faire communiquer un module externe avec votre application. Voici comment faire.&lt;/p&gt;
+
+&lt;h2 id=&quot;prrequis&quot;&gt;Prérequis&lt;/h2&gt;
+
+&lt;p&gt;Pour ce tuto j’ai utilisé la version &lt;strong&gt;2.1.3&lt;/strong&gt; de vuejs&lt;/p&gt;
+
+&lt;h2 id=&quot;but-du-tutoriel&quot;&gt;But du tutoriel&lt;/h2&gt;
+
+&lt;p&gt;Réussir à communiquer avec vuejs via le scope &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt;. Nous allons ici juste donner la possibilité de modifier un texte dynamiquement.&lt;/p&gt;
+
+&lt;h2 id=&quot;le-commencement&quot;&gt;Le commencement&lt;/h2&gt;
+
+&lt;p&gt;Un petit fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; tout joli fera l’affaire&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://unpkg.com/vue/dist/vue.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et un fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;#app&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Hello Vue.js!&#39;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Par défaut on voit bien qu’il nous est impossible de communiquer depuis le scope &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt; avec l’instance &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;premire-solution&quot;&gt;Première solution&lt;/h2&gt;
+
+&lt;p&gt;La première solution qui nous viens à l’esprit est de passer notre instance de vue dans le scope global comme ceci :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;#app&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Hello Vue.js!&#39;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// On peut maintenant communiquer n&#39;importe quand avec notre instance vue comme ceci
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;plop&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Cela à le mérite de fonctionner, mais…&lt;/p&gt;
+
+&lt;h3 id=&quot;ne-pas-faire-a-&quot;&gt;Ne pas faire ça !!!&lt;/h3&gt;
+
+&lt;p&gt;Le gros danger ici est qu’un utilisateur lambda pourra accéder entièrement à votre application et tout modifier (y compris le store).&lt;/p&gt;
+
+&lt;h2 id=&quot;la-solution-propre&quot;&gt;La solution propre&lt;/h2&gt;
+
+&lt;p&gt;La solution que j’ai retenu est de n’ouvrir qu’une seule méthode de notre instance qui nous permettra de communiquer de manière sécurisé avec l’extérieur.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;#app&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Hello Vue.js!&#39;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;changeMessage&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// on met la méthode api de notre instance Vuejs dans le scope window
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// on appelle notre api comme ceci
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;changeMessage&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;plip&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Tue, 29 Nov 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware</title>
@@ -1501,173 +1603,6 @@ On repart à zéro avec notre &lt;code class=&quot;highlighter-rouge&quot;&gt;de
         <pubDate>Fri, 13 May 2016 08:00:00 +0000</pubDate>
         <link>http://ozee31.github.io/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html</link>
         <guid isPermaLink="true">http://ozee31.github.io/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>[php] Générer des PDF avec DomPDF et CakePHP</title>
-        <description>&lt;h1 id=&quot;gnrer-des-pdf-avec-dompdf-et-cakephp&quot;&gt;Générer des PDF avec DomPDF et CakePHP&lt;/h1&gt;
-&lt;p&gt;Grâce à la librairie &lt;a href=&quot;https://github.com/dompdf/dompdf&quot;&gt;DomPDF&lt;/a&gt; couplé au plugin &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf&quot;&gt;cakephp-dompdf&lt;/a&gt;, il est très facile de générer des PDF en HTML/CSS.&lt;/p&gt;
-
-&lt;h2 id=&quot;environnement&quot;&gt;Environnement&lt;/h2&gt;
-&lt;p&gt;Voici ma configuration pour cette démo&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Une VM ubuntu server en version 14&lt;/li&gt;
-  &lt;li&gt;Server Apache&lt;/li&gt;
-  &lt;li&gt;PHP en version 7 (la version minimale est la 5.4.16)&lt;/li&gt;
-  &lt;li&gt;CakePHP en version 3.2 (la version minimale est la 3.0)&lt;/li&gt;
-  &lt;li&gt;La librairie DomPDF en version 0.7&lt;/li&gt;
-  &lt;li&gt;Le plugin cakephp-dompdf en version 1.0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
-&lt;p&gt;Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;composer require daoandco/cakephp-dompdf&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Très important, il ne faut pas oublié de générer les liens symboliques du plugin.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;bin/cake plugin assets symlink&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On charge ensuite le plugin&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// config/bootstrap.php
-&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Dompdf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;en-route-pour-laventure&quot;&gt;En route pour l’aventure&lt;/h2&gt;
-&lt;p&gt;Le plus simple pour générer les PDF est d’écouter les urls afin de traiter l’extension &lt;code class=&quot;highlighter-rouge&quot;&gt;.pdf&lt;/code&gt; (&lt;a href=&quot;http://book.cakephp.org/3.0/fr/development/routing.html#routing-des-extensions-de-fichier&quot;&gt;Documentation&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;On va donc, pour l’exemple définir une &lt;del&gt;auto&lt;/del&gt; route.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;/&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;RouteBuilder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;pdf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;/demo/view/*&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;controller&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;Demo&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;action&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;view&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et pour le controlleur :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// scr/Controller/DemoController.php
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App\Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DemoController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On teste notre route http://localhost/demo/view/test.pdf et &lt;strong&gt;bim!!!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/87TellwMnUAMrKZfakHSiIqnmuxd9fGbRzKS4B--_XAqaC7X9wDa00-i5rFXesNMtaWSrGcY8Q=s0&quot; alt=&quot;Template is missing&quot; title=&quot;capture-1.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ne vous inquiétez pas, c’est normal, pas de panique on a pas encore créé notre template.&lt;/p&gt;
-
-&lt;h2 id=&quot;jai-view-un-pdf&quot;&gt;J’ai view un PDF&lt;/h2&gt;
-
-&lt;p&gt;Comme on écoute toujours la maîtresse et que l’on est bien sage, on va créer notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;view.ctp&lt;/code&gt; dans &lt;code class=&quot;highlighter-rouge&quot;&gt;Demo/pdf/view.ctp&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Hey, t’est bien gentil mais là il me demande de créer un layout.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Oui je sais mais comme la vie est bien faite, notre petit plugin inclut justement un Layout qui nous permet entre autre de fixer un header ainsi qu’un footer.&lt;/p&gt;
-
-&lt;h2 id=&quot;plugue-ton-layout&quot;&gt;Plugue ton Layout&lt;/h2&gt;
-
-&lt;p&gt;Pour faire les choses bien (il faut toujours faire les choses bien), on va modifier notre Controller&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;viewBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Dompdf.Pdf&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Dompdf.default&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;config&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&#39;filename&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&#39;render&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;browser&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]]);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On recharge la page, et là, sous vos yeux ébahis, un magnifique PDF apparaît dans votre Firefox (comment ça vous n’utilisez pas Firefox ?)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/tJcFxm3bITPAfJTdhNHRi6uTtsMGIdxvIFhe9xNq3yJWwIF2TkqI8IcFItt7Upx2MHPvRC7sqA=s0&quot; alt=&quot;Le pdf généré&quot; title=&quot;capture-2.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Tout ça juste pour charger un Layout ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;En fait on a surtout dit à CakePHP d’utiliser le plugin pour générer la vue, je vous invite à lire &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf#configuration&quot;&gt;la documentation du plugin&lt;/a&gt; pour comprendre ce que je viens de faire.&lt;/p&gt;
-
-&lt;h2 id=&quot;je-veux-du-css-et-des-nanas&quot;&gt;Je veux du CSS et des nanas&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Bon les h1 et les p c’est bien gentil mais comment je style ça ? Et les images comment ça marche ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;On y viens, et on va même faire un header et un footer comme je suis gentil.&lt;/p&gt;
-
-&lt;p&gt;Allez c’est parti on crée notre beau css&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;c&quot;&gt;/* webroot/css/demo.css */&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et comme tout est prévu, notre beau petit plugin possède un helper, on peut donc modifier notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;view.ctp&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;css(&#39;demo&#39;); ?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ah oui, j’oubliais les nanas, pour les images c’est aussi avec le helper (et on en profite pour rajouter le header et le footer)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;css(&#39;demo&#39;); ?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php
-$this-&amp;gt;start(&#39;header&#39;);
-  echo &#39;&amp;lt;p&amp;gt;I\&#39;m a header&amp;lt;/p&amp;gt;&#39;;
-$this-&amp;gt;end();
-
-$this-&amp;gt;start(&#39;footer&#39;);
-  echo &#39;&amp;lt;p&amp;gt;I\&#39;m a footer&amp;lt;/p&amp;gt;&#39;;
-$this-&amp;gt;end();
-?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;image(&#39;nanas.jpg&#39;); ?&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On actualise la page, et voilà notre PDF stylé comme jamais
-&lt;img src=&quot;https://lh3.googleusercontent.com/4zy5TzBYp6cT4PDG_S7-V7yzX9J5BIyze5Uj-fHTpJBN7XY0NymbLGRjkvQedxVNIx9Dm6RYwg=s0&quot; alt=&quot;enter image description here&quot; title=&quot;capture-3.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;aller-plus-loin&quot;&gt;Aller plus loin&lt;/h2&gt;
-&lt;p&gt;Je vous invite à lire la &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf&quot;&gt;documentation&lt;/a&gt; du plugin qui est très complète.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 04 May 2016 12:00:00 +0000</pubDate>
-        <link>http://ozee31.github.io/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html</link>
-        <guid isPermaLink="true">http://ozee31.github.io/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html</guid>
         
         
       </item>
