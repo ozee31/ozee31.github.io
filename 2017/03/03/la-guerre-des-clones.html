@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cloner un objet ou un array en javascript n'ai pas aussi simple qu'un bonjour. Voici comment faire.">
+
+    <title>[js] La guerre des clones - Flavien BENINCA (ozee31)</title>
+
+    <link rel="canonical" href="http://ozee31.github.io/2017/03/03/la-guerre-des-clones.html">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Perso CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://ozee31.github.io/feed.xml" title="Flavien BENINCA (ozee31)" />
+
+</head>
+
+
+<body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flavien BENINCA (ozee31)</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Blog</a>
+                </li>
+                
+          				
+                    <li>
+                      <a href="/about.html">A propos</a>
+                    </li>
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                
+          				
+                    <li>
+                      <a href="/projects.html">Projets</a>
+                    </li>
+          				
+                
+          				
+                
+          				
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<header class="intro-header intro-header--post" style="
+  
+    background-image: url('/img/js.png');
+  
+  
+    background-color: #323330;
+  
+">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="heading-title">
+                        <h1>[js] La guerre des clones</h1>
+                        
+                        <h2 class="subheading">Cloner un objet ou un array en javascript n'ai pas aussi simple qu'un bonjour. Voici comment faire.</h2>
+                        
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 3 mars 2017</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<h1 id="la-guerre-des-clones">La guerre des clones</h1>
+
+<p>Cloner un objet ou un array en javascript n’ai pas aussi simple qu’un bonjour. Voici comment faire.</p>
+
+<h2 id="explication">Explication</h2>
+
+<p>En javascript le “=” d’un objet ou d’un array ne va le cloner mais copier le pointeur de celui-ci.</p>
+
+<p>La preuve est ci-dessous :</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">test</span><span class="p">:</span> <span class="s1">'obj1'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">obj</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">test</span> <span class="o">=</span> <span class="s1">'obj2'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// {test: 'obj2}
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span> <span class="c1">// {test: 'obj2}
+</span>
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">arr</span>
+<span class="nx">arr2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="c1">// [1,2]
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1,2]</span></code></pre></figure>
+
+<p>Bien sûr le plus souvent cela ne vous posera pas de problème mais si vous ne faites pas attention vous pourriez avoir des problèmes.</p>
+
+<h2 id="les-objets">Les objets</h2>
+
+<p>Comme les créateurs du javascript sont des méchants, ils ne nous ont pas fournis de fonction de clonage. Ils ont préféré se dire “ah ah on va les laisser se débrouiller, on va bien se marrer”</p>
+
+<p>Heureusement il existe au moins 2 méthodes afin de cloner un objet.</p>
+
+<h3 id="lami-json">L’ami json</h3>
+
+<p>La première solution est de transformer notre objet en chaîne JSON puis de le retransformer en objet. On aurait donc logiquement 2 objets distinct.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">test</span><span class="p">:</span> <span class="s1">'obj1'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">test</span> <span class="o">=</span> <span class="s1">'obj2'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// {test: 'obj1}
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span> <span class="c1">// {test: 'obj2}</span></code></pre></figure>
+
+<h3 id="assign">Assign</h3>
+
+<p>La méthode Object.assign() est utilisée afin de copier les valeurs de toutes les propriétés directes (non héritées) d’un objet qui sont énumérables sur un autre objet cible.</p>
+
+<p>Elle ne sert donc pas qu’à cloner un objet mais à merger des objets entre eux vers le premier paramètre. Pour cloner un objet il faut donc écrire :</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">test</span><span class="p">:</span> <span class="s1">'obj1'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">obj</span><span class="p">)</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">test</span> <span class="o">=</span> <span class="s1">'obj2'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// {test: 'obj1}
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span> <span class="c1">// {test: 'obj2}</span></code></pre></figure>
+
+<h2 id="les-array">Les array</h2>
+
+<p>Pour les array la méthode la plus simple et d’utiliser la fonction <code class="highlighter-rouge">slice</code></p>
+
+<p>Mais que fait slice : “La méthode slice() renvoie un objet tableau, contenant une copie superficielle (shallow copy) d’une portion du tableau d’origine, la portion est définie par un indice de début et un indice de fin (exclus). Le tableau original ne sera pas modifié.”</p>
+
+<p>Donc si on fait un “slice” à partir de 0 jusqu’à la fin, on a un clone (youpi)</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nx">arr2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="c1">// [1]
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1,2]</span></code></pre></figure>
+
+<h2 id="like-a-boss">Like a boss</h2>
+
+<p>Vous allez me dire “il sont bien beau tes slice et tes assign mais quand on va relire le code dans 2 mois on ne va pas forcément comprendre pourquoi on a fait ça”, et vous avez parfaitement raison.</p>
+
+<p>Et pour ceux qui sont partis avant, vous êtes <del>sale</del></p>
+
+<h3 id="la-mthode-gnrique-qui-coupe-la-moutarde">La méthode générique qui coupe la moutarde</h3>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">clone</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">source</span><span class="p">))</span> <span class="p">{</span>
+  	<span class="k">return</span> <span class="nx">source</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">source</span> <span class="o">===</span> <span class="s1">'object'</span><span class="p">)</span> <span class="p">{</span>
+  	<span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="nx">source</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">source</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">test</span><span class="p">:</span> <span class="s1">'obj1'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">test</span> <span class="o">=</span> <span class="s1">'obj2'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// {test: 'obj1}
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span> <span class="c1">// {test: 'obj2}
+</span>
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+<span class="nx">arr2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="c1">// [1]
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1,2]</span></code></pre></figure>
+
+<h3 id="les-prototypes">Les prototypes</h3>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clone</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">clone</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">({},</span> <span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">test</span><span class="p">:</span> <span class="s1">'obj1'</span><span class="p">}</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">clone</span><span class="p">()</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">test</span> <span class="o">=</span> <span class="s1">'obj2'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1">// {test: 'obj1}
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj2</span><span class="p">)</span> <span class="c1">// {test: 'obj2}
+</span>
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">clone</span><span class="p">()</span>
+<span class="nx">arr2</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="c1">// [1]
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr2</span><span class="p">)</span> <span class="c1">// [1,2]</span></code></pre></figure>
+
+
+
+        <hr>
+
+        <ul class="pager">
+          
+          <li class="previous">
+              <a href="/2016/11/29/vuejs-methodes-publiques.html" data-toggle="tooltip" data-placement="top" title="[vuejs] Méthodes publiques">&larr; Article précédent</a>
+          </li>
+          
+          
+        </ul>
+
+        
+          <hr>
+
+          <div id="disqus_thread"></div>
+
+          <script>
+            var disqus_config = function() {
+              this.page.url = "http://ozee31.github.io/2017/03/03/la-guerre-des-clones.html"; // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "/2017/03/03/la-guerre-des-clones"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            (function() { // DON'T EDIT BELOW THIS LINE
+              var d = document,
+                s = d.createElement('script');
+
+              s.src = '//flavienbeninca.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', + new Date());
+              (d.head || d.body).appendChild(s);
+            })();
+          </script>
+          <noscript>Please enable JavaScript to view the
+            <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+          </noscript>
+
+          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        
+
+      </div>
+    </div>
+  </div>
+</article>
+
+<hr>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a class="a--nocolor" href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a class="a--nocolor" href="https://github.com/ozee31">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a class="a--nocolor" href="https://www.linkedin.com/in/flavienbeninca">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a class="a--nocolor" href="mailto:contact@flavienbeninca.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53339494-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+
+</html>

@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Une nouvelle version de la librairie OhMyCache viens d'être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions keys() et getAll() ainsi que l'ajout d'un nouveau paramètres facultatif à la fonction clear()">
+    <meta name="description" content="Durant le processus de développement d'une application Vuejs, vous pouvez avoir besoin de faire communiquer un module externe avec votre application. Voici comment faire.">
 
-    <title>[js] OhMyCache - Nouvelle version 1.1.0 - Flavien BENINCA (ozee31)</title>
+    <title>[vuejs] Méthodes publiques - Flavien BENINCA (ozee31)</title>
 
-    <link rel="canonical" href="http://ozee31.github.io/2016/08/31/ohmycache-nouvelle-version-1-1-0.html">
+    <link rel="canonical" href="http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -113,10 +113,10 @@
     <!-- Post Header -->
 <header class="intro-header intro-header--post" style="
   
-    background-image: url('/img/js.png');
+    background-image: url('/img/vuejs.png');
   
   
-    background-color: #323330;
+    background-color: rgba(66, 185, 131, 0.9);
   
 ">
     <div class="container">
@@ -124,11 +124,11 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <div class="heading-title">
-                        <h1>[js] OhMyCache - Nouvelle version 1.1.0</h1>
+                        <h1>[vuejs] Méthodes publiques</h1>
                         
-                        <h2 class="subheading">Une nouvelle version de la librairie OhMyCache viens d'être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions keys() et getAll() ainsi que l'ajout d'un nouveau paramètres facultatif à la fonction clear()</h2>
+                        <h2 class="subheading">Durant le processus de développement d'une application Vuejs, vous pouvez avoir besoin de faire communiquer un module externe avec votre application. Voici comment faire.</h2>
                         
-                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 31 août 2016</span>
+                        <span class="meta">Posté par Flavien BENINCA (ozee31) le 29 novembre 2016</span>
                     </div>
                 </div>
             </div>
@@ -141,28 +141,98 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<h1 id="ohmycache---nouvelle-version-110">OhMyCache - Nouvelle version 1.1.0</h1>
+				<h1 id="vuejs---mthodes-publiques">Vuejs - Méthodes publiques</h1>
 
-<p>Une nouvelle version de la librairie OhMyCache viens d’être mise en ligne. Au programme vous aurez accès à 2 nouvelles fonctions <code class="highlighter-rouge">keys()</code> et <code class="highlighter-rouge">getAll()</code> ainsi que l’ajout d’un nouveau paramètres facultatif à la fonction <code class="highlighter-rouge">clear()</code></p>
+<p>Durant le processus de développement d’une application Vuejs, vous pouvez avoir besoin de faire communiquer un module externe avec votre application. Voici comment faire.</p>
 
-<h2 id="keys">keys()</h2>
+<h2 id="prrequis">Prérequis</h2>
 
-<p>Cette fonction retourne l’ensemble des clés stockées en cache. Petite particularité, elle ne nettoiera pas les éléments expirés.</p>
+<p>Pour ce tuto j’ai utilisé la version <strong>2.1.3</strong> de vuejs</p>
 
-<p><a href="http://flavienbeninca.fr/ohmycache/keys">Voir la documentation</a></p>
+<h2 id="but-du-tutoriel">But du tutoriel</h2>
 
-<h2 id="getall">getAll()</h2>
+<p>Réussir à communiquer avec vuejs via le scope <code class="highlighter-rouge">window</code>. Nous allons ici juste donner la possibilité de modifier un texte dynamiquement.</p>
 
-<p>Cette fonction retournera l’ensemble des données stockées en cache sour forme d’objet “clé valeur”. Contrairement à la fonction <code class="highlighter-rouge">keys()</code> les données expirées ne seront pas retournées.</p>
+<h2 id="le-commencement">Le commencement</h2>
 
-<p><a href="http://flavienbeninca.fr/ohmycache/getAll">Voir la documentation</a></p>
+<p>Un petit fichier <code class="highlighter-rouge">index.html</code> tout joli fera l’affaire</p>
 
-<h2 id="clear">Clear()</h2>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/vue/dist/vue.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
 
-<p>Le paramètre <code class="highlighter-rouge">onlyExpired</code> a été ajouté, s’il est passé à <code class="highlighter-rouge">true</code> seul les données expirées seront supprimées (cela permet de libérer de l’espace de stockage).
-Par défaut il est égal à <code class="highlighter-rouge">false</code> et toutes les données seront supprimées (y compris celles en lecture seule)</p>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
 
-<p><a href="http://flavienbeninca.fr/ohmycache/clear">Voir la documentation</a></p>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"app.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+<p>Et un fichier <code class="highlighter-rouge">app.js</code></p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s1">'Hello Vue.js!'</span>
+  <span class="p">}</span>
+<span class="p">})</span></code></pre></figure>
+
+<p>Par défaut on voit bien qu’il nous est impossible de communiquer depuis le scope <code class="highlighter-rouge">window</code> avec l’instance <code class="highlighter-rouge">Vue</code>.</p>
+
+<h2 id="premire-solution">Première solution</h2>
+
+<p>La première solution qui nous viens à l’esprit est de passer notre instance de vue dans le scope global comme ceci :</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">Vue</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s1">'Hello Vue.js!'</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// On peut maintenant communiquer n'importe quand avec notre instance vue comme ceci
+</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">Vue</span><span class="p">.</span><span class="nx">$data</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">'plop'</span></code></pre></figure>
+
+<p>Cela à le mérite de fonctionner, mais…</p>
+
+<h3 id="ne-pas-faire-a-">Ne pas faire ça !!!</h3>
+
+<p>Le gros danger ici est qu’un utilisateur lambda pourra accéder entièrement à votre application et tout modifier (y compris le store).</p>
+
+<h2 id="la-solution-propre">La solution propre</h2>
+
+<p>La solution que j’ai retenu est de n’ouvrir qu’une seule méthode de notre instance qui nous permettra de communiquer de manière sécurisé avec l’extérieur.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">vue</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s1">'Hello Vue.js!'</span>
+  <span class="p">},</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">api</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">'changeMessage'</span><span class="p">:</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">value</span>
+          <span class="k">break</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// on met la méthode api de notre instance Vuejs dans le scope window
+</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">api</span> <span class="o">=</span> <span class="nx">vue</span><span class="p">.</span><span class="nx">api</span>
+
+<span class="c1">// on appelle notre api comme ceci
+</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">api</span><span class="p">(</span><span class="s1">'changeMessage'</span><span class="p">,</span> <span class="s1">'plip'</span><span class="p">)</span></code></pre></figure>
+
 
 
         <hr>
@@ -170,12 +240,12 @@ Par défaut il est égal à <code class="highlighter-rouge">false</code> et tout
         <ul class="pager">
           
           <li class="previous">
-              <a href="/2016/08/03/vuejs-une-configuration-defferente-pour-chaque-environnement.html" data-toggle="tooltip" data-placement="top" title="[vuejs] Une configuration différente pour chaque environnement">&larr; Article précédent</a>
+              <a href="/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html" data-toggle="tooltip" data-placement="top" title="[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware">&larr; Article précédent</a>
           </li>
           
           
           <li class="next">
-              <a href="/2016/10/04/electron-creer-une-application-native-en-html-js.html" data-toggle="tooltip" data-placement="top" title="[Electron] Créer une application native en HTML/JS">Article suivant &rarr;</a>
+              <a href="/2017/03/03/la-guerre-des-clones.html" data-toggle="tooltip" data-placement="top" title="[js] La guerre des clones">Article suivant &rarr;</a>
           </li>
           
         </ul>
@@ -187,8 +257,8 @@ Par défaut il est égal à <code class="highlighter-rouge">false</code> et tout
 
           <script>
             var disqus_config = function() {
-              this.page.url = "http://ozee31.github.io/2016/08/31/ohmycache-nouvelle-version-1-1-0.html"; // Replace PAGE_URL with your page's canonical URL variable
-              this.page.identifier = "/2016/08/31/ohmycache-nouvelle-version-1-1-0"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+              this.page.url = "http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html"; // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "/2016/11/29/vuejs-methodes-publiques"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
             };
             (function() { // DON'T EDIT BELOW THIS LINE
               var d = document,

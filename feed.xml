@@ -5,9 +5,669 @@
     <description>Développeur Web basé à Toulouse spécialisé dans le back-end en PHP avec de bonnes connaissances en front-end</description>
     <link>http://ozee31.github.io/</link>
     <atom:link href="http://ozee31.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 31 Aug 2016 10:38:48 +0000</pubDate>
-    <lastBuildDate>Wed, 31 Aug 2016 10:38:48 +0000</lastBuildDate>
+    <pubDate>Fri, 03 Mar 2017 21:34:09 +0000</pubDate>
+    <lastBuildDate>Fri, 03 Mar 2017 21:34:09 +0000</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>[js] La guerre des clones</title>
+        <description>&lt;h1 id=&quot;la-guerre-des-clones&quot;&gt;La guerre des clones&lt;/h1&gt;
+
+&lt;p&gt;Cloner un objet ou un array en javascript n’ai pas aussi simple qu’un bonjour. Voici comment faire.&lt;/p&gt;
+
+&lt;h2 id=&quot;explication&quot;&gt;Explication&lt;/h2&gt;
+
+&lt;p&gt;En javascript le “=” d’un objet ou d’un array ne va le cloner mais copier le pointeur de celui-ci.&lt;/p&gt;
+
+&lt;p&gt;La preuve est ci-dessous :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj2'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}
+&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1,2]
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1,2]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Bien sûr le plus souvent cela ne vous posera pas de problème mais si vous ne faites pas attention vous pourriez avoir des problèmes.&lt;/p&gt;
+
+&lt;h2 id=&quot;les-objets&quot;&gt;Les objets&lt;/h2&gt;
+
+&lt;p&gt;Comme les créateurs du javascript sont des méchants, ils ne nous ont pas fournis de fonction de clonage. Ils ont préféré se dire “ah ah on va les laisser se débrouiller, on va bien se marrer”&lt;/p&gt;
+
+&lt;p&gt;Heureusement il existe au moins 2 méthodes afin de cloner un objet.&lt;/p&gt;
+
+&lt;h3 id=&quot;lami-json&quot;&gt;L’ami json&lt;/h3&gt;
+
+&lt;p&gt;La première solution est de transformer notre objet en chaîne JSON puis de le retransformer en objet. On aurait donc logiquement 2 objets distinct.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj2'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj1}
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;assign&quot;&gt;Assign&lt;/h3&gt;
+
+&lt;p&gt;La méthode Object.assign() est utilisée afin de copier les valeurs de toutes les propriétés directes (non héritées) d’un objet qui sont énumérables sur un autre objet cible.&lt;/p&gt;
+
+&lt;p&gt;Elle ne sert donc pas qu’à cloner un objet mais à merger des objets entre eux vers le premier paramètre. Pour cloner un objet il faut donc écrire :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({},&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj2'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj1}
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;les-array&quot;&gt;Les array&lt;/h2&gt;
+
+&lt;p&gt;Pour les array la méthode la plus simple et d’utiliser la fonction &lt;code class=&quot;highlighter-rouge&quot;&gt;slice&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Mais que fait slice : “La méthode slice() renvoie un objet tableau, contenant une copie superficielle (shallow copy) d’une portion du tableau d’origine, la portion est définie par un indice de début et un indice de fin (exclus). Le tableau original ne sera pas modifié.”&lt;/p&gt;
+
+&lt;p&gt;Donc si on fait un “slice” à partir de 0 jusqu’à la fin, on a un clone (youpi)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1]
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1,2]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;like-a-boss&quot;&gt;Like a boss&lt;/h2&gt;
+
+&lt;p&gt;Vous allez me dire “il sont bien beau tes slice et tes assign mais quand on va relire le code dans 2 mois on ne va pas forcément comprendre pourquoi on a fait ça”, et vous avez parfaitement raison.&lt;/p&gt;
+
+&lt;p&gt;Et pour ceux qui sont partis avant, vous êtes &lt;del&gt;sale&lt;/del&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;la-mthode-gnrique-qui-coupe-la-moutarde&quot;&gt;La méthode générique qui coupe la moutarde&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'object'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({},&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj2'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj1}
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}
+&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1]
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1,2]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;les-prototypes&quot;&gt;Les prototypes&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({},&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'obj2'&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj1}
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// {test: 'obj2}
+&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1]
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [1,2]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Fri, 03 Mar 2017 19:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2017/03/03/la-guerre-des-clones.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2017/03/03/la-guerre-des-clones.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>[vuejs] Méthodes publiques</title>
+        <description>&lt;h1 id=&quot;vuejs---mthodes-publiques&quot;&gt;Vuejs - Méthodes publiques&lt;/h1&gt;
+
+&lt;p&gt;Durant le processus de développement d’une application Vuejs, vous pouvez avoir besoin de faire communiquer un module externe avec votre application. Voici comment faire.&lt;/p&gt;
+
+&lt;h2 id=&quot;prrequis&quot;&gt;Prérequis&lt;/h2&gt;
+
+&lt;p&gt;Pour ce tuto j’ai utilisé la version &lt;strong&gt;2.1.3&lt;/strong&gt; de vuejs&lt;/p&gt;
+
+&lt;h2 id=&quot;but-du-tutoriel&quot;&gt;But du tutoriel&lt;/h2&gt;
+
+&lt;p&gt;Réussir à communiquer avec vuejs via le scope &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt;. Nous allons ici juste donner la possibilité de modifier un texte dynamiquement.&lt;/p&gt;
+
+&lt;h2 id=&quot;le-commencement&quot;&gt;Le commencement&lt;/h2&gt;
+
+&lt;p&gt;Un petit fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; tout joli fera l’affaire&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://unpkg.com/vue/dist/vue.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et un fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#app'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello Vue.js!'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Par défaut on voit bien qu’il nous est impossible de communiquer depuis le scope &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt; avec l’instance &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;premire-solution&quot;&gt;Première solution&lt;/h2&gt;
+
+&lt;p&gt;La première solution qui nous viens à l’esprit est de passer notre instance de vue dans le scope global comme ceci :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#app'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello Vue.js!'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// On peut maintenant communiquer n'importe quand avec notre instance vue comme ceci
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'plop'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Cela à le mérite de fonctionner, mais…&lt;/p&gt;
+
+&lt;h3 id=&quot;ne-pas-faire-a-&quot;&gt;Ne pas faire ça !!!&lt;/h3&gt;
+
+&lt;p&gt;Le gros danger ici est qu’un utilisateur lambda pourra accéder entièrement à votre application et tout modifier (y compris le store).&lt;/p&gt;
+
+&lt;h2 id=&quot;la-solution-propre&quot;&gt;La solution propre&lt;/h2&gt;
+
+&lt;p&gt;La solution que j’ai retenu est de n’ouvrir qu’une seule méthode de notre instance qui nous permettra de communiquer de manière sécurisé avec l’extérieur.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#app'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello Vue.js!'&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'changeMessage'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// on met la méthode api de notre instance Vuejs dans le scope window
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;vue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// on appelle notre api comme ceci
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'changeMessage'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'plip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+</description>
+        <pubDate>Tue, 29 Nov 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/11/29/vuejs-methodes-publiques.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>[php] CakePHP 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware</title>
+        <description>&lt;h1 id=&quot;cakephp-33--activer-le-crossdomain-cors-en-utilisant-le-middleware&quot;&gt;CakePhp 3.3 : Activer le CrossDomain (CORS) en utilisant le middleware&lt;/h1&gt;
+
+&lt;p&gt;Dans un &lt;a href=&quot;http://www.flavienbeninca.fr/2016/07/12/cakephp-3-crosscomain-cors.html&quot;&gt;précédent article&lt;/a&gt;, je vous avais montré comment activer le CrossDomain sur votre application en utilisant les filtres du Dispatcher.&lt;/p&gt;
+
+&lt;p&gt;Cependant depuis le version 3.3 de CakePHP cette technique est obsolète et doit être remplacée par le Middleware.&lt;/p&gt;
+
+&lt;p&gt;Mais comme je suis généreux je vous ai concocté un petit plugin qui fera tout le boulot à votre place &lt;del&gt;ou preques&lt;/del&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Rien de bien compliqué, un petit coup de composer et le tour est joué.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;composer require ozee31/cakephp-cors&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;La seule condition est d’avoir CakePHP dans sa version &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;gt; 3.3.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;activation&quot;&gt;Activation&lt;/h2&gt;
+
+&lt;p&gt;Là aussi, attention c’est très très difficile, il suffit de l’activer dans le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;bootstrap.php&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Cors'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bootstrap'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'routes'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;magie-magie-et-vos-ide&quot;&gt;Magie, magie &lt;del&gt;et vos idée…&lt;/del&gt;&lt;/h2&gt;
+
+&lt;p&gt;Et voilà les requêtes ajax CrossDomain fonctionnent, elle est pas belle la vie?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Quoi c’est tout? C’est paramétrable? Ça fonctionne comment?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Où là doucement, je v’ai tout vous expliquer.&lt;/p&gt;
+
+&lt;h2 id=&quot;secret-de-fabrication&quot;&gt;Secret de fabrication&lt;/h2&gt;
+
+&lt;p&gt;Comme vous vous en doutez, le plugin utilise le &lt;a href=&quot;http://book.cakephp.org/3.0/fr/controllers/middleware.html&quot;&gt;Middleware&lt;/a&gt; afin d’analyser la requête et donner la réponse adéquate au navigateur.&lt;/p&gt;
+
+&lt;h3 id=&quot;etapes&quot;&gt;Etapes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Le navigateur envoi une requête &lt;code class=&quot;highlighter-rouge&quot;&gt;OPTIONS&lt;/code&gt; au serveur&lt;/li&gt;
+  &lt;li&gt;Le plugin analyse les informations et renvoi les bons entêtes au navigateur si l’origine est autorisée (on verra ça dans le chapitre configuration)&lt;/li&gt;
+  &lt;li&gt;Si la réponse est correcte la navigateur peut envoyer la bonne requête au serveur (GET, POST…) qui sera traitée normalement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Pour des informations plus détaillées sur le CrossDomain je vous invite à &lt;a href=&quot;https://developer.mozilla.org/fr/docs/HTTP/Access_control_CORS&quot;&gt;lire cet article&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;comment-le-middleware-traite-til-la-requte-options-&quot;&gt;Comment le Middleware traite t’il la requête OPTIONS ?&lt;/h3&gt;
+
+&lt;h4 id=&quot;origin&quot;&gt;Origin&lt;/h4&gt;
+
+&lt;p&gt;Dans un premier temps, le middleware va valider que l’appelant est autorisé à effectuer l’appel (par défaut le plugin autorise tout le monde).&lt;/p&gt;
+
+&lt;h4 id=&quot;headers&quot;&gt;Headers&lt;/h4&gt;
+
+&lt;p&gt;Ensuite le plugin analyse les entêtes, si un seul n’est pas autorisé la requête est refusée. (Par défaut le plugin autorise tous les entêtes).&lt;/p&gt;
+
+&lt;h4 id=&quot;mthodes&quot;&gt;Méthodes&lt;/h4&gt;
+
+&lt;p&gt;Là encore le plugin autorise toutes les méthodes HTTP possible (GET, POST, PUT, DELETE)&lt;/p&gt;
+
+&lt;h4 id=&quot;cache&quot;&gt;Cache&lt;/h4&gt;
+
+&lt;p&gt;Par défaut le plugin met en cache la réponse pendant un jour (le navigateur n’aura pas besoin de relancer une requête OPTION qui a déjà été envoyée)&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Bien sûr il est possible de surcharger la configuration par défaut, tout se passe dans votre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;app.php&lt;/code&gt;, il suffit d’ajouter la clé &lt;code class=&quot;highlighter-rouge&quot;&gt;Cors&lt;/code&gt; qui contiendra toutes les options désirées.&lt;/p&gt;
+
+&lt;p&gt;Dans l’exemple ci-dessous nous souhaiterons autoriser les requêtes crossDomain de google, leboncoin et mozilla, nous n’autoriserons que le header authorization, les methodes POST et GET et désactiverons le cache.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;'Cors'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'AllowOrigin'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://google.fr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://leboncoin.fr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://mozilla.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'AllowMethods'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'GET'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'POST'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'AllowHeaders'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'authorization'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'MaxAge'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour plus de détails sur la configuration &lt;a href=&quot;https://github.com/ozee31/cakephp-cors&quot;&gt;c’est ici&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 09 Nov 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>[Electron] Electron + VueJS = electron-vue</title>
+        <description>&lt;h1 id=&quot;electron--vuejs--electron-vue&quot;&gt;Electron + VueJS = electron-vue&lt;/h1&gt;
+
+&lt;p&gt;Dans mon précédent article, je vous ai parlé d’Electron pour créer une application native en HTML/JS. Aujourd’hui je vais vous montrer comment il est simple de créer une application Electron grâce au framework JS VueJS.&lt;/p&gt;
+
+&lt;h2 id=&quot;la-librairie&quot;&gt;La librairie&lt;/h2&gt;
+
+&lt;p&gt;Nul besoin d’installer Vuejs et Electron séparément, une librairie se charge de tout : &lt;a href=&quot;https://www.gitbook.com/book/simulatedgreg/electron-vue/details&quot;&gt;electron-vue&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Elle est bien sûr installable via &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; mais avant ça il y a des prérequis (et je me suis bien pris la tête).&lt;/p&gt;
+
+&lt;h2 id=&quot;prrequis&quot;&gt;Prérequis&lt;/h2&gt;
+
+&lt;p&gt;Comme je l’ai dis précédemment, je me suis bien pris la tête pour réussir l’installation de cette librairie (et la documentation n’est pas très bavarde à ce sujet) mais comme je suis gentil je vais vous montrer comment faire pas à pas.&lt;/p&gt;
+
+&lt;h3 id=&quot;python&quot;&gt;Python&lt;/h3&gt;
+
+&lt;p&gt;Donc la première chose à avoir sur son PC est &lt;a href=&quot;https://www.python.org/downloads/&quot;&gt;Python&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Attention la version à télécharger, à l’heure où je parle (ou plutôt à l’heure où j’écris ces lignes), est la branche &lt;strong&gt;2.x&lt;/strong&gt; (la branche 3.x n’étant pas compatible). Rassurez-vous les version 2.x et 3.x peuvent fonctionner parallèlement.&lt;/p&gt;
+
+&lt;h3 id=&quot;windows-build-tools&quot;&gt;Windows-Build-Tools&lt;/h3&gt;
+
+&lt;p&gt;C’est sur cette partie que j’ai eu le plus de mal, en effet, ne connaissant pas cette librairie j’ai d’abord essayer d’installer &lt;del&gt;l’usine à gaz&lt;/del&gt; Visual Studio afin de posséder le compilateur C++ nécessaire à l’installation de la librairie.&lt;/p&gt;
+
+&lt;p&gt;Mais grâce à cette simple librairie, tout parait (est) beaucoup plus simple. J’ai tout de même dû upgrader npm manuellement.&lt;/p&gt;
+
+&lt;h4 id=&quot;npm-windows-upgrade&quot;&gt;npm-windows-upgrade&lt;/h4&gt;
+
+&lt;p&gt;Si vous êtes sur Linux ou Mac passez votre chemin ^^.&lt;/p&gt;
+
+&lt;p&gt;La première chose à faire est d’ouvrir &lt;strong&gt;PowerShell&lt;/strong&gt; en mode &lt;strong&gt;administrateur&lt;/strong&gt; et de lancer la commande :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ensuite toujours en mode &lt;strong&gt;administrateur&lt;/strong&gt; (mais pas forcément sur PowerShell) vous faites ceci&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install --global --production npm-windows-upgrade
+npm-windows-upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;et installez la dernière version de &lt;code class=&quot;highlighter-rouge&quot;&gt;NPM&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;windows-builds-tools&quot;&gt;Windows Builds Tools&lt;/h4&gt;
+
+&lt;p&gt;Vous pouvez installer &lt;code class=&quot;highlighter-rouge&quot;&gt;windows-build-tools&lt;/code&gt; globalement&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install --global windows-build-tools&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Maintenant on peut démarrer un projet electron-vue grâce à &lt;code class=&quot;highlighter-rouge&quot;&gt;vue-cli&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si vue-cli n’est pas installé, installez le globalement :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install -g vue-cli&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ensuite on initialise et on installe les dépendances :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;vue init simulatedgreg/electron-vue my-project
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;my-project
+npm install
+npm run dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;dveloppement&quot;&gt;Développement&lt;/h2&gt;
+
+&lt;p&gt;Le gros point fort de cette librairie, est que, comme sur un projet VueJS classique, le Hot reload fonctionne.&lt;/p&gt;
+
+&lt;p&gt;Alors lancez au plus vite votre serveur de dev :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm run dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Pour la suite, si vous connaissez VueJS, vous ne serez pas perdu.&lt;/p&gt;
+
+&lt;h2 id=&quot;vous-navez-pas-russi--installer-electron-vue-&quot;&gt;Vous n’avez pas réussi à installer electron-vue ?&lt;/h2&gt;
+
+&lt;p&gt;Si ce tuto n’a pas fonctionné chez-vous, laissez moi un commentaire avec le plus d’informations possible (SE, version de NPM…) car vu toutes les manipulations que j’ai dû effectuer avant d’arriver au résultat, il est possible que j’ai oublié 2 ou 3 détails.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 13 Oct 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/10/13/electron-vuejs-electron-vue.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>[Electron] Créer une application native en HTML/JS</title>
+        <description>&lt;h1 id=&quot;electron---crer-une-application-native-en-htmljs&quot;&gt;Electron - Créer une application native en HTML/JS&lt;/h1&gt;
+
+&lt;p&gt;Créer une application native multi OS est devenu très simple grâce à Electron. En effet plus besoin d’apprendre le C, C++, Java… il est désormais possible de développer votre application avec les technologies du Web.&lt;/p&gt;
+
+&lt;h2 id=&quot;prsentation&quot;&gt;Présentation&lt;/h2&gt;
+
+&lt;p&gt;Initialement développé pour l’éditeur Atom, l’outil de Github a été utilisé pour créer des applications par des entreprises comme Microsoft, Facebook, Slack et Docker.&lt;/p&gt;
+
+&lt;p&gt;Pour fonctionner, Electron utilise NodeJS et Chromium et fourni une API afin de gérer les fenêtres, communiquer avec le système…&lt;/p&gt;
+
+&lt;h2 id=&quot;prparation&quot;&gt;Préparation&lt;/h2&gt;
+
+&lt;p&gt;La première chose à faire est de démarrer un projet NPM.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm init&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Installez maintenant Electron en tant que dépendance de développement&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm i -D electron&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Nous allons maintenant structurer notre projet, créez les répertoires suivant :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;dist&lt;/strong&gt; : contiendra les fichiers natif (Windows, Linus, MacOS)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;src&lt;/strong&gt; : contiendra le code source de notre application&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Créez ensuite les fichiers suivant :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;/main.js&lt;/strong&gt; : c’est le fichier central, celui qui va générer l’application electron&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;/src/index.html&lt;/strong&gt; : la page d’accueil de notre application&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;/src/app.js&lt;/strong&gt; : le code javascript de notre application sera stocké ici&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;/src/app.css&lt;/strong&gt; : le style css de notre application sera stocké ici&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Attention : dans votre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt; la valeur de la clé &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; doit pointer sur &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;main&quot;: &quot;main.js&quot;,
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;allons-y-les-zamis&quot;&gt;Allons y les z’amis&lt;/h2&gt;
+
+&lt;p&gt;Nous allons commencer par un exemple des plus basique&lt;/p&gt;
+
+&lt;h3 id=&quot;mainjs&quot;&gt;main.js&lt;/h3&gt;
+
+&lt;p&gt;Le code du fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt; est issu du tuto &lt;a href=&quot;https://github.com/electron/electron-quick-start&quot;&gt;démarrage rapide&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;electron&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'electron'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Permet de gérer les evenements système
+&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;electron&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Permet de gérer les fenetres
+&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BrowserWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;electron&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BrowserWindow&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Gardez une référence globale de l'objet &quot;window&quot;, si vous ne le faites pas, la fenêtre se ferme automatiquement lorsque l'objet JavaScript est nettoyé.
+&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createWindow&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Création d'une fenetre en résolution 800x600
+&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BrowserWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// La fenetre va charger notre fichier index.html
+&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;loadURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//${__dirname}/src/index.html`)
+&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// Cet evenement est déclenché lorsque la fenetre est fermée
+&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'closed'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// réinitialisation de l'objet &quot;window&quot;
+&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Cet évenement est déclenché lorsque Electron a terminé son initialisation. On lance la création de la fenêtre à ce moment là
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ready'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Cet évenement est déclenché lorque toutes les fenêtres sont fermées (pour notre exemple nous n'avons qu'une seule fenêtre mais il est possble de gérer le multi-fentres)
+&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'window-all-closed'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Sur OS X, il est courant que les applications puissent rester active jusqu'à ce que l'utilisateur quitte explicitement via la commande &quot;Cmd + Q&quot;
+&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;platform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'darwin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;quit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'activate'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Sur OS X, il est courant de re-créer une fenêtre dans l'application lorsque l'icône du dock est cliqué et il n'y a pas d'autres fenêtres ouvertes.
+&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;indexhtml&quot;&gt;index.html&lt;/h3&gt;
+
+&lt;p&gt;Notre &lt;del&gt;super&lt;/del&gt; application nous permettra de générer un nombre aléatoire entre 0 et 100 (oui monsieur). On aura même un bouton pour quitter l’application (oui car le &lt;code class=&quot;highlighter-rouge&quot;&gt;alt + F4&lt;/code&gt; c’est marrant 2 secondes mais pas plus).&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fr&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Electron Demo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Electron Demo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;section&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Géréner un nombre aléatoire&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+      Valeur =
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;random-result&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;random-button&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;button&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Générer&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/section&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app-close&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;button&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Fermer l'application&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;app.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;appcss&quot;&gt;app.css&lt;/h3&gt;
+
+&lt;p&gt;On ajoute un style tout droit sorti du futur&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#app-close&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;absolute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;appjs&quot;&gt;app.js&lt;/h3&gt;
+
+&lt;p&gt;Et maintenant on code notre application &lt;del&gt;révolutionnaire&lt;/del&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'load'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;randomResult&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'random-result'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'random-button'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onclick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;randomResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;textContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'app-close'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onclick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Ici on utilisera l'api pour fermer l'application
+&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;on-teste&quot;&gt;On teste&lt;/h3&gt;
+
+&lt;p&gt;Pour tester rien de plus simple, il suffit de lancer la commande &lt;code class=&quot;highlighter-rouge&quot;&gt;electron .&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Si tout va bien, l’application devrait se lancer en mode fenêtre. Bien sur le bouton “Fermer l’application” ne fonctionne pas (car la fonctionnalité n’a pas été codé).&lt;/p&gt;
+
+&lt;h2 id=&quot;on-passe--la-vitesse-suprieure-pas-trop-quand-mme&quot;&gt;On passe à la vitesse supérieure (pas trop quand même)&lt;/h2&gt;
+
+&lt;h3 id=&quot;fermer-lapplication&quot;&gt;Fermer l’application&lt;/h3&gt;
+
+&lt;p&gt;Pour fermer l’application nous allons utiliser l’API d’electron afin de faire communiquer l’objet &lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt; avec notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Je vous invite donc à modifier le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; comme ceci.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'app-close'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onclick&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;remote&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'electron'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;remote&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// chargement de l'api remote
+&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;remote&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getCurrentWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// on récupère la fenetre courante
+&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// on ferme la fenetre
+&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Maintenant si vous relancez electron et que vous cliquez sur “Fermer l’application” … L’application se ferme #magie&lt;/p&gt;
+
+&lt;h3 id=&quot;plein-cran&quot;&gt;Plein écran&lt;/h3&gt;
+
+&lt;p&gt;Si vous voulez passer votre application en plein écran, vous pouvez modifier le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;main.js&lt;/code&gt; comme ceci :&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;mainWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BrowserWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fullscreen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;compiler&quot;&gt;Compiler&lt;/h3&gt;
+
+&lt;p&gt;Bon voilà notre application est terminée, elle est belle et sans bug, comment on compile?&lt;/p&gt;
+
+&lt;p&gt;Un outil fait tout le travail (ou presque), il s’agit d’&lt;a href=&quot;https://github.com/electron-userland/electron-packager&quot;&gt;electron-packager&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Il faut dans un premier temps l’installer&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm i -D electron-packager&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Et enfin on lance la compilation&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;electron-packager . demo --out dist --overwrite --all&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;La commande va compiler le dossier courant &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; dans le répertoire &lt;code class=&quot;highlighter-rouge&quot;&gt;dist&lt;/code&gt;, va le nommer &lt;code class=&quot;highlighter-rouge&quot;&gt;demo&lt;/code&gt;, le compilera pour toutes les plateformes &lt;code class=&quot;highlighter-rouge&quot;&gt;--all&lt;/code&gt;, et enfin forcera la recompilation si le projet existe déjà &lt;code class=&quot;highlighter-rouge&quot;&gt;--overwrite&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Vous pouvez maintenant trouver dans le répertoire “dist” l’ensemble des déclinaisons de votre projet pour les différents systèmes d’exploitations.&lt;/p&gt;
+
+&lt;h2 id=&quot;aller-plus-loin&quot;&gt;Aller plus loin&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lire la &lt;a href=&quot;http://electron.atom.io/docs/&quot;&gt;documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Démarrer vos projets grâce aux &lt;a href=&quot;http://electron.atom.io/community/#boilerplates&quot;&gt;Boilerplates de la communauté&lt;/a&gt; (react, vuejs…)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 04 Oct 2016 08:00:00 +0000</pubDate>
+        <link>http://ozee31.github.io/2016/10/04/electron-creer-une-application-native-en-html-js.html</link>
+        <guid isPermaLink="true">http://ozee31.github.io/2016/10/04/electron-creer-une-application-native-en-html-js.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>[js] OhMyCache - Nouvelle version 1.1.0</title>
@@ -314,7 +974,15 @@ De plus on ne va pas simplement effectuer la copie de nos fichiers de config mai
     
       <item>
         <title>[php] CakePHP 3 : Activer le CrossDomain (CORS)</title>
-        <description>&lt;h1 id=&quot;cakephp-3--activer-le-crossdomain-cors&quot;&gt;CakePhp 3 : Activer le CrossDomain (CORS)&lt;/h1&gt;
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;!!!&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Attention cette méthode est dépréciée depuis la version 3.3 de CakePHP, je vous invite &lt;a href=&quot;http://flavienbeninca.fr/2016/11/09/cakephp-3-3-crosscomain-cors-middleware.html&quot;&gt;à lire cet article&lt;/a&gt; pour activer le CrossDomain grâce au Middleware.&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;!!!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;cakephp-3--activer-le-crossdomain-cors&quot;&gt;CakePhp 3 : Activer le CrossDomain (CORS)&lt;/h1&gt;
 
 &lt;p&gt;Suite à la création d’une API sous CakePHP 3.2, j’ai du à un moment autoriser le CrossDomain afin que mon API soit consultable depuis n’importe quel domaine.&lt;/p&gt;
 
@@ -821,437 +1489,6 @@ npm install sass-loader node-sass webpack --save-dev&lt;/code&gt;&lt;/pre&gt;&lt
         <pubDate>Wed, 15 Jun 2016 08:00:00 +0000</pubDate>
         <link>http://ozee31.github.io/2016/06/15/vuejs-demarrer-avec-bootstrap.html</link>
         <guid isPermaLink="true">http://ozee31.github.io/2016/06/15/vuejs-demarrer-avec-bootstrap.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>[js] Le LocalStorage, en plus simple et plus complet</title>
-        <description>&lt;h1 id=&quot;le-localstorage-en-plus-simple-et-plus-complet&quot;&gt;Le LocalStorage, en plus simple et plus complet&lt;/h1&gt;
-&lt;p&gt;Nous allons voir qu’avec la librairie Cachejs, il est relativement simple de stocker des données côté client en utilisant le LocalStorage du navigateur.&lt;/p&gt;
-
-&lt;h2 id=&quot;qusaco-&quot;&gt;Quésaco ?&lt;/h2&gt;
-
-&lt;p&gt;On va commencer par une petite définition à base de wikipedia&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Le stockage web local ou stockage DOM (Document Object Model) est une technique d’enregistrement de données dans un navigateur web. Le stockage web local permet l’enregistrement persistant, comme avec les cookies mais avec une capacité bien plus grande, et sans avoir à rajouter de données dans l’entête de requête HTTP. Il existe deux types de stockage web local : le stockage local et le stockage de session, équivalant respectivement aux cookies persistants et aux cookies de session.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;LocalStorage est donc une API qui est compatible avec la plupart des navigateurs (pour peux qu’on soit moderne), à savoir Chrome, Firefox, IE (à partir de la 8), Opera, Safari.&lt;/p&gt;
-
-&lt;h2 id=&quot;en-avant-guingamp&quot;&gt;En avant &lt;del&gt;Guingamp&lt;/del&gt;&lt;/h2&gt;
-
-&lt;p&gt;Pour cette démonstration nous n’avons pas besoin de grand chose, on va créer une page HTML avec un script JS donc pas besoin de serveur Apache ou autre ça va être très simple.&lt;/p&gt;
-
-&lt;p&gt;Je vais juste utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; pour installer la librairie mais libre à vous d’utiliser &lt;code class=&quot;highlighter-rouge&quot;&gt;bower&lt;/code&gt; ou de télécharger les sources directement sur github.&lt;/p&gt;
-
-&lt;p&gt;D’ailleur en parlant de source voici le &lt;a href=&quot;https://github.com/ozee31/cachejs&quot;&gt;repository&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;installation-et-prparation&quot;&gt;Installation et préparation&lt;/h2&gt;
-
-&lt;p&gt;Pour cette démonstration je vais initialiser un projet npm&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm init&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Puis j’installer la librairie (à ce jour la version 1.0)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;npm install ozee-cachejs&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Je vais créer ensuite un fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fr&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Cachejs demo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;node_modules/ozee-cachejs/dist/cache.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;demo.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Puis un fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;demo.js&lt;/code&gt; avec un petit bout de code qui va nous permettre de savoir si la lib est chargé&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'output'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'undefined'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Lib non chargé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Lib chargé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On démarre notre fichier index.html dans notre navigateur favori et si tout se passe bien on devrait voir s’afficher&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Lib chargé&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Si ce n’est pas le cas je vous invite à vérifier le chemin vers la livrairie.&lt;/p&gt;
-
-&lt;h2 id=&quot;prsentation&quot;&gt;Présentation&lt;/h2&gt;
-
-&lt;p&gt;Avant de commencer à utiliser la librairie, je pense q’une petite présentation s’impose.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;1 = 2&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Tu te fous pas un peu de moi là ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Je vous rassure, je suis meilleur que ça en mathématique. Tout ça pour vous dire que cette librairie est composé de 2 classes qui partagent exactement la même API.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Cachejs.Local&lt;/code&gt; : utilise &lt;a href=&quot;https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage&quot;&gt;le localStorage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Cachejs.Session&lt;/code&gt; : utilise &lt;a href=&quot;https://developer.mozilla.org/fr/docs/Web/API/Window/sessionStorage&quot;&gt;le sessionStorage&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;La propriété localStorage vous permet d’accéder à un objet local Storage. Le localStorage est similaire au sessionStorage. La seul différence : les données stockées dans le localStorage n’ont pas de délai d’expiration, les données stockées dans le sessionStorage sont nettoyées quand la session navigateur prend fin — donc quand on ferme le navigateur.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;pourquoi-&quot;&gt;Pourquoi ?&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Et elle m’apporte quoi cette librairie par rapport à l’API de base ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Concrètement, par rapport à l’api standard vous pourrez :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;stocker des données complexe (array, object)&lt;/li&gt;
-  &lt;li&gt;faire expirer vos données au bout d’un certain temps&lt;/li&gt;
-  &lt;li&gt;stocker des données en lecture seule&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mthodes-man&quot;&gt;Méthodes man&lt;/h3&gt;
-
-&lt;p&gt;Voici un bref aperçu des méthodes disponible :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;set&lt;/strong&gt; : stocker une donnée&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;get&lt;/strong&gt; : récupérer une donnée stocké&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;remove&lt;/strong&gt; : supprimer une donnée&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;clear&lt;/strong&gt; : vider tout le cache&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;isExpired&lt;/strong&gt; : indique si la donnée a expiré&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;isReadonly&lt;/strong&gt; : indique si la donnée est en lecture seule&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;alors-on-danse-commence&quot;&gt;Alors on &lt;del&gt;danse&lt;/del&gt; commence&lt;/h2&gt;
-
-&lt;h3 id=&quot;set-et-match&quot;&gt;Set et match&lt;/h3&gt;
-&lt;p&gt;Nous allons stocker divers types de données (string, array, objet…) et les afficher ensuite dans notre balise &lt;code class=&quot;highlighter-rouge&quot;&gt;output&lt;/code&gt;. Je vous invite donc à modifier le fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;demo.js&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// demo.js
-&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'output'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'undefined'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Lib non chargé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// On réinitialise le cache
-&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-     * Stockage des données
-     */&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// stockage d'un string
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monString'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'je suis un string'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// stockage d'un booléen en Session
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monBool'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// stockage d'un array
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monArray'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// stockage d'un objet
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monObjet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;prenom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Lary'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;nom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Gole'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-     * Récupération des données
-     */&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// On affiche le cache local de la clé 'monString'
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'monString = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monString'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Si on affiche le cache local de la clé 'monBool' cela affiche 'null' car il a été enregistré en cache de session
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'monBool (local) = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monBool'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// En revanche avec le cache session ça marche
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'monBool (sessoin) = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monBool'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// On affiche notre array
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'monArray = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monArray'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Et pour finir notre objet
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'monObjet = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'monObjet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Une fois la page rafraîchie vous devrez voir apparaître :&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;monString = je suis un string
-monBool (local) = null
-monBool (sessoin) = true
-monArray = 1,2,3
-monObjet = {&quot;prenom&quot;:&quot;Lary&quot;,&quot;nom&quot;:&quot;Gole&quot;}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;aller-plus-loin&quot;&gt;Aller plus loin&lt;/h3&gt;
-
-&lt;p&gt;Si vous êtes toujours là (et je l’espère), on va comme le titre l’indique, aller plus loin, en utilisant l’expiration des données et la lecture seule.
-On repart à zéro avec notre &lt;code class=&quot;highlighter-rouge&quot;&gt;demo.js&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// demo.js
-&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'output'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'undefined'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Lib non chargé'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;// On réinitialise le cache
-&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-     * Lecture seule
-     */&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readOnly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Je suis en lecture seule'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Je ne peux donc pas modifié la donnée
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readOnly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Je ne peux pas être modifié'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'readOnly = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readOnly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Je ne peux pas la supprimer non plus
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readOnly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'readOnly = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'readOnly'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/**
-     * Expiration
-     */&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'expiration'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Je vais expirer dans 3 secondes'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// J'existe encore
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'expiration = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'expiration'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// Dans 4 secondes j'existe plus
-&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'expiration = '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cachejs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'expiration'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;br&amp;gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On recharge, on attend 4 secondes et le résultat sera :&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    readOnly = Je suis en lecture seule
-    readOnly = Je suis en lecture seule
-    expiration = Je vais expirer dans 3 secondes
-    expiration = null
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-</description>
-        <pubDate>Fri, 13 May 2016 08:00:00 +0000</pubDate>
-        <link>http://ozee31.github.io/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html</link>
-        <guid isPermaLink="true">http://ozee31.github.io/2016/05/13/le-localstorage-en-plus-simple-et-plus-complet.html</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>[php] Générer des PDF avec DomPDF et CakePHP</title>
-        <description>&lt;h1 id=&quot;gnrer-des-pdf-avec-dompdf-et-cakephp&quot;&gt;Générer des PDF avec DomPDF et CakePHP&lt;/h1&gt;
-&lt;p&gt;Grâce à la librairie &lt;a href=&quot;https://github.com/dompdf/dompdf&quot;&gt;DomPDF&lt;/a&gt; couplé au plugin &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf&quot;&gt;cakephp-dompdf&lt;/a&gt;, il est très facile de générer des PDF en HTML/CSS.&lt;/p&gt;
-
-&lt;h2 id=&quot;environnement&quot;&gt;Environnement&lt;/h2&gt;
-&lt;p&gt;Voici ma configuration pour cette démo&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Une VM ubuntu server en version 14&lt;/li&gt;
-  &lt;li&gt;Server Apache&lt;/li&gt;
-  &lt;li&gt;PHP en version 7 (la version minimale est la 5.4.16)&lt;/li&gt;
-  &lt;li&gt;CakePHP en version 3.2 (la version minimale est la 3.0)&lt;/li&gt;
-  &lt;li&gt;La librairie DomPDF en version 0.7&lt;/li&gt;
-  &lt;li&gt;Le plugin cakephp-dompdf en version 1.0&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
-&lt;p&gt;Pour installer la librairie ainsi que le plugin, rien de plus simple en utilisant composer&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;composer require daoandco/cakephp-dompdf&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Très important, il ne faut pas oublié de générer les liens symboliques du plugin.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;bin/cake plugin assets symlink&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On charge ensuite le plugin&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// config/bootstrap.php
-&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Dompdf'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;en-route-pour-laventure&quot;&gt;En route pour l’aventure&lt;/h2&gt;
-&lt;p&gt;Le plus simple pour générer les PDF est d’écouter les urls afin de traiter l’extension &lt;code class=&quot;highlighter-rouge&quot;&gt;.pdf&lt;/code&gt; (&lt;a href=&quot;http://book.cakephp.org/3.0/fr/development/routing.html#routing-des-extensions-de-fichier&quot;&gt;Documentation&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;On va donc, pour l’exemple définir une &lt;del&gt;auto&lt;/del&gt; route.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Router&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;RouteBuilder&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'pdf'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$routes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/demo/view/*'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'controller'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Demo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'action'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'view'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et pour le controlleur :&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// scr/Controller/DemoController.php
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App\Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DemoController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On teste notre route http://localhost/demo/view/test.pdf et &lt;strong&gt;bim!!!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/87TellwMnUAMrKZfakHSiIqnmuxd9fGbRzKS4B--_XAqaC7X9wDa00-i5rFXesNMtaWSrGcY8Q=s0&quot; alt=&quot;Template is missing&quot; title=&quot;capture-1.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Ne vous inquiétez pas, c’est normal, pas de panique on a pas encore créé notre template.&lt;/p&gt;
-
-&lt;h2 id=&quot;jai-view-un-pdf&quot;&gt;J’ai view un PDF&lt;/h2&gt;
-
-&lt;p&gt;Comme on écoute toujours la maîtresse et que l’on est bien sage, on va créer notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;view.ctp&lt;/code&gt; dans &lt;code class=&quot;highlighter-rouge&quot;&gt;Demo/pdf/view.ctp&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Hey, t’est bien gentil mais là il me demande de créer un layout.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Oui je sais mais comme la vie est bien faite, notre petit plugin inclut justement un Layout qui nous permet entre autre de fixer un header ainsi qu’un footer.&lt;/p&gt;
-
-&lt;h2 id=&quot;plugue-ton-layout&quot;&gt;Plugue ton Layout&lt;/h2&gt;
-
-&lt;p&gt;Pour faire les choses bien (il faut toujours faire les choses bien), on va modifier notre Controller&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;viewBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Dompdf.Pdf'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Dompdf.default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'config'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;'filename'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;'render'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'browser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;]]);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On recharge la page, et là, sous vos yeux ébahis, un magnifique PDF apparaît dans votre Firefox (comment ça vous n’utilisez pas Firefox ?)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/tJcFxm3bITPAfJTdhNHRi6uTtsMGIdxvIFhe9xNq3yJWwIF2TkqI8IcFItt7Upx2MHPvRC7sqA=s0&quot; alt=&quot;Le pdf généré&quot; title=&quot;capture-2.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Tout ça juste pour charger un Layout ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;En fait on a surtout dit à CakePHP d’utiliser le plugin pour générer la vue, je vous invite à lire &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf#configuration&quot;&gt;la documentation du plugin&lt;/a&gt; pour comprendre ce que je viens de faire.&lt;/p&gt;
-
-&lt;h2 id=&quot;je-veux-du-css-et-des-nanas&quot;&gt;Je veux du CSS et des nanas&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Bon les h1 et les p c’est bien gentil mais comment je style ça ? Et les images comment ça marche ?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;On y viens, et on va même faire un header et un footer comme je suis gentil.&lt;/p&gt;
-
-&lt;p&gt;Allez c’est parti on crée notre beau css&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;c&quot;&gt;/* webroot/css/demo.css */&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Et comme tout est prévu, notre beau petit plugin possède un helper, on peut donc modifier notre fichier &lt;code class=&quot;highlighter-rouge&quot;&gt;view.ctp&lt;/code&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;css('demo'); ?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Ah oui, j’oubliais les nanas, pour les images c’est aussi avec le helper (et on en profite pour rajouter le header et le footer)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- src/Template/Demo/pdf/view.ctp --&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;css('demo'); ?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php
-$this-&amp;gt;start('header');
-  echo '&amp;lt;p&amp;gt;I\'m a header&amp;lt;/p&amp;gt;';
-$this-&amp;gt;end();
-
-$this-&amp;gt;start('footer');
-  echo '&amp;lt;p&amp;gt;I\'m a footer&amp;lt;/p&amp;gt;';
-$this-&amp;gt;end();
-?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Ceci est un pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Il est généré avec Dôme Pédéhèffe&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $this-&amp;gt;Dompdf-&amp;gt;image('nanas.jpg'); ?&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;On actualise la page, et voilà notre PDF stylé comme jamais
-&lt;img src=&quot;https://lh3.googleusercontent.com/4zy5TzBYp6cT4PDG_S7-V7yzX9J5BIyze5Uj-fHTpJBN7XY0NymbLGRjkvQedxVNIx9Dm6RYwg=s0&quot; alt=&quot;enter image description here&quot; title=&quot;capture-3.JPG&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;aller-plus-loin&quot;&gt;Aller plus loin&lt;/h2&gt;
-&lt;p&gt;Je vous invite à lire la &lt;a href=&quot;https://github.com/DaoAndCo/cakephp-dompdf&quot;&gt;documentation&lt;/a&gt; du plugin qui est très complète.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 04 May 2016 12:00:00 +0000</pubDate>
-        <link>http://ozee31.github.io/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html</link>
-        <guid isPermaLink="true">http://ozee31.github.io/2016/05/04/generer-des-pdf-avec-dompdf-et-cakephp.html</guid>
         
         
       </item>
